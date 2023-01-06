@@ -1,0 +1,29 @@
+.input-container {
+  width: 100%;
+  
+}
+
+.input {
+  border-bottom: 1px solid #3369F3;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+}
+
+.label {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+  color: #999; 
+  display: block;
+  transform: translateY(-1.5rem);
+  line-height: 1rem;
+  transition: 0.5s; 
+}
+
+.input:focus + label, 
+.input:valid + label { 
+  font-size: 9px;
+  transform: translateY(-2.5rem);
+}

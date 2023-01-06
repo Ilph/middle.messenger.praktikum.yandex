@@ -1,0 +1,37 @@
+.label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #EAEAEA;
+  margin: 0.4em 0;
+  padding-bottom: 0.5em;
+}
+
+.label-container p {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+}
+
+.label-container:last-child {
+  border-bottom: 0;
+}
+
+.profile__label input {
+  text-align: end;
+}
+
+.profile__label input::placeholder {
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+}
+
+input:disabled {
+  cursor: default;
+  background-color: transparent;
+  color: #999999;
+  border: 0;
+}

@@ -1,0 +1,15 @@
+.aside {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background-color: #FBFBFB;
+}
+
+.aside__button {
+  background-color: transparent;
+}
