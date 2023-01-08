@@ -6,55 +6,77 @@ import error404 from "./pages/error/error404.js"
 import profile from "./pages/profile/profile.js"
 import profileData from "./pages/profileData/profileData.js"
 import profilePassword from "./pages/profilePassword/profilePassword.js"
+import {createModal} from "./modules/userProfile/utils/createModalWindow.js"
 import "./styles/main.scss"
 
 
-
-if (window.location.href == "http://localhost:3000/") {
+function loginPage() {
   const result = tpl(
     {page: login()}
-  ) 
-  document.getElementById("root").innerHTML = result
-} else if (window.location.href == "http://localhost:3000/reg") {
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function registrationPage() {
   const result = tpl(
     {page: registration()}
-  ) 
-  document.getElementById("root").innerHTML = result
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function error500Page() {
+  const result = tpl(
+    {page: error500()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function error404Page() {
+  const result = tpl(
+    {page: error404()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function profilePage() {
+  const result = tpl(
+    {page: profile()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function profileDataPage() {
+  const result = tpl(
+    {page: plprofileData()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function profilePasswordPage() {
+  const result = tpl(
+    {page: profilePassword()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+
+if (window.location.href == "http://localhost:3000/") {
+  loginPage()
+} else if (window.location.href == "http://localhost:3000/reg") {
+  registrationPage()
 } else if (window.location.href == "http://localhost:3000/error500") {
-  const result = tpl(
-    {
-      page: error500()
-    }
-  ) 
-  document.getElementById("root").innerHTML = result
+  error500Page()
 } else if (window.location.href == "http://localhost:3000/error404") {
-  const result = tpl(
-    {
-      page: error404()
-    }
-  ) 
-  document.getElementById("root").innerHTML = result
+  error404Page()
 } else if (window.location.href == "http://localhost:3000/profile") {
-  const result = tpl(
-    {
-      page: profile()
-    }
-  ) 
-  document.getElementById("root").innerHTML = result
+  profilePage()
+  createModal()
 } else if (window.location.href == "http://localhost:3000/profileData") {
-  const result = tpl(
-    {
-      page: profileData()
-    }
-  ) 
-  document.getElementById("root").innerHTML = result
+  profileDataPage()
 }
 else if (window.location.href == "http://localhost:3000/profilePassword") {
-  const result = tpl(
-    {
-      page: profilePassword()
-    }
-  ) 
-  document.getElementById("root").innerHTML = result
+  profilePasswordPage()
 }
+
+
 

@@ -17,7 +17,7 @@
   opacity: 0;
   position: absolute;
   top: 40%;
-  left: 30%;
+  left: 8%;
 
   font-family: 'Inter';
   font-style: normal;
@@ -25,6 +25,11 @@
   font-size: 0.8em;
 
   color: #FFFFFF;
+}
+
+.avatar__text {
+  display: block;
+  text-align: center;
 }
 
 .avatar__label:hover {

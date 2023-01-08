@@ -8,6 +8,7 @@ person.forEach(item => {
   const tpl = input({
     types: types,
     disabled: disabled,
+    nameInput: item.name,
     name: item.title,
     placeholder: item.placholder,
   })

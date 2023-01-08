@@ -1,5 +1,5 @@
 import tpl from "./input.hbs"
 
-export default (types, name, placeholder, disabled) => {
-  return tpl(types, name, placeholder, disabled)
+export default (types, name, nameInput, placeholder, disabled) => {
+  return tpl(types, name, nameInput, placeholder, disabled)
 }

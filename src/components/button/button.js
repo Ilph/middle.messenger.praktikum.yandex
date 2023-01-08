@@ -1,5 +1,5 @@
 import buttonTpl from "./button.hbs"
 
-export default (value) => {
-  return buttonTpl(value)
+export default (value, style) => {
+  return buttonTpl(value, style)
 }
