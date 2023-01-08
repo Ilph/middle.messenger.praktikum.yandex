@@ -1,10 +1,7 @@
 import tpl from "./chat.hbs"
-import sideBar from ""
-import mainContent from ""
+// import sideBar from ""
+// import mainContent from ""
 
 export default () => {
-  return tpl({
-    sideBar: sideBar(),
-    mainContent: mainContent()
-  })
+  return tpl()
 }

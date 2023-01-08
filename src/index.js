@@ -6,6 +6,7 @@ import error404 from "./pages/error/error404.js"
 import profile from "./pages/profile/profile.js"
 import profileData from "./pages/profileData/profileData.js"
 import profilePassword from "./pages/profilePassword/profilePassword.js"
+import chat from "./pages/chat/chat"
 import {createModal} from "./modules/userProfile/utils/createModalWindow.js"
 import "./styles/main.scss"
 
@@ -47,7 +48,7 @@ function profilePage() {
 
 function profileDataPage() {
   const result = tpl(
-    {page: plprofileData()}
+    {page: profileData()}
   )
   return document.getElementById("root").innerHTML = result
 }
@@ -55,6 +56,13 @@ function profileDataPage() {
 function profilePasswordPage() {
   const result = tpl(
     {page: profilePassword()}
+  )
+  return document.getElementById("root").innerHTML = result
+}
+
+function chatPage() {
+  const result = tpl(
+    {page: chat()}
   )
   return document.getElementById("root").innerHTML = result
 }
@@ -76,6 +84,8 @@ if (window.location.href == "http://localhost:3000/") {
 }
 else if (window.location.href == "http://localhost:3000/profilePassword") {
   profilePasswordPage()
+}else if (window.location.href == "http://localhost:3000/chat") {
+  chatPage()
 }
 
 
