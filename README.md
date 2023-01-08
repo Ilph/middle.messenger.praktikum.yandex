@@ -12,14 +12,4 @@ npm run build - сборка проекта
 npm run start - запуск файла server.js
 npm run dev - запуск файла server.js в режиме разработки
 
-## Переход по страницам
-http://localhost:3000/
-http://localhost:3000/req
-http://localhost:3000/error500
-http://localhost:3000/error404
-http://localhost:3000/profile
-http://localhost:3000/profileData
-http://localhost:3000/profilePassword
-http://localhost:3000/chat
-
 
