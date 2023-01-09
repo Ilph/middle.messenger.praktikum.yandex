@@ -23,21 +23,21 @@ export default () => {
         style: "input_size",
       }),
       firstName: input({
-        id: "login",
+        id: "firstName",
         name: "first_name",
         type: "text", 
         placeholder: "Имя",
         style: "input_size",
       }),
       secondName: input({
-        id: "name",
+        id: "secondName",
         name: "second_name",
         type: "text", 
         placeholder: "Фамилия",
         style: "input_size",
       }),
       phone: input({
-        id: "name",
+        id: "phone",
         name: "phone",
         type: "text", 
         placeholder: "Телефон",
@@ -51,7 +51,7 @@ export default () => {
         style: "input_size",
       }),
       passwordRepeat: input({
-        id: "password",
+        id: "passwordRepeat",
         name: "password_repeat",
         type: "password",
         placeholder: "Passwors (repeat)",

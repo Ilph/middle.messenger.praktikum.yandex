@@ -8,7 +8,7 @@ import button from "../../components/button/button"
 
 export default () => {
   const types = "password"
-  disabled = ""
+  const disabled = ""
   return tpl({
     aside: aside(),
     avatar: avatar(),
