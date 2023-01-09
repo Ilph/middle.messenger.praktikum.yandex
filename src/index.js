@@ -87,6 +87,3 @@ else if (window.location.href == "http://localhost:3000/profilePassword") {
 }else if (window.location.href == "http://localhost:3000/chat") {
   chatPage()
 }
-
-
-

@@ -24,7 +24,7 @@
   font-weight: 500;
   font-size: 0.8em;
 
-  color: #FFFFFF;
+  color: $avatar_text_hover_color;
 }
 
 .avatar__text {
@@ -33,7 +33,7 @@
 }
 
 .avatar__label:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: $avatar_bg_hover_color;
 }
 
 .avatar__label:hover .avatar__text {

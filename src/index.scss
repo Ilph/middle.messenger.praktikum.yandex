@@ -2,9 +2,12 @@
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #00bfff ;
+  background-color: $input_border_color;
   width: 150px;
   height: 150px;
+}
+
+.test-nav {
   display: flex;
   flex-direction: column;
   justify-content: center;

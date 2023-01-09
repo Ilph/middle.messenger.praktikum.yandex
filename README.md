@@ -12,4 +12,5 @@ npm run build - сборка проекта
 npm run start - запуск файла server.js
 npm run dev - запуск файла server.js в режиме разработки
 
-
+## Ссылка на Netlify
+https://wonderful-banoffee-b9288f.netlify.app/

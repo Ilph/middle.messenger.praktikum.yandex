@@ -1,10 +1,9 @@
 .input-container {
   width: 100%;
-  
 }
 
 .input {
-  border-bottom: 1px solid #3369F3;
+  border-bottom: 1px solid $input_border_color;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -15,7 +14,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 0.8em;
-  color: #999; 
+  color: $input_label_text_color; 
   display: block;
   transform: translateY(-1.5rem);
   line-height: 1rem;

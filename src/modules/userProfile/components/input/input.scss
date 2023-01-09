@@ -32,6 +32,6 @@
 input:disabled {
   cursor: default;
   background-color: transparent;
-  color: #999999;
+  color: $input_label_text_color;
   border: 0;
 }
