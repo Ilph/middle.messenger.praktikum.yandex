@@ -68,22 +68,22 @@ function chatPage() {
 }
 
 
-if (window.location.href == "http://localhost:3000/") {
+if (window.location.href == "/") {
   loginPage()
-} else if (window.location.href == "http://localhost:3000/reg") {
+} else if (window.location.href == "/reg") {
   registrationPage()
-} else if (window.location.href == "http://localhost:3000/error500") {
+} else if (window.location.href == "/error500") {
   error500Page()
-} else if (window.location.href == "http://localhost:3000/error404") {
+} else if (window.location.href == "/error404") {
   error404Page()
-} else if (window.location.href == "http://localhost:3000/profile") {
+} else if (window.location.href == "/profile") {
   profilePage()
   createModal()
-} else if (window.location.href == "http://localhost:3000/profileData") {
+} else if (window.location.href == "/profileData") {
   profileDataPage()
 }
-else if (window.location.href == "http://localhost:3000/profilePassword") {
+else if (window.location.href == "/profilePassword") {
   profilePasswordPage()
-}else if (window.location.href == "http://localhost:3000/chat") {
+}else if (window.location.href == "/chat") {
   chatPage()
 }
