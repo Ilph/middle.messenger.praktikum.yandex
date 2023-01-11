@@ -68,9 +68,9 @@ function chatPage() {
 }
 
 
-if (window.location.href == "https://wonderful-banoffee-b9288f.netlify.app") {
+if (window.location.href == "") {
   loginPage()
-} else if (window.location.href == "https://wonderful-banoffee-b9288f.netlify.app/reg") {
+} else if (window.location.href == "/reg") {
   registrationPage()
 } else if (window.location.href == "/error500") {
   error500Page()
