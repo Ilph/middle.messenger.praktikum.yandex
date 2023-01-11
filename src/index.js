@@ -68,7 +68,7 @@ function chatPage() {
 }
 
 
-if (window.location.href == "") {
+if (window.location.href == "/") {
   loginPage()
 } else if (window.location.href == "/reg") {
   registrationPage()
