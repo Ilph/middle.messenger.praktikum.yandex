@@ -67,23 +67,24 @@ function chatPage() {
   return document.getElementById("root").innerHTML = result
 }
 
+const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()
 
-if (window.location.href == "http://localhost:3000/") {
+if (window.location.href ==  baseUrl + "/") {
   loginPage()
-} else if (window.location.href == "http://localhost:3000/reg") {
+} else if (window.location.href == baseUrl + "/reg") {
   registrationPage()
-} else if (window.location.href == "http://localhost:3000/error500") {
+} else if (window.location.href == baseUrl + "/error500") {
   error500Page()
-} else if (window.location.href == "http://localhost:3000/error404") {
+} else if (window.location.href == baseUrl + "/error404") {
   error404Page()
-} else if (window.location.href == "http://localhost:3000/profile") {
+} else if (window.location.href == baseUrl + "/profile") {
   profilePage()
   createModal()
-} else if (window.location.href == "http://localhost:3000/profileData") {
+} else if (window.location.href == baseUrl + "/profileData") {
   profileDataPage()
 }
-else if (window.location.href == "http://localhost:3000/profilePassword") {
+else if (window.location.href == baseUrl + "/profilePassword") {
   profilePasswordPage()
-}else if (window.location.href == "http://localhost:3000/chat") {
+}else if (window.location.href == baseUrl + "/chat") {
   chatPage()
 }
