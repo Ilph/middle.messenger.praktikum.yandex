@@ -1,0 +1,11 @@
+.label-container a {
+  margin: 0.3em 0;
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+}
+
+.label-container:last-child a {
+  color: $profile_userchange_link_color;
+}

@@ -1,0 +1,58 @@
+.form-auth {
+  width: 340px;
+  height: 460px;
+  margin: auto;
+
+  background: $avatar_text_hover_color;
+  box-shadow: 0px 0px 6px $box_shadow_color;
+  border-radius: 12px;
+}
+
+.form-auth__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.25em;
+  text-align: center;
+  color: $profile_text_color;
+  padding: 50px 0 57px 0;
+}
+
+.form-auth__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-auth__container_margin {
+  margin-bottom: 7em;
+}
+
+.input-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.input_size {
+  width: 100%;
+}
+
+.input-container_margin {
+  margin-bottom: 2em;
+}
+
+.form-auth__buttont {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+  margin: 0 2em 1em 2em;
+}
+
+.form-auth__link {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.7em;
+  text-align: center;
+}

@@ -1,0 +1,48 @@
+.avatar__label {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: #EFEFEF;
+  background-image: url("/static/icons/iconAvatar.png");
+  background-origin: border-box;
+  background-size: 35%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.avatar__text {
+  opacity: 0;
+  position: absolute;
+  top: 40%;
+  left: 8%;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+
+  color: $avatar_text_hover_color;
+}
+
+.avatar__text {
+  display: block;
+  text-align: center;
+}
+
+.avatar__label:hover {
+  background-color: $avatar_bg_hover_color;
+}
+
+.avatar__label:hover .avatar__text {
+  opacity: 1;
+}
+
+.avatar__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
