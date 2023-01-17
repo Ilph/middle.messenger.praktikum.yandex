@@ -3,10 +3,14 @@ import modalWindow from "../modalWindows/modal"
 import {upLoad} from "./upLoad"
 
 export function createModal() {
-  const input = document.querySelector(".avatar__input")
+  const options = {
+    value:"Поменять",
+    style: ""
+  }
+  const input = document.querySelector(".avatar__input") as HTMLInputElement
   const modal = document.createElement("div")
   modal.classList.add("modal")
-  const tpl = modalWindow({button: button({value:"Поменять"})})
+  const tpl = modalWindow(button(options))
   modal.insertAdjacentHTML("afterbegin", tpl)
   document.body.appendChild(modal)
   

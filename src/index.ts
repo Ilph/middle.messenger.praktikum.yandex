@@ -1,70 +1,74 @@
 import tpl from "./index.hbs"
-import login from "./pages/authorization/login.js"
-import registration from "./pages/registration/registration.js"
-import error500 from "./pages/error/error500.js"
-import error404 from "./pages/error/error404.js"
-import profile from "./pages/profile/profile.js"
-import profileData from "./pages/profileData/profileData.js"
-import profilePassword from "./pages/profilePassword/profilePassword.js"
+import login from "./pages/authorization/login"
+import registration from "./pages/registration/registration"
+import error500 from "./pages/error/error500"
+import error404 from "./pages/error/error404"
+import profile from "./pages/profile/profile"
+import profileData from "./pages/profileData/profileData"
+import profilePassword from "./pages/profilePassword/profilePassword"
 import chat from "./pages/chat/chat"
-import {createModal} from "./modules/userProfile/utils/createModalWindow.js"
+import {createModal} from "./modules/userProfile/utils/createModalWindow"
 import "./styles/main.scss"
+
+
+
+const root = document.getElementById("root") as HTMLElement
 
 
 function loginPage() {
   const result = tpl(
     {page: login()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function registrationPage() {
   const result = tpl(
     {page: registration()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function error500Page() {
   const result = tpl(
     {page: error500()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function error404Page() {
   const result = tpl(
     {page: error404()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function profilePage() {
   const result = tpl(
     {page: profile()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function profileDataPage() {
   const result = tpl(
     {page: profileData()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function profilePasswordPage() {
   const result = tpl(
     {page: profilePassword()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 function chatPage() {
   const result = tpl(
     {page: chat()}
   )
-  return document.getElementById("root").innerHTML = result
+  return root.innerHTML = result
 }
 
 const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()
