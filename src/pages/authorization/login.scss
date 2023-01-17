@@ -2,20 +2,19 @@
   width: 340px;
   height: 460px;
   margin: auto;
-
   background: $avatar_text_hover_color;
-  box-shadow: 0px 0px 6px $box_shadow_color;
+  box-shadow: 0 0 6px $box_shadow_color;
   border-radius: 12px;
 }
 
 .form-auth__title {
-  font-family: 'Inter';
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.25em;
   text-align: center;
   color: $profile_text_color;
-  padding: 50px 0 57px 0;
+  padding: 50px 0 57px;
 }
 
 .form-auth__container {
@@ -42,15 +41,15 @@
 }
 
 .form-auth__buttont {
-  font-family: 'Inter';
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.8em;
-  margin: 0 2em 1em 2em;
+  margin: 0 2em 1em;
 }
 
 .form-auth__link {
-  font-family: 'Inter';
+  font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.7em;

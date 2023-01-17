@@ -13,8 +13,8 @@ export default () => {
     exite: "Выход"
   }
 
-  const types: string = "text"
-  const disabled: string = "disabled"
+  const types = "text"
+  const disabled = "disabled"
 
   return tpl({
     aside: aside(),

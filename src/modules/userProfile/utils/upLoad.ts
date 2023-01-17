@@ -11,7 +11,7 @@ export function upLoad() {
       return
     }
 
-    let {files} = event.target
+    const {files} = event.target
     const fileType = files[0].type
     labelText.textContent = fileType
     titleText.textContent = "Файл загружен"

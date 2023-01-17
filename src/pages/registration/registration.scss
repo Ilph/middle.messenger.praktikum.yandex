@@ -2,20 +2,19 @@
   width: 340px;
   height: 615px;
   margin: auto;
-
-  background: #FFFFFF;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 14%);
   border-radius: 12px;
 }
 
 .form-reg__title {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.25em;
   text-align: center;
-  color: #1E1E1E;
-  padding: 50px 0 40px 0;
+  color: #1e1e1e;
+  padding: 50px 0 40px;
 }
 
 .form-reg__container {
@@ -42,15 +41,15 @@
 }
 
 .form-reg__buttont {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.8em;
-  margin: 0 2em 1em 2em;
+  margin: 0 2em 1em;
 }
 
 .form-reg__link {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.7em;
