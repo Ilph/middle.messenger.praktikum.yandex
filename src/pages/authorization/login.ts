@@ -7,7 +7,7 @@ export default () => {
 
   const optionsBtn = {
     value: "Sign in", 
-    style: "form-auth__buttont"
+    style: "form-auth__button"
   }
 
   const optionsInp = {

@@ -6,7 +6,7 @@ import error404 from "./pages/error/error404"
 import profile from "./pages/profile/profile"
 import profileData from "./pages/profileData/profileData"
 import profilePassword from "./pages/profilePassword/profilePassword"
-import chat from "./pages/chat/chat"
+import {Chat} from "./pages/chat/chat"
 import {createModal} from "./modules/userProfile/utils/createModalWindow"
 import "./styles/main.scss"
 
@@ -65,10 +65,10 @@ function profilePasswordPage() {
 }
 
 function chatPage() {
-  const result = tpl(
-    {page: chat()}
-  )
-  return root.innerHTML = result
+  const chatPage = new Chat("div", {
+    text: "Еще не реализовано"
+  })
+  return root.innerHTML = chatPage.getContent()!.outerHTML
 }
 
 const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()
@@ -86,9 +86,9 @@ if (window.location.href ==  baseUrl + "/") {
   createModal()
 } else if (window.location.href == baseUrl + "/profileData") {
   profileDataPage()
-}
-else if (window.location.href == baseUrl + "/profilePassword") {
+} else if (window.location.href == baseUrl + "/profilePassword") {
   profilePasswordPage()
-}else if (window.location.href == baseUrl + "/chat") {
+} else if (window.location.href == baseUrl + "/chat") {
   chatPage()
 }
+
