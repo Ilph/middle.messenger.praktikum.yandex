@@ -13,7 +13,7 @@ export class Block<T> {
   private _element: HTMLElement | null = null
   private _meta: {tagName: string, props: T}
   private eventBus: () => EventBus
-  protected props: T
+  protected props: T 
   protected children: {[key: string]: Block<T>}
   private _id: string | null = null
 
@@ -144,8 +144,8 @@ export class Block<T> {
     return { children, props }
 }
 
-  compile(template: (prop: T) => string, props: T) {
-    const propsAndStubs: T = { ...props }
+  compile(template: (prop: object) => string, props: T) {
+    const propsAndStubs = { ...props }
 
     Object.entries(this.children).forEach(([key, child]) => {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`

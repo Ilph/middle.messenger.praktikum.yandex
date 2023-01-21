@@ -1,12 +1,15 @@
 import inputTpl from "./input.hbs"
-import {options} from "./types"
+import { Block } from "../../utils/Block"
 
-export default (options: options) => {
-  return inputTpl({
-    id: options.id,
-    name: options.name,
-    style: options.style,
-    type: options.style,
-    placeholder: options.placeholder
-  })
+export class Input extends Block<IInput> {
+  constructor(props) {
+    super("input", props)
+  }
+
+  render() {
+    return this.compile(inputTpl, {
+      id: this.props.data.id,
+      placeholder: this.props.data.placeholder
+    })
+  }
 }

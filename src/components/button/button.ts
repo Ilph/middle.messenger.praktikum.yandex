@@ -1,6 +1,22 @@
 import buttonTpl from "./button.hbs"
-import {options} from "./types"
+import { Block } from "../../utils/Block"
 
-export default (options: options) => {
-  return buttonTpl({value: options.value, style: options.style})
+export interface IButton {
+  [key: string]: string | {
+    [key: string]: string 
+  }
+}
+
+export class Button extends Block<IButton> {
+  constructor(props: IButton) {
+    super("button", props)
+  }
+  
+  render() {
+
+    return this.compile(buttonTpl, {
+      value: this.props.data.value
+    })
+
+  }
 }

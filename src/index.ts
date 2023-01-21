@@ -1,5 +1,5 @@
 import tpl from "./index.hbs"
-import login from "./pages/authorization/login"
+import { login } from "./pages/authorization/index"
 import registration from "./pages/registration/registration"
 import error500 from "./pages/error/error500"
 import error404 from "./pages/error/error404"
@@ -15,10 +15,9 @@ import "./styles/main.scss"
 const root = document.getElementById("root") as HTMLElement
 
 function loginPage() {
-  const result = tpl(
-    {page: login()}
-  )
-  return root.innerHTML = result
+  root.appendChild(login.getContent()!)
+  chat.dispatchComponentDidMount()
+  return root 
 }
 
 function registrationPage() {

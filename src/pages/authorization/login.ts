@@ -1,39 +1,32 @@
 import tpl from "./login.hbs"
+import { Block } from "../../utils/Block"
+import { IButton } from "../../components/button/button"
 
-import input from "../../components/input/input"
-import button from "../../components/button/button"
 
-export default () => {
-
-  const optionsBtn = {
-    value: "Sign in", 
-    style: "form-auth__button"
-  }
-
-  const optionsInp = {
-    login: {
-      id: "login",
-      name: "login",
-      type: "text", 
-      placeholder: "Login",
-      style: "input_size",
-    },
-    password: {
-      id: "password",
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      style: "input_size",
-    }
-  }
-  
-  return tpl(
-    {
-      entry: "Вход",
-      inputLogin: input(optionsInp.login),
-      inputPassword: input(optionsInp.password),
-      button: button(optionsBtn),
-      registration: "Registration",
-    }
-  )
+interface ILogin {
+  data: {
+    entry: string;
+    registration: string
+  },
+  attributes: {
+    class: string
+  },
+  inputLogin: inputLogin;
+  inputPassword: inputPassword;
+  button: IButton
 }
+
+export class Login extends Block<ILogin> {
+  constructor(props: ILogin) {
+    super("section", props)
+  }
+
+  render() {
+    return this.compile(tpl, {
+      entry: this.props.data.entry,
+      registration: this.props.data.registration
+    })
+  }
+}
+
+  
