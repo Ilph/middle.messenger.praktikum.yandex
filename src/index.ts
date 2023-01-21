@@ -6,14 +6,13 @@ import error404 from "./pages/error/error404"
 import profile from "./pages/profile/profile"
 import profileData from "./pages/profileData/profileData"
 import profilePassword from "./pages/profilePassword/profilePassword"
-import {Chat} from "./pages/chat/chat"
+import {chat} from "./pages/chat/index"
 import {createModal} from "./modules/userProfile/utils/createModalWindow"
 import "./styles/main.scss"
 
 
 
 const root = document.getElementById("root") as HTMLElement
-
 
 function loginPage() {
   const result = tpl(
@@ -65,10 +64,9 @@ function profilePasswordPage() {
 }
 
 function chatPage() {
-  const chatPage = new Chat("div", {
-    text: "Еще не реализовано"
-  })
-  return root.innerHTML = chatPage.getContent()!.outerHTML
+  root.appendChild(chat.getContent()!)
+  chat.dispatchComponentDidMount()
+  return root
 }
 
 const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()

@@ -6,6 +6,6 @@ export default (options: options) => {
     {
       changeData: options.changeData,
       changePassword: options.changePassword,
-      exite: options.changePassword
+      exite: options.exite
     })
 }

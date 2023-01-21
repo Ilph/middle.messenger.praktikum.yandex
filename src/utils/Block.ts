@@ -1,10 +1,8 @@
 import {EventBus} from "./EventBus"
+import { v4 as makeUUID } from 'uuid'
 
-interface Props<Type> {
-  content: Type,
-}
+export class Block<T> {
 
-export class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:componentt-did-mount",
@@ -13,12 +11,15 @@ export class Block {
   }
 
   private _element: HTMLElement | null = null
-  private _meta: {tagName: string, props: unknown}
+  private _meta: {tagName: string, props: T}
   private eventBus: () => EventBus
-  protected props: Record<string, unknown>
+  protected props: T
+  protected children: {[key: string]: Block<T>}
+  private _id: string | null = null
 
-  constructor(tagName="div", props = {}) {
+  constructor(tagName="div", propsAndChildren: T) {
     const eventBus = new EventBus()
+    const {children, props} = this._getChildren(propsAndChildren)
     
     this.eventBus = () => eventBus
 
@@ -26,14 +27,17 @@ export class Block {
       tagName,
       props
     }
-
-    this.props = this._makePropsProxy(props)
+    
+    this._id = makeUUID()
+    
+    this.children = this._makePropsProxy(children)
+    this.props = this._makePropsProxy({...props, __id: this._id})
 
     this._registerEvents(eventBus)
     eventBus.emit(Block.EVENTS.INIT)
   }
 
-  private _registerEvents(eventBus: any) {
+  private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
@@ -41,53 +45,64 @@ export class Block {
   }
 
   private _createDocumentElement(tagName: string): HTMLElement {
-    return document.createElement(tagName)
+    const element = document.createElement(tagName)
+
+    if(this.props.settings?.withInternalID) {
+      element.setAttribute('data-id', this._id!)
+    }
+    return element
   }
 
-  private _createResources() {
+  private _createResources(): void {
     const {tagName} = this._meta
     this._element = this._createDocumentElement(tagName)
   }
 
-  private _init() {
+  private _init(): void {
     this._createResources()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
 
-  private _render() {
+  private _render(): void {
     const block = this.render()
-
     this._removeEvents()
+    this._element!.innerHTML = ''
+    this._removeEvents()
+    this._element!.append(block)
+    this._addEvents()
+    this._addAttributes()
+  }
 
-    if(this._element) {
-      this._element.innerHTML = block
-      this._addEvents()
-    } else {
-      throw new Error("Element dosn't exist")
+  protected render(): DocumentFragment {
+    return new DocumentFragment
+  }
+
+  private _componentDidMount(): void {
+    this.componentDidMount()
+
+    Object.values(this.children).forEach(child => {
+      child.dispatchComponentDidMount()
+    })
+  }
+
+  protected componentDidMount(): boolean {
+    return true
+  }
+
+  public dispatchComponentDidMount(): void {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM)
+    if(Object.keys(this.children).length) {
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected render(): string {
-    return ""
+  private _componentDidUpdate(oldProps: T, newProps: T): void {
+    if(this.componentDidUpdate(oldProps, newProps)) {
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+    }
   }
 
-  private _componentDidMount() {
-    this.componentDidMount()
-  }
-
-  protected componentDidMount() {
-
-  }
-
-  protected dispatchComponentDidMount() {
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM)
-  }
-
-  private _componentDidUpdate(oldProps: Props<unknown>, newProps: Props<unknown>) {
-
-  }
-
-  protected componentDidUpdate(oldProps: Props<unknown>, newProps: Props<unknown>) {
+  protected componentDidUpdate(oldProps: T, newProps: T): boolean {
     return true
   }
 
@@ -99,12 +114,58 @@ export class Block {
     Object.assign(this.props, nextProps)
   }
 
-  get element() {
+  get element(): HTMLElement | null{
     return this._element;
   }
 
-  getContent() {
+  getContent(): HTMLElement | null{
     return this.element;
+  }
+
+  _getChildren(propsAndChildren: T) {
+    const children: {[key: string]: Block<T>} = {}
+    const props: any = {}
+
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value
+      } else if(Array.isArray(value)) {
+        value.forEach(item => {
+          Object.entries(item).forEach(([key, value]) => {
+            if (value instanceof Block) {
+              children[key] = value
+          } 
+        })
+        })
+      } else {
+        props[key] = value
+      }
+    })
+    return { children, props }
+}
+
+  compile(template: (prop: T) => string, props: T) {
+    const propsAndStubs: T = { ...props }
+
+    Object.entries(this.children).forEach(([key, child]) => {
+        propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+    });
+
+    const html = template(propsAndStubs)
+
+    const fragment = document.createElement('template')
+
+    fragment.innerHTML = html
+    
+    Object.values(this.children).forEach(child => {
+        const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+        
+        if(!stub) {
+          return
+        }
+        stub.replaceWith(child.getContent()!)
+    })
+    return fragment.content
   }
   
   _makePropsProxy(props: Record<string, unknown>) {
@@ -129,12 +190,16 @@ export class Block {
     })
   }
 
-  private _addEvents() {
+  private _addEvents(): void {
     const {events = {}}: any = this.props
+
+    if(!this.props.events) {
+      return
+    }
 
     Object.keys(events).forEach(eventName => {
       this._element!.addEventListener(eventName, events[eventName])
-    });
+    })
   }
 
   private _removeEvents() {
@@ -145,4 +210,15 @@ export class Block {
     });
   }
 
+  private _addAttributes() {
+    const {attributes = {}}: T = this.props
+
+    if(!this.props.attributes) {
+      return
+    }
+
+    Object.entries(attributes).forEach(([key, value]) => {
+      this._element?.setAttribute(key, value)
+    })
+  }
 }

@@ -1,15 +1,22 @@
 import tpl from "./chat.hbs"
 import {Block} from "../../utils/Block"
 
-export class Chat extends Block {
+interface ChatType {
+  [key: string]: {
+    [key: string]: string
+  } | {
+    [key: string]: (event: MouseEvent) => void
+  } | any
+}
 
-  constructor(tagName: string, props: Record<string, unknown>) {
-    super(tagName, props)
+export class Chat extends Block<ChatType> {
+
+  constructor(props: ChatType) {
+    super("section", props)
   }
 
   render() {
-    return tpl({text: this.props.text})
+    return this.compile(tpl, {
+    })
   }
 }
-
-
