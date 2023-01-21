@@ -15,8 +15,6 @@ export class ChatAside extends Block<IChatAside> {
   }
 
   render() {
-    console.log(this.children)
-    console.log(this.props)
     return this.compile(tpl, {
       profile: this.props.data.profile
     })

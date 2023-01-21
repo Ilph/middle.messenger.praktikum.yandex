@@ -1,6 +1,58 @@
 import { Login } from "./login"
-import { button } from "../../components/button/index"
-import { inputLogin, inputPassword} from "../../components/input/index"
+import { Button } from "../../components/button/button"
+import { Input } from "../../components/input/input"
+
+
+const propsInput = {
+  login: { 
+    attributes: { 
+    class: "input-container input-container_margin",
+    },
+    data: {
+      id: "login",
+      name: "login",
+      type: "text",
+      label: "Login",
+    }
+  },
+  password: {
+    attributes: {
+      class: "input-container",
+    },
+    data: {
+      id: "password",
+      name: "password",
+      type: "password",
+      label: "Password",
+    }
+  }
+}
+
+const propsButton = {
+  data: {
+    value: "sign in"
+  }, 
+  attributes: {
+    class: "button form-auth__button",
+    type: "submit"
+  }
+}
+
+
+const inputLogin = new Input(propsInput.login)
+const inputPassword = new Input(propsInput.password)
+export const button = new Button(propsButton)
+
+const checkPassword = (password) => {
+  if(password.length <= 2) {
+    console.log("Error")
+  }
+}
+
+const handleClick = (e) => {
+  checkPassword()
+}
+
 
 const props = {
   data: {
@@ -9,6 +61,9 @@ const props = {
   },
   attributes: {
     class: "section"
+  },
+  events: {
+    click: handleClick
   },
   inputLogin: inputLogin,
   inputPassword: inputPassword,

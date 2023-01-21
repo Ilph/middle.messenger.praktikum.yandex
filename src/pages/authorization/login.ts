@@ -29,4 +29,3 @@ export class Login extends Block<ILogin> {
   }
 }
 
-  
