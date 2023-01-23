@@ -2,11 +2,19 @@
   width: 100%;
 }
 
+.input-container_margin {
+  margin-bottom: 2em;
+}
+
 .input {
   border-bottom: 1px solid $input_border_color;
   font-family: Inter, sans-serif;
   font-style: normal;
   font-weight: 500;
+}
+
+.input_size {
+  width: 100%;
 }
 
 .label {
@@ -26,3 +34,17 @@
   font-size: 9px;
   transform: translateY(-2.5rem);
 }
+
+.helpertext {
+  display: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  color: #FF2F2F;
+}
+
+.helpertexton {
+  display: block;
+}
+

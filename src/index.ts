@@ -87,4 +87,3 @@ if (window.location.href ==  baseUrl + "/") {
 } else if (window.location.href == baseUrl + "/chat") {
   chatPage()
 }
-

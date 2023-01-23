@@ -10,7 +10,7 @@ export class Block<T> {
     FLOW_RENDER: "flow:render"
   }
 
-  private _element: HTMLElement | null = null
+  protected _element: HTMLElement | null = null
   private _meta: {tagName: string, props: T}
   private eventBus: () => EventBus
   protected props: T 
@@ -190,7 +190,9 @@ export class Block<T> {
     })
   }
 
-  private _addEvents(): void {
+  protected _addEvents(): void {
+    
+
     const {events = {}}: any = this.props
 
     if(!this.props.events) {

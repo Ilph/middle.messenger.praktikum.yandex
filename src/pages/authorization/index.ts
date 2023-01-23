@@ -1,6 +1,7 @@
 import { Login } from "./login"
 import { Button } from "../../components/button/button"
 import { Input } from "../../components/input/input"
+import { checkInputFocusIn, checkInputFocusOut, checkButtonSubmit } from "../../utils/checkUtilsInput/checkInputs"
 
 
 const propsInput = {
@@ -13,6 +14,7 @@ const propsInput = {
       name: "login",
       type: "text",
       label: "Login",
+      helperText: "Неверный логин"
     }
   },
   password: {
@@ -24,6 +26,7 @@ const propsInput = {
       name: "password",
       type: "password",
       label: "Password",
+      helperText: "Неверный пароль"
     }
   }
 }
@@ -43,15 +46,7 @@ const inputLogin = new Input(propsInput.login)
 const inputPassword = new Input(propsInput.password)
 export const button = new Button(propsButton)
 
-const checkPassword = (password) => {
-  if(password.length <= 2) {
-    console.log("Error")
-  }
-}
 
-const handleClick = (e) => {
-  checkPassword()
-}
 
 
 const props = {
@@ -63,7 +58,9 @@ const props = {
     class: "section"
   },
   events: {
-    click: handleClick
+    focus: checkInputFocusIn,
+    blur: checkInputFocusOut,
+    click: checkButtonSubmit
   },
   inputLogin: inputLogin,
   inputPassword: inputPassword,

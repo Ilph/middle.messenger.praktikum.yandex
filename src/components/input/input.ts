@@ -11,7 +11,8 @@ export class Input extends Block<IInput> {
       id: this.props.data.id,
       name: this.props.data.name,
       type: this.props.data.type,
-      label: this.props.data.label
+      label: this.props.data.label,
+      helperText: this.props.data.helperText
     })
   }
 }

@@ -1,6 +1,7 @@
 import { Registration } from "./registration"
 import { Input } from "../../components/input/input"
 import { Button } from "../../components/button/button"
+import { checkInputFocusIn, checkInputFocusOut, checkButtonSubmit } from "../../utils/checkUtilsInput/checkInputs"
 
 const propsInput = {
   email: {
@@ -108,6 +109,11 @@ const props = {
   },
   attributes: {
     class: "section"
+  },
+  events: {
+    focus: checkInputFocusIn,
+    blur: checkInputFocusOut,
+    click: checkButtonSubmit
   },
   button: button,
   email: email,
