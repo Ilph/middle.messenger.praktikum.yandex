@@ -1,4 +1,3 @@
-import tpl from "./index.hbs"
 import { login } from "./pages/authorization/index"
 import {registration} from "./pages/registration/index"
 import error500 from "./pages/error/error500"
@@ -8,21 +7,25 @@ import profileData from "./pages/profileData/profileData"
 import profilePassword from "./pages/profilePassword/profilePassword"
 import {chat} from "./pages/chat/index"
 import {createModal} from "./modules/userProfile/utils/createModalWindow"
+import { Main } from "./main"
 import "./styles/main.scss"
-
 
 
 const root = document.getElementById("root") as HTMLElement
 
 function loginPage() {
-  root.appendChild(login.getContent()!)
-  chat.dispatchComponentDidMount()
+  const mainPage = new Main({
+    page: login
+  })
+  root.appendChild(mainPage.getContent()!)
   return root 
 }
 
 function registrationPage() {
-  root.appendChild(registration.getContent()!)
-  chat.dispatchComponentDidMount()
+  const mainPage = new Main({
+    page: registration
+  })
+  root.appendChild(mainPage.getContent()!)
   return root 
 }
 
@@ -62,9 +65,11 @@ function profilePasswordPage() {
 }
 
 function chatPage() {
-  root.appendChild(chat.getContent()!)
-  chat.dispatchComponentDidMount()
-  return root
+  const mainPage = new Main({
+    page: chat
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()

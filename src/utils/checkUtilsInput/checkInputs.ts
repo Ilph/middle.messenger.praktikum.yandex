@@ -99,6 +99,9 @@ export const checkButtonSubmit = (event: MouseEvent) => {
   const result = _checkInputsInButton(inputsData)
   if(result.includes(false)) {
     throw new Error("Введите корректные данные")
-  }
+  }  else if(inputsData.password && inputsData.passwordRepeate && inputsData.password !==inputsData.passwordRepeate)
+    {
+      throw new Error("Пароли не совпадают")
+    }
   console.log(inputsData)
 }
