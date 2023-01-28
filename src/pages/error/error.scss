@@ -8,24 +8,20 @@
 }
 
 .error__title {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 2.5em;
-
   color: $profile_text_color;
-
   margin-bottom: 0.4em;
 }
 
 .error__text {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.25em;
-
   color: $profile_text_color;
-
   margin-bottom: 3em;
 }
 
@@ -34,10 +30,9 @@
 }
 
 .error__link {
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.7em;
-
   color: $input_border_color;
 }

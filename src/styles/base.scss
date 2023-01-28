@@ -1,16 +1,23 @@
 @font-face {
-  font-family: "Inter";
+  font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  src: url("../../static/fonts/Inter-Medium.ttf"),
-    url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap'),
+  src:
+    url("../../static/fonts/Inter-Medium.ttf"),
+    url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
 }
 
 body {
-  font-family: "Inter", "Arial", sans-serif;
+  height: 100vh;
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  margin: 0;
+}
+
+.main {
+  height: 100%;
 }
 
 button,
@@ -18,12 +25,12 @@ input,
 h1,
 h2,
 h3,
-p
-{
+p {
   margin: 0;
-	border: 0;
-	padding: 0;
+  border: 0;
+  padding: 0;
   box-sizing: border-box;
+  background-color: transparent;
 }
 
 input:focus {
