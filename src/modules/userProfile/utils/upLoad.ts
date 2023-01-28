@@ -5,16 +5,14 @@ export function upLoad() {
 
   input.setAttribute("accept", ".png,.jpeg,.jpg,.gif") 
 
-
-  const changeHandler = event => {
-    if (!event.target.files.length) {
-      return
+  const changeHandler = (event: Event) => {
+    const target = (<HTMLInputElement>event.target)
+    if (target.files) {
+      const {files} = target
+      const fileType = files[0].type
+      labelText.textContent = fileType
+      titleText.textContent = "Файл загружен"
     }
-
-    const {files} = event.target
-    const fileType = files[0].type
-    labelText.textContent = fileType
-    titleText.textContent = "Файл загружен"
   }
 
   input.addEventListener("change", changeHandler)

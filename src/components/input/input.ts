@@ -1,8 +1,14 @@
 import inputTpl from "./input.hbs"
 import { Block } from "../../utils/Block"
 
+export interface IInput {
+  [key: string]: string | {
+    [key: string]: string 
+  }
+}
+
 export class Input extends Block<IInput> {
-  constructor(props) {
+  constructor(props: IInput) {
     super("div", props)
   }
 

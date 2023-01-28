@@ -1,5 +1,5 @@
 import tpl from "./chat.hbs"
-import {Block} from "../../utils/Block"
+import { Block } from "../../utils/Block"
 
 interface ChatType {
   [key: string]: {
@@ -16,7 +16,6 @@ export class Chat extends Block<ChatType> {
   }
 
   render() {
-    return this.compile(tpl, {
-    })
+    return this.compile(tpl, {})
   }
 }

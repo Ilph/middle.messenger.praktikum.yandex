@@ -1,25 +1,28 @@
+//HTML's template
 import tpl from "./profile.hbs"
 
-import aside from "../../modules/userProfile/blocks/aside/aside"
-import avatar from "../../modules/userProfile/components/image/avatar"
-import {userData} from "../../modules/userProfile/blocks/userData/userdata"
-import {person} from "../../modules/userProfile/blocks/userData/model"
-import userChange from "../../modules/userProfile/blocks/userChange/userChange"
+//components's template
+import { Block } from "../../utils/Block"
 
-export default () => {
-  const options = {
-    changeData: "Изменить данные",
-    changePassword: "Изменить пароль",
-    exite: "Выход"
+//types
+import { IAside } from "../../modules/userProfile/blocks/aside/aside"
+import { IAvatar } from "../../modules/userProfile/components/image/avatar"
+import { IUserChange } from "../../modules/userProfile/blocks/userChange/userChange"
+import { IUserData } from "../../modules/userProfile/blocks/userData/userdata"
+
+interface IProfile {
+  aside: Block<IAside>,
+  avatar: Block<IAvatar>,
+  userData: Block<IUserData>,
+  userChange: Block<IUserChange>
+}
+
+export class Profile extends Block<IProfile> {
+  constructor(props: IProfile) {
+    super("section", props)
   }
 
-  const types = "text"
-  const disabled = "disabled"
-
-  return tpl({
-    aside: aside(),
-    avatar: avatar(),
-    userData: userData(types, disabled, person),
-    userChange: userChange(options)
-  })
+  render() {
+    return this.compile(tpl, {})
+  }
 }

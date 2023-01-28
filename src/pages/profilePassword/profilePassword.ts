@@ -1,22 +1,52 @@
+//HTML's template
 import tpl from "./profilePassword.hbs"
+//Component's template
+import { Block } from "../../utils/Block"
+//types
+import { IAside } from "../../modules/userProfile/blocks/aside/aside"
+import { IAvatar } from "../../modules/userProfile/components/image/avatar"
+import { IInputProfile } from "../../modules/userProfile/components/input/input"
+import { IButton } from "../../components/button/button"
 
-import aside from "../../modules/userProfile/blocks/aside/aside"
-import avatar from "../../modules/userProfile/components/image/avatar"
-import {userData} from "../../modules/userProfile/blocks/userData/userdata"
-import {personPassword} from "../../modules/userProfile/blocks/userData/model"
-import button from "../../components/button/button"
+export interface IProfilePassword {
+  attributes: {
+    class: string
+  },
+  aside: Block<IAside>,
+  avatar: Block<IAvatar>,
+  oldPassword: Block<IInputProfile>,
+  newPassword: Block<IInputProfile>,
+  repeatNewPassword: Block<IInputProfile>,
+  save: Block<IButton>
+}
 
-export default () => {
-  const types = "password"
-  const disabled = ""
-  const options = {
-    value: "Сохранить",
-    style: ""
+export class ProfilePassword extends Block<IProfilePassword> {
+  constructor(props: IProfilePassword) {
+    super("section", props)
   }
-  return tpl({
-    aside: aside(),
-    avatar: avatar(),
-    userData: userData(types, disabled, personPassword),
-    save: button(options)
-  })
+
+  render() {
+    return this.compile(tpl, {})
+  }
+
+  _addEvents() {
+    const {events = {}}: any = this.props
+    const input = Array.from(this._element!.querySelectorAll("form input"))
+    const button = Array.from(this._element!.querySelectorAll("form button"))
+    const inputAndButton = input.concat(button)
+    
+    inputAndButton.forEach(el => {
+      if(!this.props.events) {
+        return
+      }
+  
+      Object.keys(events).forEach(eventName => {
+        if(eventName !== "click" && el.tagName == "INPUT") {
+          el.addEventListener(eventName, events[eventName])
+        } else if(eventName == "click" && el.tagName == "BUTTON") {
+          el.addEventListener(eventName, events[eventName])
+        }
+      })
+    })
+  }
 }

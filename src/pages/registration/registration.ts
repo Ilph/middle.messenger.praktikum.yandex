@@ -1,8 +1,12 @@
 import tpl from "./registration.hbs"
 import { Block } from "../../utils/Block"
+//type
+import { IInput } from "../../components/input/input"
 
 interface IRegistration {
-
+  [key: string]: {
+    [key: string]: string | any
+  } | Block<IInput>
 }
 
 export class Registration extends Block<IRegistration> {
@@ -19,8 +23,8 @@ export class Registration extends Block<IRegistration> {
 
   _addEvents() {
     const {events = {}}: any = this.props
-    const input = Array.from(this._element!.querySelectorAll("input"))
-    const button = Array.from(this._element!.querySelectorAll("button"))
+    const input = Array.from(this._element!.querySelectorAll("form input"))
+    const button = Array.from(this._element!.querySelectorAll("form button"))
     const inputAndButton = input.concat(button)
     
     inputAndButton.forEach(el => {

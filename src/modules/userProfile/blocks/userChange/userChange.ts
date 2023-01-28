@@ -1,11 +1,27 @@
 import tpl from "./userChange.hbs"
-import {options} from "./types"
+import { Block } from "../../../../utils/Block"
 
-export default (options: options) => {
-  return tpl(
-    {
-      changeData: options.changeData,
-      changePassword: options.changePassword,
-      exite: options.exite
+export interface IUserChange {
+  data: {
+    changeData: string,
+    changePassword: string,
+    exite: string
+  },
+  attributes: {
+    class: string
+  }
+}
+
+export class UserChanges extends Block<IUserChange> {
+  constructor(props: IUserChange) {
+    super("div", props)
+  }
+
+  render() {
+    return this.compile(tpl, {
+      changeData: this.props.data.changeData,
+      changePassword: this.props.data.changePassword,
+      exite: this.props.data.exite
     })
+  }
 }

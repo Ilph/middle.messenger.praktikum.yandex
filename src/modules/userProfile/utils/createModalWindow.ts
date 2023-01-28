@@ -1,25 +1,20 @@
-import button from "../../../components/button/button"
-import modalWindow from "../modalWindows/modal"
+import { modalWindowAvatar } from "../modalWindows/index"
 import {upLoad} from "./upLoad"
 
 export function createModal() {
-  const options = {
-    value:"Поменять",
-    style: ""
-  }
   const input = document.querySelector(".avatar__input") as HTMLInputElement
   const modal = document.createElement("div")
   modal.classList.add("modal")
-  const tpl = modalWindow(button(options))
-  modal.insertAdjacentHTML("afterbegin", tpl)
+  modal.appendChild(modalWindowAvatar.getContent()!)
   document.body.appendChild(modal)
-  
+
   function handler() {
     modal.classList.add("open")
-  } 
+  }
 
-  function listener(event) {
-    if(event.target.dataset.close)
+  function listener(event: MouseEvent) {
+    const target = event.target as HTMLButtonElement
+    if(target.dataset.close)
       modal.classList.remove("open")
   }
 

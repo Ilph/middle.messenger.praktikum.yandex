@@ -1,12 +1,11 @@
 import { login } from "./pages/authorization/index"
-import {registration} from "./pages/registration/index"
-import error500 from "./pages/error/error500"
-import error404 from "./pages/error/error404"
-import profile from "./pages/profile/profile"
-import profileData from "./pages/profileData/profileData"
-import profilePassword from "./pages/profilePassword/profilePassword"
-import {chat} from "./pages/chat/index"
-import {createModal} from "./modules/userProfile/utils/createModalWindow"
+import { registration } from "./pages/registration/index"
+import { error404, error500 } from "./pages/error/index"
+import { profile } from "./pages/profile/index"
+import { profileData } from "./pages/profileData/index"
+import { profilePassword } from "./pages/profilePassword/index"
+import { chat } from "./pages/chat/index"
+import { createModal } from "./modules/userProfile/utils/createModalWindow"
 import { Main } from "./main"
 import "./styles/main.scss"
 
@@ -15,6 +14,9 @@ const root = document.getElementById("root") as HTMLElement
 
 function loginPage() {
   const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
     page: login
   })
   root.appendChild(mainPage.getContent()!)
@@ -23,6 +25,9 @@ function loginPage() {
 
 function registrationPage() {
   const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
     page: registration
   })
   root.appendChild(mainPage.getContent()!)
@@ -30,38 +35,58 @@ function registrationPage() {
 }
 
 function error500Page() {
-  const result = tpl(
-    {page: error500()}
-  )
-  return root.innerHTML = result
+  const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
+    page: error500
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 function error404Page() {
-  const result = tpl(
-    {page: error404()}
-  )
-  return root.innerHTML = result
+  const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
+    page: error404
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 function profilePage() {
-  const result = tpl(
-    {page: profile()}
-  )
-  return root.innerHTML = result
+  const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
+    page: profile
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 function profileDataPage() {
-  const result = tpl(
-    {page: profileData()}
-  )
-  return root.innerHTML = result
+  const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
+    page: profileData
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 function profilePasswordPage() {
-  const result = tpl(
-    {page: profilePassword()}
-  )
-  return root.innerHTML = result
+  const mainPage = new Main({
+    attributes: {
+      class: "main"
+    },
+    page: profilePassword
+  })
+  root.appendChild(mainPage.getContent()!)
+  return root 
 }
 
 function chatPage() {
@@ -85,10 +110,10 @@ if (window.location.href ==  baseUrl + "/") {
 } else if (window.location.href == baseUrl + "/profile") {
   profilePage()
   createModal()
-} else if (window.location.href == baseUrl + "/profileData") {
-  profileDataPage()
 } else if (window.location.href == baseUrl + "/profilePassword") {
   profilePasswordPage()
 } else if (window.location.href == baseUrl + "/chat") {
   chatPage()
-}
+} else if (window.location.href == baseUrl + "/profileData") {
+  profileDataPage()
+} 

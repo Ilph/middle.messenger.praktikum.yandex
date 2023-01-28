@@ -1,5 +1,5 @@
 import { ChatAside } from "./chatsAside"
-import { chat, chat2 } from "../../component/chat/index"
+import { chat } from "../../component/chat/index"
 
 const props = {
   attributes: {
@@ -11,7 +11,7 @@ const props = {
   Chat: chat,
   events: {
     click: (event: MouseEvent) => {
-      if((event.target! as HTMLElement).getAttribute("type")) {
+      if((event.target as HTMLElement).getAttribute("type")) {
         console.log(event.target)
       }
     }

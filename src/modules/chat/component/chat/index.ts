@@ -15,4 +15,3 @@ const props = {
 }
 
 export const chat = new Chat(props)
-export const chat2 = new Chat(props)

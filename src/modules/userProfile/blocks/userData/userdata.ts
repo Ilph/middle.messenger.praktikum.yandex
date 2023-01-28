@@ -1,27 +1,24 @@
+//HTML's templates
 import tpl from "./userdata.hbs"
-import input from "../../components/input/input"
-import {person} from "./model"
+//Component templates
+import { Block } from "../../../../utils/Block"
+//type
+import { IInputProfile } from "../../components/input/input"
 
-export function userData(types: string, disabled: string, person:person) {
+export interface IUserData {
+  [key: string]: Block<IInputProfile> | {
+    [key: string]: string
+  }
+}
 
-  let templates = ""
+export class UserData extends Block<IUserData> {
+  constructor(props: IUserData) {
+    super("div", props)
+  }
 
-  person.person.forEach(item => {
-
-    const options = {
-      types: types,
-      disabled: disabled,
-      nameInput: item.name,
-      name: item.title,
-      placeholder: item.placeholder,
-    }
-
-    const tpl = input(options)
-    templates += tpl
-  })
-
-  return tpl({
-      title: person.name,
-      template: templates
+  render() {
+    return this.compile(tpl, {
+      title: this.props.data.title
     })
+  }
 }

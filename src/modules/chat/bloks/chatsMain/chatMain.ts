@@ -1,5 +1,11 @@
+//HTML's templates
 import tpl from "./chatMain.hbs"
-import {Block} from "../../../../utils/Block"
+//Component's template
+import { Block } from "../../../../utils/Block"
+//icons
+import dot from "../../../../../static/icons/3dot.png"
+import clip from "../../../../../static/icons/clip.png"
+import arrowRigth from "../../../../../static/icons/arrowRigth.png"
 
 export interface ChatMainType {
   [key: string]: string | {
@@ -14,7 +20,9 @@ export class ChatMain extends Block<ChatMainType> {
 
   render() {
     return this.compile(tpl, {
-      text: this.props.text
+      dots: dot,
+      clip: clip,
+      arrowRigth: arrowRigth
     })
   }
 }

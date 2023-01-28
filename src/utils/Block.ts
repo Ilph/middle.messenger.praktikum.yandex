@@ -1,5 +1,5 @@
 import {EventBus} from "./EventBus"
-import { v4 as makeUUID } from 'uuid'
+import { v4 as makeUUID } from "uuid"
 
 export class Block<T> {
 
@@ -11,9 +11,11 @@ export class Block<T> {
   }
 
   protected _element: HTMLElement | null = null
-  private _meta: {tagName: string, props: T}
+  private _meta: {tagName: string, props: {
+    [key: string]: {[key: string]: string | number | boolean}}
+  }
   private eventBus: () => EventBus
-  protected props: T 
+  protected props: {[key: string]: {[key: string]: string | number | boolean}}
   protected children: {[key: string]: Block<T>}
   private _id: string | null = null
 
@@ -40,15 +42,14 @@ export class Block<T> {
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this))
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this))
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this ))
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
   }
 
   private _createDocumentElement(tagName: string): HTMLElement {
     const element = document.createElement(tagName)
-
-    if(this.props.settings?.withInternalID) {
-      element.setAttribute('data-id', this._id!)
+    if(this.props.settings?.withInternalId) {
+      element.setAttribute("data-id", this._id!)
     }
     return element
   }
@@ -66,7 +67,7 @@ export class Block<T> {
   private _render(): void {
     const block = this.render()
     this._removeEvents()
-    this._element!.innerHTML = ''
+    this._element!.innerHTML = ""
     this._removeEvents()
     this._element!.append(block)
     this._addEvents()
@@ -96,13 +97,19 @@ export class Block<T> {
     }
   }
 
-  private _componentDidUpdate(oldProps: T, newProps: T): void {
+  private _componentDidUpdate(
+    oldProps: Record<string, unknown>, 
+    newProps: Record<string, unknown>
+    ): void {
     if(this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected componentDidUpdate(oldProps: T, newProps: T): boolean {
+  protected componentDidUpdate(
+    oldProps: Record<string, unknown>, 
+    newProps: Record<string, unknown>
+    ) {
     return true
   }
 
@@ -144,7 +151,7 @@ export class Block<T> {
     return { children, props }
 }
 
-  compile(template: (prop: object) => string, props: T) {
+  compile(template: (prop: Record<string, unknown>) => string, props: Record<string, unknown>) {
     const propsAndStubs = { ...props }
 
     Object.entries(this.children).forEach(([key, child]) => {
@@ -153,7 +160,7 @@ export class Block<T> {
 
     const html = template(propsAndStubs)
 
-    const fragment = document.createElement('template')
+    const fragment = document.createElement("template")
 
     fragment.innerHTML = html
     
@@ -168,16 +175,18 @@ export class Block<T> {
     return fragment.content
   }
   
-  _makePropsProxy(props: Record<string, unknown>) {
+  _makePropsProxy(props: any) {
 
-    const self = this;
+    const self = this
 
     return new Proxy(props, {
-      get(target: any, prop: string) {
+      get(target: {[key: string]: () => {} | {[key: string]: string | number | boolean}},
+        prop: string) {
         const value = target[prop]
         return typeof value === "function" ? value.bind(target) : value
       },
-      set(target: any, prop, value) {
+      set(target: {[key: string]: {[key: string]: string | number | boolean}},
+        prop: string, value) {
         const oldTarget: any = {...target}
         target[prop] = value
   
@@ -191,7 +200,6 @@ export class Block<T> {
   }
 
   protected _addEvents(): void {
-    
 
     const {events = {}}: any = this.props
 
@@ -209,18 +217,20 @@ export class Block<T> {
 
     Object.keys(events).forEach(eventName => {
       this._element!.removeEventListener(eventName, events[eventName])
-    });
+    })
   }
 
   private _addAttributes() {
-    const {attributes = {}}: T = this.props
+    const {attributes = {}} = this.props
 
     if(!this.props.attributes) {
       return
     }
 
     Object.entries(attributes).forEach(([key, value]) => {
-      this._element?.setAttribute(key, value)
+      if(typeof value === "string") {
+        this._element!.setAttribute(key, value)
+      }
     })
   }
 }

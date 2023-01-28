@@ -1,12 +1,14 @@
 import tpl from "./chat.hbs"
 import { Block } from "../../../../utils/Block"
 
-interface IChat {
+export interface IChat {
   [key: string]: {
     [key: string]: string
   } | {
     [key: string]: (event: MouseEvent) => void
-  } | any
+  } | {
+    [key: string]: boolean
+  }
 }
 
 export class Chat extends Block<IChat> {

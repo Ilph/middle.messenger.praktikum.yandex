@@ -1,4 +1,4 @@
-import {ChatMain} from "./chatMain"
+import { ChatMain } from "./chatMain"
 
 const props = {
   text: "Выберите чат, чтобы отправить сообщение",

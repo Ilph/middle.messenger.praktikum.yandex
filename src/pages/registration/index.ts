@@ -1,7 +1,11 @@
 import { Registration } from "./registration"
 import { Input } from "../../components/input/input"
 import { Button } from "../../components/button/button"
-import { checkInputFocusIn, checkInputFocusOut, checkButtonSubmit } from "../../utils/checkUtilsInput/checkInputs"
+import {
+  checkInputFocusIn,
+  checkInputFocusOut,
+  checkButtonSubmit
+} from "../../utils/checkUtilsInput/checkInputs"
 
 const propsInput = {
   email: {
@@ -9,7 +13,8 @@ const propsInput = {
       id: "email",
       name: "email",
       type: "email", 
-      label: "Email"
+      label: "Email",
+      helperText: "Неверный email"
     },
     attributes: { 
       class: "input-container input-container_margin",
@@ -20,7 +25,8 @@ const propsInput = {
       id: "login",
       name: "login",
       type: "text", 
-      label: "Login"
+      label: "Login",
+      helperText: "Неверный логин"
     },
     attributes: { 
       class: "input-container input-container_margin",
@@ -31,7 +37,8 @@ const propsInput = {
       id: "firstName",
       name: "first_name",
       type: "text", 
-      label: "Имя"
+      label: "Имя",
+      helperText: "Неверный формат имени"
     }, 
     attributes: { 
       class: "input-container input-container_margin",
@@ -42,7 +49,8 @@ const propsInput = {
       id: "secondName",
       name: "secondName",
       type: "text", 
-      label: "Фамилия"
+      label: "Фамилия",
+      helperText: "Неверный формаь Фамилии"
     }, 
     attributes: { 
       class: "input-container input-container_margin",
@@ -53,7 +61,8 @@ const propsInput = {
       id: "phone",
       name: "phone",
       type: "text", 
-      label: "Телефон"
+      label: "Телефон",
+      helperText: "Неверный формат телефона"
     }, 
     attributes: { 
       class: "input-container input-container_margin",
@@ -64,7 +73,8 @@ const propsInput = {
       id: "password",
       name: "password",
       type: "password", 
-      label: "Password"
+      label: "Password",
+      helperText: "Неверный пароль"
     }, 
     attributes: { 
       class: "input-container input-container_margin",
@@ -72,10 +82,11 @@ const propsInput = {
   },
   passwordRepeat: {
     data: {
-      id: "passwordRepeat",
+      id: "repeatPassword",
       name: "password_repeat",
       type: "password", 
-      label: "Passwors (repeat)"
+      label: "Passwors (repeat)",
+      helperText: "Неверный пароль"
     }, 
     attributes: { 
       class: "input-container input-container_margin",
@@ -115,14 +126,14 @@ const props = {
     blur: checkInputFocusOut,
     click: checkButtonSubmit
   },
-  button: button,
   email: email,
   login: login,
   firstName: firstName,
   secondName: secondName,
   phone: phone,
   password: password,
-  passwordRepeat: passwordRepeat
+  passwordRepeat: passwordRepeat,
+  button: button
 }
 
 export const registration = new Registration(props)

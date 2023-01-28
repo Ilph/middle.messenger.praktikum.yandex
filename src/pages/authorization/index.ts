@@ -1,7 +1,11 @@
 import { Login } from "./login"
 import { Button } from "../../components/button/button"
 import { Input } from "../../components/input/input"
-import { checkInputFocusIn, checkInputFocusOut, checkButtonSubmit } from "../../utils/checkUtilsInput/checkInputs"
+import {
+  checkInputFocusIn,
+  checkInputFocusOut,
+  checkButtonSubmit
+} from "../../utils/checkUtilsInput/checkInputs"
 
 
 const propsInput = {
@@ -41,13 +45,9 @@ const propsButton = {
   }
 }
 
-
 const inputLogin = new Input(propsInput.login)
 const inputPassword = new Input(propsInput.password)
 export const button = new Button(propsButton)
-
-
-
 
 const props = {
   data: {

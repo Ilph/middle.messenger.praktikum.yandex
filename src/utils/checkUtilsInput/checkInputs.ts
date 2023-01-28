@@ -19,7 +19,7 @@ function checkName(name: string): boolean {
 }
 
 function checkPhone(phone: string): boolean {
-  const regPhone = /^[\+0-9]{10,15}/
+  const regPhone = /^[0-9]{10,15}/
   return regPhone.test(phone)
 }
 
@@ -31,8 +31,12 @@ function checkMessage(message: string): boolean {
 const checkInputs = {
   login: checkLogin,
   password: checkPassword,
+  oldPassword: checkPassword,
+  newPassword: checkPassword,
+  repeatPassword: checkPassword,
   email: checkEmail,
-  name: checkName,
+  firstName: checkName,
+  secondName: checkName,
   phone: checkPhone,
   message: checkMessage
 }
@@ -40,8 +44,8 @@ const checkInputs = {
 export const checkInputFocusIn = (event: FocusEvent) => {
   event.preventDefault()
   event.stopPropagation()
-  let tag = (<HTMLInputElement>event.target)
-  let tagName = tag.tagName
+  const tag = (<HTMLInputElement>event.target)
+  const tagName = tag.tagName
   const tagId = tag.id
   const helpertext = document.querySelector(`${tagName}[id=${tagId}] ~ .helpertext`)
 
@@ -58,11 +62,11 @@ export const checkInputFocusIn = (event: FocusEvent) => {
 export const checkInputFocusOut = (event: FocusEvent) => {
   event.preventDefault()
   event.stopPropagation()
-  let tag = (<HTMLInputElement>event.target)
-  let tagName = tag!.tagName
+  const tag = (<HTMLInputElement>event.target)
+  const tagName = tag!.tagName
   const tagId = tag!.id
   const helpertext = document.querySelector(`${tagName}[id=${tagId}] ~ .helpertext`)
-
+  
   Object.entries(checkInputs).forEach(([key, values]) => {
     if(tag!.id === key && tag!.value !== "") {
       if(!values(tag!.value)) {
@@ -74,7 +78,7 @@ export const checkInputFocusOut = (event: FocusEvent) => {
 
 function _getDataInput(): Record<string, string> {
   const inputsData:Record<string, string> = {}
-  const inputs = document.querySelectorAll("input")
+  const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("form input")
   inputs.forEach(item => {
     inputsData[item.id] = item.value
   })
@@ -97,11 +101,8 @@ export const checkButtonSubmit = (event: MouseEvent) => {
   event.preventDefault()
   const inputsData = _getDataInput()
   const result = _checkInputsInButton(inputsData)
+  console.log(inputsData)
   if(result.includes(false)) {
     throw new Error("Введите корректные данные")
-  }  else if(inputsData.password && inputsData.passwordRepeate && inputsData.password !==inputsData.passwordRepeate)
-    {
-      throw new Error("Пароли не совпадают")
-    }
-  console.log(inputsData)
+  }
 }

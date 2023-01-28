@@ -1,13 +1,12 @@
-<div class="label-container">
-  <p>{{name}}</p>
-  <label class="profile__label">
-    <input 
-      name={{nameInput}}
-      type={{types}} 
-      size="30"
-      autocomplete="off"
-      placeholder={{placeholder}} 
-      {{disabled}}
-      />
-  </label>
-</div>
+<p>{{names}}</p>
+<label for={{id}} class="profile__label"></label>
+<input 
+    id={{id}}
+    name={{nameInput}}
+    type={{types}} 
+    size="30"
+    autocomplete="off"
+    placeholder={{placeholder}} 
+    {{disabled}}
+    />
+<p class="helpertext">{{helperText}}</p>
