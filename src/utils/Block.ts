@@ -124,11 +124,11 @@ export class Block<T> {
     return this.element;
   }
 
-  _getChildren(propsAndChildren: any) {
+  _getChildren(propsAndChildren: T) {
     const children: {[key: string]: Block<T>} = {}
     const props: any = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+    Object.entries(propsAndChildren as Record<string, unknown>).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value
       } else if(Array.isArray(value)) {
