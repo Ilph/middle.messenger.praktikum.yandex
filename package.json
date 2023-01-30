@@ -11,7 +11,7 @@
   "scripts": {
     "startparcel": "parcel -p 3000 --open --no-cache --no-source-maps",
     "build": "parcel build --no-source-maps --no-cache --target default --dist-dir ./dist",
-    "start": "node server.js",
+    "start": "node server.cjs",
     "dev": "nodemon server.js",
     "elt": "npx eslint .",
     "slt": "npx stylelint **/*.scss",
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/Ilph/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "2.8.2",
+    "@types/node": "18.11.18",
     "@types/uuid": "9.0.0",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
