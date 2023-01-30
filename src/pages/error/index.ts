@@ -1,3 +1,4 @@
+//Components
 import { Error404, Error500 } from "./error"
 
 const props = {

@@ -25,16 +25,16 @@ interface IOptions {
 
 class HTTPTransport {
   get = (url: string, options: IOptions = {}) => {
-    return this.request(url, {...options, method: METHODS.GET}, options.timeout);
+    return this.request(url, {...options, method: METHODS.GET}, options.timeout)
   }
   post = (url: string, options: IOptions = {}) => {
-  return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+  return this.request(url, {...options, method: METHODS.POST}, options.timeout)
   }
   put = (url: string, options: IOptions = {}) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+    return this.request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
   delete = (url: string, options: IOptions = {}) => { 
-    return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+    return this.request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
 
   request = (url: string, options: IOptions = {}, timeout = 5000) => {
@@ -42,7 +42,7 @@ class HTTPTransport {
 
     return new Promise(function(resolve, reject) {
       if (!method) {
-        reject("No method");
+        reject("No method")
         return;
       }
 
@@ -54,26 +54,26 @@ class HTTPTransport {
         isGet && !!data
         ? `${url}${queryStringify(data)}`
         : url,
-      );
+      )
 
       Object.keys(headers).forEach(key => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
+        xhr.setRequestHeader(key, headers[key])
+      })
 
       xhr.onload = function() {
-        resolve(xhr);
-      };
+        resolve(xhr)
+      }
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
+      xhr.onabort = reject
+      xhr.onerror = reject
 
-      xhr.timeout = timeout;
-      xhr.ontimeout = reject;
+      xhr.timeout = timeout
+      xhr.ontimeout = reject
 
       if (isGet || !data) {
-        xhr.send();
+        xhr.send()
       } else {
-        xhr.send(data);
+        xhr.send(data)
       }
     });
   };

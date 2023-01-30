@@ -4,7 +4,7 @@ function checkLogin(login: string): boolean {
 }
 
 function checkPassword(password: string): boolean {
-  const regPassword = /^.*(?=.{4,40})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
+  const regPassword = /^.*(?=.{8,40})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
   return regPassword.test(password)
 }
 
@@ -14,12 +14,12 @@ function checkEmail(email: string): boolean {
 }
 
 function checkName(name: string): boolean {
-  const regName = /^[а-яА-ЯёЁa-zA-Z0-9]+$/
+  const regName = /^[А-ЯA-Z][а-яА-ЯёЁa-zA-Z-]+$/
   return regName.test(name)
 }
 
 function checkPhone(phone: string): boolean {
-  const regPhone = /^[0-9]{10,15}/
+  const regPhone = /^[+0-9]{10,15}/
   return regPhone.test(phone)
 }
 
@@ -52,7 +52,6 @@ export const checkInputFocusIn = (event: FocusEvent) => {
   Object.entries(checkInputs).forEach(([key, values]) => {
     if(tag!.id === key && tag!.value !== "") {
       if(!values(tag!.value)) {
-        tag.value = ""
         helpertext!.classList.toggle("helpertexton")
       }
     }

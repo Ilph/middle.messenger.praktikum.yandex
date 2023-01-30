@@ -1,6 +1,8 @@
+//Components
 import { Login } from "./login"
 import { Button } from "../../components/button/button"
 import { Input } from "../../components/input/input"
+//Utils
 import {
   checkInputFocusIn,
   checkInputFocusOut,
@@ -47,7 +49,7 @@ const propsButton = {
 
 const inputLogin = new Input(propsInput.login)
 const inputPassword = new Input(propsInput.password)
-export const button = new Button(propsButton)
+const button = new Button(propsButton)
 
 const props = {
   data: {

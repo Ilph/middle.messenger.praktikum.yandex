@@ -1,6 +1,8 @@
+//Component's
 import { Registration } from "./registration"
 import { Input } from "../../components/input/input"
 import { Button } from "../../components/button/button"
+//Utils
 import {
   checkInputFocusIn,
   checkInputFocusOut,

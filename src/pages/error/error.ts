@@ -1,4 +1,6 @@
+//HTML's template
 import tpl from "./error.hbs"
+//Component's template
 import { Block } from "../../utils/Block"
 
 export interface IError {

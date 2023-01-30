@@ -1,9 +1,11 @@
+//HTML's template
 import tpl from "./registration.hbs"
+//Component's template
 import { Block } from "../../utils/Block"
 //type
 import { IInput } from "../../components/input/input"
 
-interface IRegistration {
+export interface IRegistration {
   [key: string]: {
     [key: string]: string | any
   } | Block<IInput>

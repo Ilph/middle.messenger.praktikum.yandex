@@ -1,7 +1,6 @@
 //component's template
 import { Profile } from "./profile"
 
-
 //instances of components
 import { aside } from "../../modules/userProfile/blocks/aside/index"
 import { avatar } from "../../modules/userProfile/components/image/index"

@@ -97,23 +97,18 @@ export class Block<T> {
     }
   }
 
-  private _componentDidUpdate(
-    oldProps: Record<string, unknown>, 
-    newProps: Record<string, unknown>
-    ): void {
+  private _componentDidUpdate(oldProps: T, newProps: T): void {
     if(this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected componentDidUpdate(
-    oldProps: Record<string, unknown>, 
-    newProps: Record<string, unknown>
-    ) {
+  protected componentDidUpdate(oldProps: T, newProps: T) {
+    console.log(oldProps, newProps)
     return true
   }
 
-  setProps = (nextProps: string) => {
+  setProps = (nextProps:T) => {
     if(!nextProps) {
       return
     }
@@ -129,9 +124,9 @@ export class Block<T> {
     return this.element;
   }
 
-  _getChildren(propsAndChildren: T) {
+  _getChildren(propsAndChildren: any) {
     const children: {[key: string]: Block<T>} = {}
-    const props: any = {}
+    const props: any = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -141,8 +136,8 @@ export class Block<T> {
           Object.entries(item).forEach(([key, value]) => {
             if (value instanceof Block) {
               children[key] = value
-          } 
-        })
+            }
+          })
         })
       } else {
         props[key] = value

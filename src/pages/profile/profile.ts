@@ -10,7 +10,7 @@ import { IAvatar } from "../../modules/userProfile/components/image/avatar"
 import { IUserChange } from "../../modules/userProfile/blocks/userChange/userChange"
 import { IUserData } from "../../modules/userProfile/blocks/userData/userdata"
 
-interface IProfile {
+export interface IProfile {
   aside: Block<IAside>,
   avatar: Block<IAvatar>,
   userData: Block<IUserData>,

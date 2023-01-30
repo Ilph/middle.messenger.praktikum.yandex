@@ -1,7 +1,9 @@
+//HTML's template
 import tpl from "./chat.hbs"
+//Component's template
 import { Block } from "../../utils/Block"
 
-interface ChatType {
+export interface IChatType {
   [key: string]: {
     [key: string]: string
   } | {
@@ -9,9 +11,9 @@ interface ChatType {
   } | any
 }
 
-export class Chat extends Block<ChatType> {
+export class Chat extends Block<IChatType> {
 
-  constructor(props: ChatType) {
+  constructor(props: IChatType) {
     super("section", props)
   }
 
