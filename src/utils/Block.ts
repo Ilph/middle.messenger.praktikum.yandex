@@ -68,7 +68,6 @@ export class Block<T> {
     const block = this.render()
     this._removeEvents()
     this._element!.innerHTML = ""
-    this._removeEvents()
     this._element!.append(block)
     this._addEvents()
     this._addAttributes()
