@@ -20,8 +20,7 @@ export interface ILogin {
     blur: (event: FocusEvent) => void,
     click: (event: MouseEvent) => void
   },
-  inputLogin: Block<IInput>,
-  inputPassword: Block<IInput>,
+  inputs: Block<IInput>[],
   button: Block<IButton>
 }
 

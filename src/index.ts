@@ -75,6 +75,7 @@ function profileDataPage() {
     page: profileData
   })
   root.appendChild(mainPage.getContent()!)
+  createModal(".avatar__input")
   return root 
 }
 
@@ -94,6 +95,7 @@ function chatPage() {
     page: chat
   })
   root.appendChild(mainPage.getContent()!)
+  createModal(".chat-header__dropdown-menu button")
   return root 
 }
 
@@ -109,7 +111,6 @@ if (window.location.href ==  baseUrl + "/") {
   error404Page()
 } else if (window.location.href == baseUrl + "/profile") {
   profilePage()
-  createModal()
 } else if (window.location.href == baseUrl + "/profilePassword") {
   profilePasswordPage()
 } else if (window.location.href == baseUrl + "/chat") {

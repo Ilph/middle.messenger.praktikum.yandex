@@ -79,7 +79,6 @@ export class Block<T> {
 
   private _componentDidMount(): void {
     this.componentDidMount()
-
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount()
     })
@@ -119,25 +118,20 @@ export class Block<T> {
     return this._element;
   }
 
-  getContent(): HTMLElement | null{
+  getContent(): HTMLElement | null{   
+    
     return this.element;
   }
 
   _getChildren(propsAndChildren: T) {
-    const children: {[key: string]: Block<T>} = {}
+    const children: {[key: string]: Block<T> | Array<Block<T>>} = {}
     const props: any = {};
 
     Object.entries(propsAndChildren as Record<string, unknown>).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value
       } else if(Array.isArray(value)) {
-        value.forEach(item => {
-          Object.entries(item).forEach(([key, value]) => {
-            if (value instanceof Block) {
-              children[key] = value
-            }
-          })
-        })
+        children[key] = value.slice()
       } else {
         props[key] = value
       }
@@ -149,23 +143,38 @@ export class Block<T> {
     const propsAndStubs = { ...props }
 
     Object.entries(this.children).forEach(([key, child]) => {
+      if (Array.isArray(child)) {
+        propsAndStubs[key] = " "
+        child.forEach(item => {
+          propsAndStubs[key] += `<div data-id="${item._id}"></div>`
+        })
+      } else {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`
-    });
+      }
+    })
 
     const html = template(propsAndStubs)
-
     const fragment = document.createElement("template")
-
     fragment.innerHTML = html
     
     Object.values(this.children).forEach(child => {
+      if (Array.isArray(child)) {
+        child.forEach(item => {
+          const stub = fragment.content.querySelector(`[data-id="${item._id}"]`)
+          if(!stub) {
+            return
+          }
+          stub.replaceWith(item.getContent()!)
+        })
+      } else {
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-        
         if(!stub) {
           return
         }
         stub.replaceWith(child.getContent()!)
+      }
     })
+
     return fragment.content
   }
   

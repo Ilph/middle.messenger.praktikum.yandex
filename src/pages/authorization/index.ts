@@ -64,8 +64,7 @@ const props = {
     blur: checkInputFocusOut,
     click: checkButtonSubmit
   },
-  inputLogin: inputLogin,
-  inputPassword: inputPassword,
+  inputs: [inputLogin, inputPassword],
   button: button
 }
 
