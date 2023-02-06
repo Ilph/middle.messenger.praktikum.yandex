@@ -7,6 +7,9 @@ https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3
 ## Команды
 npm run start - запуск проекта в режиме разработчика
 npm run build - сборка проекта
+npm run elt - запуск ESLint
+npm run slt - запуск Stylelint
+npm run tsc - запуск компилятора Typescript для проверки типизации
 
 ## Команды Server
 npm run start - запуск файла server.js

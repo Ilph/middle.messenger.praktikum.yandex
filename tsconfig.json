@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "rootDirs": ["./src"],
+    "typeRoots": ["./types"],
+    "allowJs": true,
+    "outDir": ".dist/",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strictNullChecks": true
+  }
+}

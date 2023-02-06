@@ -5,7 +5,7 @@
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   background-image: url("/static/icons/iconAvatar.png");
   background-origin: border-box;
   background-size: 35%;
@@ -18,16 +18,11 @@
   position: absolute;
   top: 40%;
   left: 8%;
-
-  font-family: 'Inter';
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.8em;
-
   color: $avatar_text_hover_color;
-}
-
-.avatar__text {
   display: block;
   text-align: center;
 }
