@@ -1,5 +1,7 @@
 import { ChatAside } from "./chatsAside"
 import { chat } from "../../component/chat/index"
+import { router } from "../../../../index"
+
 
 const props = {
   attributes: {
@@ -11,9 +13,8 @@ const props = {
   Chat: chat,
   events: {
     click: (event: MouseEvent) => {
-      if((event.target as HTMLElement).getAttribute("type")) {
-        console.log(event.target)
-      }
+      event.preventDefault()
+      router.go("/settings")
     }
   }
 }

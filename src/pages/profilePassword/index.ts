@@ -67,26 +67,34 @@ const buttonProps = {
   },
   attributes: {
     class: "button"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      console.log("Ok")
+    }
   }
 }
 
 const button = new Button(buttonProps)
 
-const props = {
-  attributes: {
-    class: "section"
-  },
-  events: {
-    focus: checkInputFocusIn,
-    blur: checkInputFocusOut,
-    click: checkButtonSubmit
-  },
-  aside: asideProfilePassword,
-  avatar: avatarProfilePassword,
-  oldPassword: oldPassword,
-  newPassword: newPassword,
-  repeatNewPassword: repeatNewPassword,
-  save: button
+export function profilePasswordInstance() {
+  const props = {
+    attributes: {
+      class: "section"
+    },
+    events: {
+      focus: checkInputFocusIn,
+      blur: checkInputFocusOut,
+      click: checkButtonSubmit
+    },
+    aside: asideProfilePassword,
+    avatar: avatarProfilePassword,
+    oldPassword: oldPassword,
+    newPassword: newPassword,
+    repeatNewPassword: repeatNewPassword,
+    save: button
+  }
+  
+  return new ProfilePassword(props)
 }
-
-export const profilePassword = new ProfilePassword(props)

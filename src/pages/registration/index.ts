@@ -8,6 +8,9 @@ import {
   checkInputFocusOut,
   checkButtonSubmit
 } from "../../utils/checkUtilsInput/checkInputs"
+import { router } from "../../index"
+
+export function registrationInstance() {
 
 const propsInput = {
   email: {
@@ -102,7 +105,19 @@ const propsButton = {
   },
   attributes: {
     class: "button form-reg__button",
-    type: "submit"
+    type: "submit",
+    "data-handler": "registration"
+  }
+}
+
+const propsButton2 = {
+  data: {
+    value: "sign in"
+  },
+  attributes: {
+    class: "button form-reg__button form-reg__button_secondcolor",
+    type: "submit",
+    "data-handler": "changepage"
   }
 }
 
@@ -114,6 +129,12 @@ const phone = new Input(propsInput.phone)
 const password = new Input(propsInput.password)
 const passwordRepeat = new Input(propsInput.passwordRepeat)
 const button = new Button(propsButton)
+const button2 = new Button(propsButton2)
+
+function navigate(event: MouseEvent) {
+  event.preventDefault()
+  router.go("/")
+}
 
 const props = {
   data: {
@@ -126,7 +147,7 @@ const props = {
   events: {
     focus: checkInputFocusIn,
     blur: checkInputFocusOut,
-    click: checkButtonSubmit
+    click: [checkButtonSubmit, navigate]
   },
   email: email,
   login: login,
@@ -135,7 +156,7 @@ const props = {
   phone: phone,
   password: password,
   passwordRepeat: passwordRepeat,
-  button: button
+  button: [button, button2]
+  }
+  return new Registration(props)
 }
-
-export const registration = new Registration(props)

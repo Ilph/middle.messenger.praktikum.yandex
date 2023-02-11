@@ -236,4 +236,16 @@ export class Block<T> {
       }
     })
   }
+
+  show() {
+    if(this._element!.style.display = "none") {
+      this._element!.style.display = "block"
+    }
+  }
+
+  hide() {
+    if(this._element!.style.display = "block") {
+      this._element!.style.display = "none"
+    }
+  }
 }

@@ -12,30 +12,38 @@ import {
   checkButtonSubmit
 } from "../../utils/checkUtilsInput/checkInputs"
 
-const buttonProps = {
-  data: {
-    value: "Сохранить"
-  },
-  attributes: {
-    class: "button"
+export function profileDataInstance() {
+  const buttonProps = {
+    data: {
+      value: "Сохранить"
+    },
+    attributes: {
+      class: "button"
+    },
+    events: {
+      click: (event: MouseEvent) => {
+        event.preventDefault()
+        console.log("Ok")
+      }
+    }
   }
+  
+  const button = new Button(buttonProps)
+  
+  const props = {
+    attributes: {
+      class: "section"
+    },
+    events: {
+      focus: checkInputFocusIn,
+      blur: checkInputFocusOut,
+      click: checkButtonSubmit
+    },
+    aside: asideProfileData,
+    avatar: avatarProfileData,
+    userData: userDataProfileData,
+    save: button
+  }
+  
+  return new ProfileData(props)
 }
-
-const button = new Button(buttonProps)
-
-const props = {
-  attributes: {
-    class: "section"
-  },
-  events: {
-    focus: checkInputFocusIn,
-    blur: checkInputFocusOut,
-    click: checkButtonSubmit
-  },
-  aside: asideProfileData,
-  avatar: avatarProfileData,
-  userData: userDataProfileData,
-  save: button
-}
-
-export const profileData = new ProfileData(props)

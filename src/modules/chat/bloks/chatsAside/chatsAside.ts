@@ -20,4 +20,12 @@ export class ChatAside extends Block<IChatAside> {
       profile: this.props.data.profile
     })
   }
+
+  _addEvents() {
+    const {events = {}}: any = this.props
+    const button = this._element!.querySelector("button")
+    Object.keys(events).forEach(eventName => {
+      button!.addEventListener(eventName, events[eventName])
+    })
+  }
 }

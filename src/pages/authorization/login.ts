@@ -5,6 +5,8 @@ import { Block } from "../../utils/Block"
 //type
 import { IButton } from "../../components/button/button"
 import { IInput } from "../../components/input/input"
+//store
+// import store, { StoreEvents } from "../../store/store"
 
 
 export interface ILogin {
@@ -17,16 +19,21 @@ export interface ILogin {
   },
   events: {
     focus: (event: FocusEvent) => void,
-    blur: (event: FocusEvent) => void,
-    click: (event: MouseEvent) => void
+    blur: (event: FocusEvent) => void
   },
   inputs: Block<IInput>[],
-  button: Block<IButton>
+  button: Block<IButton>[]
 }
 
 export class Login extends Block<ILogin> {
   constructor(props: ILogin) {
     super("section", props)
+    
+    // UserController.getUser()
+
+    // store.on(StoreEvents.Updated, () => {
+    //   this.setProps(store.getState())
+    // })
   }
 
   render() {
@@ -51,7 +58,15 @@ export class Login extends Block<ILogin> {
         if(eventName !== "click" && el.tagName == "INPUT") {
           el.addEventListener(eventName, events[eventName])
         } else if(eventName == "click" && el.tagName == "BUTTON") {
-          el.addEventListener(eventName, events[eventName])
+          const element: HTMLElement = <HTMLElement>el
+            switch(element.dataset.handler) {
+              case "signin": 
+                el.addEventListener(eventName, events[eventName][0])
+                break
+              case "changepage":
+                el.addEventListener(eventName, events[eventName][1])
+                break
+            }
         }
       })
     })

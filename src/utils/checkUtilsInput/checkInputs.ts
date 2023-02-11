@@ -1,9 +1,9 @@
-function checkLogin(login: string): boolean {
+export function checkLogin(login: string): boolean {
   const regLogin = /^[a-zA-Z][a-zA-Z0-9-_]{3,20}$/
   return regLogin.test(login)
 }
 
-function checkPassword(password: string): boolean {
+export function checkPassword(password: string): boolean {
   const regPassword = /^.*(?=.{8,40})(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
   return regPassword.test(password)
 }
@@ -75,7 +75,7 @@ export const checkInputFocusOut = (event: FocusEvent) => {
   })
 }
 
-function _getDataInput(): Record<string, string> {
+export function getDataInput(): Record<string, string> {
   const inputsData:Record<string, string> = {}
   const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("form input")
   inputs.forEach(item => {
@@ -84,24 +84,25 @@ function _getDataInput(): Record<string, string> {
   return inputsData
 }
 
-function _checkInputsInButton(inputsData: Record<string, string>): boolean[] {
-  const result: boolean[] = []
-  Object.entries(inputsData).forEach(([key, value]) => {
-    Object.entries(checkInputs).forEach(([k, v]) => {
-      if(key === k && value) {
-        result.push((v(value)))
-      }
-    })
-  })
-  return result
-}
+// function _checkInputsInButton(inputsData: Record<string, string>): boolean[] {
+//   const result: boolean[] = []
+//   Object.entries(inputsData).forEach(([key, value]) => {
+//     Object.entries(checkInputs).forEach(([k, v]) => {
+//       if(key === k && value) {
+//         result.push((v(value)))
+//       }
+//     })
+//   })
+//   return result
+// }
 
-export const checkButtonSubmit = (event: MouseEvent) => {
-  event.preventDefault()
-  const inputsData = _getDataInput()
-  const result = _checkInputsInButton(inputsData)
-  console.log(inputsData)
-  if(result.includes(false)) {
-    throw new Error("Введите корректные данные")
-  }
-}
+// export const checkButtonSubmit = (event: MouseEvent) => {
+//   event.preventDefault()
+//   const inputsData = _getDataInput()
+//   return inputsData
+//   const result = _checkInputsInButton(inputsData)
+//   console.log(inputsData)
+//   if(result.includes(false)) {
+//     throw new Error("Введите корректные данные")
+//   }
+// }

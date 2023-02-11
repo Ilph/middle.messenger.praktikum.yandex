@@ -16,7 +16,8 @@ type IPageTypes = ILogin | IRegistration | IChatType | IError | IProfile | IProf
 
 interface IMain {
   attributes?: {
-    class: string
+    class: string,
+    id: string
   },
   page: Block<IPageTypes>
 }
