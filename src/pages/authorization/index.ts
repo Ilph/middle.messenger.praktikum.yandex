@@ -13,8 +13,9 @@ import { UserLoginController } from "../../controllers/user-Login"
 //Router
 import { router } from "../../index"
 
-
 export function loginInstance() {
+  const userLoginController = new UserLoginController()
+
   const propsInput = {
     login: { 
       attributes: { 
@@ -55,7 +56,6 @@ export function loginInstance() {
       click: (event: MouseEvent) => {
         event.preventDefault()
         const data = getDataInput()
-        const userLoginController = new UserLoginController()
         userLoginController.login(data)
       }
     }
@@ -100,6 +100,6 @@ export function loginInstance() {
     inputs: [inputLogin, inputPassword],
     button: [button, button2]
   }
-  
+
   return new Login(props)
 }

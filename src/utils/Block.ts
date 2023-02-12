@@ -102,7 +102,7 @@ export class Block<T> {
   }
 
   protected componentDidUpdate(oldProps: T, newProps: T) {
-    console.log(oldProps, newProps)
+    // console.log(oldProps, newProps)
     return true
   }
 

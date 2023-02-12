@@ -8,7 +8,7 @@ const propsInput = {
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: `zxc`,
       disabled: "disabled"
     },
     attributes: {
@@ -20,7 +20,7 @@ const propsInput = {
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: `qw`,
       disabled: "disabled"
     },
     attributes: {
@@ -32,7 +32,7 @@ const propsInput = {
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: `qwe`,
       disabled: "disabled"
     },
     attributes: {
@@ -44,7 +44,7 @@ const propsInput = {
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: `qwe`,
       disabled: "disabled"
     },
     attributes: {
@@ -54,9 +54,9 @@ const propsInput = {
   displayName: {
     data: {
       name: "Имя в чате",
-      nameInput: "emdisplay_name",
+      nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: `qwe`,
       disabled: "disabled"
     },
     attributes: {
@@ -68,7 +68,7 @@ const propsInput = {
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: `qwe`,
       disabled: "disabled"
     },
     attributes: {
@@ -88,12 +88,7 @@ const props = {
   data: {
     title: "Иван"
   },
-  email: email,
-  login: login,
-  firstName: firstName,
-  secondName: secondName,
-  displayName: displayName,
-  phone: phone
+  inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
 export const userData = new UserData(props)
@@ -196,12 +191,7 @@ const propsProfileData = {
   data: {
     title: ""
   },
-  email: emailProfileData,
-  login: loginProfileData,
-  firstName: firstNameProfileData,
-  secondName: secondNameProfileData,
-  displayName: displayNameProfileData,
-  phone: phoneProfileData
+  inputs: [emailProfileData, loginProfileData, firstNameProfileData, secondNameProfileData, displayNameProfileData, phoneProfileData]
 }
 
 export const userDataProfileData = new UserData(propsProfileData)

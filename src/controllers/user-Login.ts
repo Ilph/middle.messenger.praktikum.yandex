@@ -19,8 +19,9 @@ export class UserLoginController {
       loginAPI.request(JSON.stringify(data)).then((status) => {
         if(status !== 200) {
           throw new Error("error")
+        } else {
+          router.go("/messenger")
         }
-        router.go("/messenger")
       })
 
     } catch (error) {

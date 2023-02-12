@@ -1,5 +1,8 @@
 import { UserChanges } from "./userChange"
 import { router } from "../../../../index"
+import { UserLogoutController } from "../../../../controllers/user-Logout"
+
+const userLogoutController = new UserLogoutController()
 
 function changePage(event: MouseEvent) {
   event.preventDefault()
@@ -12,7 +15,7 @@ function changePage(event: MouseEvent) {
       router.go("/profilePassword")
       break
     case "exite":
-      router.go("/")
+      userLogoutController.logout()
       break
   }
 }

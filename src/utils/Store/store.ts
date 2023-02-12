@@ -1,12 +1,12 @@
-import { EventBus } from "../utils/EventBus"
-import { set, Indexed } from "../utils/set"
+import { EventBus } from "../EventBus"
+import { set, Indexed } from "../set"
 
 export enum StoreEvents {
   Updated = "updated"
 }
 
 class Store extends EventBus {
-  private state: Indexed = {}
+  public state: Indexed = {}
 
   public getState() {
     return this.state
@@ -14,7 +14,6 @@ class Store extends EventBus {
 
   public set(path: string, value: any) {
     set(this.state, path, value)
-
     this.emit(StoreEvents.Updated)
   }
 }

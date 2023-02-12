@@ -6,7 +6,7 @@ import { Block } from "../../../../utils/Block"
 import { IInputProfile } from "../../components/input/input"
 
 export interface IUserData {
-  [key: string]: Block<IInputProfile> | {
+  [key: string]: Block<IInputProfile>[] | {
     [key: string]: string
   }
 }

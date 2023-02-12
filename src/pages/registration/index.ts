@@ -6,11 +6,14 @@ import { Button } from "../../components/button/button"
 import {
   checkInputFocusIn,
   checkInputFocusOut,
-  checkButtonSubmit
+  getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
 import { router } from "../../index"
+import { UserRegistration } from "../../controllers/user-Registration"
 
 export function registrationInstance() {
+
+  const userRegistration = new UserRegistration()
 
 const propsInput = {
   email: {
@@ -39,7 +42,7 @@ const propsInput = {
   },
   firstName: {
     data: {
-      id: "firstName",
+      id: "first_name",
       name: "first_name",
       type: "text", 
       label: "Имя",
@@ -51,7 +54,7 @@ const propsInput = {
   },
   secondName: {
     data: {
-      id: "secondName",
+      id: "second_name",
       name: "secondName",
       type: "text", 
       label: "Фамилия",
@@ -105,8 +108,14 @@ const propsButton = {
   },
   attributes: {
     class: "button form-reg__button",
-    type: "submit",
-    "data-handler": "registration"
+    type: "submit"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      const data = getDataInput()
+      userRegistration.registration(data)
+    }
   }
 }
 
@@ -116,8 +125,13 @@ const propsButton2 = {
   },
   attributes: {
     class: "button form-reg__button form-reg__button_secondcolor",
-    type: "submit",
-    "data-handler": "changepage"
+    type: "submit"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      router.go("/")
+    }
   }
 }
 
@@ -131,11 +145,6 @@ const passwordRepeat = new Input(propsInput.passwordRepeat)
 const button = new Button(propsButton)
 const button2 = new Button(propsButton2)
 
-function navigate(event: MouseEvent) {
-  event.preventDefault()
-  router.go("/")
-}
-
 const props = {
   data: {
     entry: "Регистрация",
@@ -146,8 +155,7 @@ const props = {
   },
   events: {
     focus: checkInputFocusIn,
-    blur: checkInputFocusOut,
-    click: [checkButtonSubmit, navigate]
+    blur: checkInputFocusOut
   },
   email: email,
   login: login,

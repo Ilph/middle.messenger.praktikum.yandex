@@ -1,5 +1,6 @@
 import tpl from "./input.hbs"
 import { Block } from "../../../../utils/Block"
+// import store, { StoreEvents } from "../../../../utils/Store/store"
 
 export interface IInputProfile {
   data: {
@@ -14,6 +15,11 @@ export interface IInputProfile {
 export class InputProfile extends Block<IInputProfile> {
   constructor(props: IInputProfile) {
     super("div", props)
+
+    // store.on(StoreEvents.Updated, () => {
+    //    this.setProps(store.getState())
+    //    console.log(this.props.user.login)
+    // })
   }
 
   render() {

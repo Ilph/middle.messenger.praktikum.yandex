@@ -28,12 +28,6 @@ export interface ILogin {
 export class Login extends Block<ILogin> {
   constructor(props: ILogin) {
     super("section", props)
-    
-    // UserController.getUser()
-
-    // store.on(StoreEvents.Updated, () => {
-    //   this.setProps(store.getState())
-    // })
   }
 
   render() {
