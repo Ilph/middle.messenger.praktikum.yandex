@@ -81,7 +81,7 @@ export class ChatsAPI extends BaseAPI {
     })
   }
 
-  async getToken(id: number): Promise<string> {
+  async getToken(id: number): Promise<any> {
     return this.http.post(`/token/${id}`, {
       credentials: 'include'
     })

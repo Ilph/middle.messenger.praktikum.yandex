@@ -19,8 +19,8 @@ export interface Message {
 }
 
 class MessagesController {
-  private sockets: Map<number, WSTransport> = new Map();
-
+  private sockets: Map<number, WSTransport> = new Map()
+ 
   async connect(id: number, token: string) {
     if (this.sockets.has(id)) {
       return
@@ -31,7 +31,6 @@ class MessagesController {
     const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`)
     this.sockets.set(id, wsTransport)
     await wsTransport.connect()
-    this.sendMessage(id, "Первое сообщение")
 
     this.subscribe(wsTransport, id)
     // this.fetchOldMessages(id)
@@ -70,7 +69,10 @@ class MessagesController {
     if (Array.isArray(messages)) {
       messagesToAdd = messages.reverse()
     } else {
-      messagesToAdd.push(messages)
+        if(JSON.parse(messages).type == 'pong') {
+          return
+        }
+        messagesToAdd.push(messages)
     }
 
     const currentMessages = (store.getState().messages || {})[id] || []

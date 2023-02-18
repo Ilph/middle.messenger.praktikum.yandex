@@ -19,7 +19,7 @@ class ChatsController {
 
     chats.map(async (chat) => {
       const token = await this.getToken(chat.id)
-      await MessagesController.connect(chat.id, JSON.stringify(token))
+      await MessagesController.connect(chat.id, token.token)
     })
     store.set("chats", chats)
   }

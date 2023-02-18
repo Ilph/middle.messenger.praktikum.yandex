@@ -6,6 +6,7 @@ import { Block } from "../../../../utils/Block"
 export interface IMessage {
   content: string,
   isMine: boolean,
+  time: string,
   attributes: {
     class: string
   }

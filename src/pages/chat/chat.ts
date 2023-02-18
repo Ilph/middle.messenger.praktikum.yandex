@@ -25,14 +25,13 @@ export class ChatPage extends Block<IChatType> {
     
     ChatsController.fetchChats()
     AuthController.fetchUser()
-    
   }
   private createChats(state: any) {
     return state.map((data: any) => {
       return new chatWithStore({
         title: data.title,
         created_by: data.created_by,
-        last_message: data.last_message,
+        last_message: data.last_message.content,
         unread_count: data.unread_count,
         events: {
           click: () => {
@@ -57,7 +56,7 @@ export class ChatPage extends Block<IChatType> {
       (childChatAside as Block<ChatAside>).children.chats = this.createChats(newProps.chats)
     }
 
-    return true
+    return false
   }
 
   render() {

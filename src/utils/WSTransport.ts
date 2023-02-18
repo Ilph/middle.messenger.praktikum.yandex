@@ -28,7 +28,7 @@ export default class WSTransport extends EventBus {
 
     this.subscribe(this.socket)
 
-    this.setupPing();
+    this.setupPing()
 
     return new Promise((resolve) => {
       this.on(WSTransportEvents.Connected, () => {

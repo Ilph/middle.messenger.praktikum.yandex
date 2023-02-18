@@ -24,20 +24,22 @@ export class ChatMain extends Block<ChatMainType> {
   private createMessages(props: any) {
     const selectedChat = props.selectedChat
     return props.messages[selectedChat!].map( (elements: any) => {
+      const messageContent = JSON.parse(elements)
+      const milliseconds = Date.parse(messageContent.time)
+      const date = new Date(milliseconds)
+      const time = `${date.getHours()}:${date.getMinutes()}`
       return new Message({
-        content: elements,
+        content: messageContent.content,
+        time: time,
         attributes: {
           class: "chat-body__wrapper-text"
         },
-        isMine: props.user.data.id === elements.user_id
+        isMine: props.user.data.id === messageContent.user_id
       })
     })
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-    if(isEqual(oldProps, newProps)) {
-      return false
-    }
     const childMessage = this.children as unknown
     if(newProps.selectedChat) {
       (childMessage as Record<string, unknown>).messagesInstance = this.createMessages(newProps)

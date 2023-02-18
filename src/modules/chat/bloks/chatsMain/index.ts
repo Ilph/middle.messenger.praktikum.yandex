@@ -4,7 +4,9 @@ import MessagesController from "../../../../controllers/messages-controller"
 import store from "../../../../utils/Store/store"
 import ChatsControllers from "../../../../controllers/chats-controllers"
 
-const wrapper = connect((state: any) => state)
+const wrapper = connect((state: any) => {
+  return state
+})
 
 const chatMainWithStore = wrapper(ChatMain)
 
@@ -24,7 +26,6 @@ function deleteChat(event: MouseEvent) {
 }
 const props = {
   login: "...loading",
-  text: "Выберите чат, чтобы отправить сообщение",
   attributes: {
     class: "chat__section"
   },
