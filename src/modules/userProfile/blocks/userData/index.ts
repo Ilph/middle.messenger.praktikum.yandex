@@ -5,10 +5,11 @@ import { InputProfile } from "../../components/input/input"
 const propsInput = {
   email: {
     data: {
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -17,10 +18,11 @@ const propsInput = {
   },
   login: {
     data: {
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -29,10 +31,11 @@ const propsInput = {
   },
   firstName: {
     data: {
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -41,10 +44,11 @@ const propsInput = {
   },
   secondName: {
     data: {
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -53,10 +57,11 @@ const propsInput = {
   },
   displayName: {
     data: {
+      idName: "display_name",
       name: "Имя в чате",
-      nameInput: "emdisplay_name",
+      nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -65,10 +70,11 @@ const propsInput = {
   },
   phone: {
     data: {
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -86,27 +92,21 @@ const phone = new InputProfile(propsInput.phone)
 
 const props = {
   data: {
-    title: "Иван"
+    login: "is loading",
   },
-  email: email,
-  login: login,
-  firstName: firstName,
-  secondName: secondName,
-  displayName: displayName,
-  phone: phone
+  inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
 export const userData = new UserData(props)
 
-
 const propsInputProfileData = {
   email: {
     data: {
-      id: "email",
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный email"
     },
@@ -116,11 +116,11 @@ const propsInputProfileData = {
   },
   login: {
     data: {
-      id: "login",
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный логин"
     },
@@ -130,11 +130,11 @@ const propsInputProfileData = {
   },
   firstName: {
     data: {
-      id: "firstName",
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод имени"
     },
@@ -144,11 +144,11 @@ const propsInputProfileData = {
   },
   secondName: {
     data: {
-      id: "secondName",
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод фамилии"
     },
@@ -158,11 +158,11 @@ const propsInputProfileData = {
   },
   displayName: {
     data: {
-      id: "displayName",
+      idName: "display_name",
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "...loading",
       disabled: ""
     },
     attributes: {
@@ -171,11 +171,11 @@ const propsInputProfileData = {
   },
   phone: {
     data: {
-      id: "phone",
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод номера"
     },
@@ -196,12 +196,7 @@ const propsProfileData = {
   data: {
     title: ""
   },
-  email: emailProfileData,
-  login: loginProfileData,
-  firstName: firstNameProfileData,
-  secondName: secondNameProfileData,
-  displayName: displayNameProfileData,
-  phone: phoneProfileData
+  inputs: [emailProfileData, loginProfileData, firstNameProfileData, secondNameProfileData, displayNameProfileData, phoneProfileData]
 }
 
 export const userDataProfileData = new UserData(propsProfileData)

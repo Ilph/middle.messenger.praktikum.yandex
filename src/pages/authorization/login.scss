@@ -40,10 +40,7 @@
   margin: 0 2em 1em;
 }
 
-.form-auth__link {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.7em;
-  text-align: center;
+.form-auth__button_secondcolor {
+  color: $button_text_secondcolor;
+  background-color: $button_bg_secondcolor;
 }

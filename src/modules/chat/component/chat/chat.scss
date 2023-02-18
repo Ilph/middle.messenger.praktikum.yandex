@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 2em;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid $chat_aside_input_bg_color;
 }
 
 .chat-list__wrapper {
@@ -21,9 +21,9 @@
 .chat-list__wrapper-img {
   width: 50px;
   height: 50px;
-  border: 1px solid #efefef;
+  border: 1px solid $chat_aside_input_bg_color;
   border-radius: 50%;
-  background-color: #efefef;
+  background-color: $chat_aside_input_bg_color;
 }
 
 .chat-list__title {
@@ -33,7 +33,7 @@
   font-size: 0.8em;
   margin: 0;
   padding-bottom: 0.5em;
-  color: #1e1e1e;
+  color: $profile_text_color;
 }
 
 .chat-list__text {
@@ -43,11 +43,11 @@
   font-size: 0.7em;
   margin: 0;
   padding-bottom: 1.5em;
-  color: #999;
+  color: $input_label_text_color;
 }
 
 .chat-list__text span {
-  color: #1e1e1e;
+  color: $profile_text_color;
   padding-right: 0.2em;
 }
 
@@ -60,7 +60,7 @@
 
 .chat-list__date {
   text-align: center;
-  color: #999;
+  color: $input_label_text_color;
   margin: 0;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;
@@ -75,7 +75,7 @@
   margin: 0;
   text-align: center;
   border-radius: 50%;
-  background-color: #3369f3;
+  background-color: $input_border_color;
   color: #fff;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;

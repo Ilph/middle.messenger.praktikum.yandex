@@ -1,8 +1,15 @@
 import { Aside } from "./aside"
+import router from "../../../../utils/Router/Router"
 
 const props = {
   attributes: {
     class: "aside"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      router.back()
+    }
   }
 }
 

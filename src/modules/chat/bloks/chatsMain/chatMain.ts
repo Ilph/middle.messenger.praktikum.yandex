@@ -2,13 +2,15 @@
 import tpl from "./chatMain.hbs"
 //Component's template
 import { Block } from "../../../../utils/Block"
+import { Message, IMessage } from "../../component/message/message"
 //icons
 import dot from "../../../../../static/icons/3dot.png"
 import clip from "../../../../../static/icons/clip.png"
 import arrowRigth from "../../../../../static/icons/arrowRigth.png"
 
+
 export interface ChatMainType {
-  [key: string]: string | {
+  [key: string]: string | Block<IMessage>[] | {
     [key: string]: string
   }
 }
@@ -18,11 +20,62 @@ export class ChatMain extends Block<ChatMainType> {
     super("section", props)
   }
 
+  private createMessages(props: any) {
+    const selectedChat = props.selectedChat
+  
+    return props.messages[selectedChat!].map( (elements: any) => {
+      const messageContent = JSON.parse(elements)
+      const milliseconds = Date.parse(messageContent.time)
+      const date = new Date(milliseconds)
+      const time = `${date.getHours()}:${date.getMinutes()}`
+      return new Message({
+        content: messageContent.content,
+        time: time,
+        attributes: {
+          class: "chat-body__wrapper-text"
+        },
+        isMine: props.user.data.id === messageContent.user_id
+      })
+    })
+  }
+
+  protected componentDidUpdate(newProps: any): boolean {
+    const childMessage = this.children as unknown
+    if(newProps.selectedChat) {
+      (childMessage as Record<string, unknown>).messagesInstance = this.createMessages(newProps)
+    }
+    return true
+  }
+
   render() {
     return this.compile(tpl, {
+      login: this.props.login,
       dots: dot,
       clip: clip,
       arrowRigth: arrowRigth
+    })
+  }
+
+  _addEvents() {
+    const {events = {}}: any = this.props
+    const buttons = Array.from(this._element!.querySelectorAll("button"))
+
+    buttons.forEach(el => {
+      if(!this.props.events) {
+        return
+      }
+
+      Object.keys(events).forEach(eventName => {
+        const element: HTMLElement = <HTMLElement>el
+        switch(element.dataset.chat) {
+          case("sendMessage"):
+            el.addEventListener(eventName, events[eventName][0])
+            break
+          case("deleteChat"):
+            el.addEventListener(eventName, events[eventName][1])
+            break
+        }
+      })
     })
   }
 }

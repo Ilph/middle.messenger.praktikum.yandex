@@ -48,6 +48,11 @@
   margin: 0 2em 1em;
 }
 
+.form-reg__button_secondcolor {
+  color: $button_text_secondcolor;
+  background-color: $button_bg_secondcolor;
+}
+
 .form-reg__link {
   font-family: Inter, Arial, sans-serif;
   font-style: normal;

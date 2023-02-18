@@ -1,9 +1,12 @@
+//HTML's template
 import tpl from "./login.hbs"
+//Component's template
 import { Block } from "../../utils/Block"
+//type
 import { IButton } from "../../components/button/button"
+import { IInput } from "../../components/input/input"
 
-
-interface ILogin {
+export interface ILogin {
   data: {
     entry: string;
     registration: string
@@ -11,9 +14,12 @@ interface ILogin {
   attributes: {
     class: string
   },
-  inputLogin: inputLogin;
-  inputPassword: inputPassword;
-  button: IButton
+  events: {
+    focus: (event: FocusEvent) => void,
+    blur: (event: FocusEvent) => void
+  },
+  inputs: Block<IInput>[],
+  button: Block<IButton>[]
 }
 
 export class Login extends Block<ILogin> {
@@ -30,8 +36,8 @@ export class Login extends Block<ILogin> {
 
   _addEvents() {
     const {events = {}}: any = this.props
-    const input = Array.from(this._element!.querySelectorAll("input"))
-    const button = Array.from(this._element!.querySelectorAll("button"))
+    const input = Array.from(this._element!.querySelectorAll("form input"))
+    const button = Array.from(this._element!.querySelectorAll("form button"))
     const inputAndButton = input.concat(button)
     
     inputAndButton.forEach(el => {
@@ -43,7 +49,15 @@ export class Login extends Block<ILogin> {
         if(eventName !== "click" && el.tagName == "INPUT") {
           el.addEventListener(eventName, events[eventName])
         } else if(eventName == "click" && el.tagName == "BUTTON") {
-          el.addEventListener(eventName, events[eventName])
+          const element: HTMLElement = <HTMLElement>el
+            switch(element.dataset.handler) {
+              case "signin": 
+                el.addEventListener(eventName, events[eventName][0])
+                break
+              case "changepage":
+                el.addEventListener(eventName, events[eventName][1])
+                break
+            }
         }
       })
     })

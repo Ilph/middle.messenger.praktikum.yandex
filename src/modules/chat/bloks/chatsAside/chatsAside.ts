@@ -1,13 +1,12 @@
 import tpl from "./chatsAside.hbs"
 import { Block } from "../../../../utils/Block"
-import { IChat } from "../../component/chat/chat"
 
 interface IChatAside {
   [key: string]: {
     [key: string]: string
   } | {
     [key: string]: (event: MouseEvent) => void
-  } | Block<IChat>
+  }
 }
 
 export class ChatAside extends Block<IChatAside> {
@@ -18,6 +17,14 @@ export class ChatAside extends Block<IChatAside> {
   render() {
     return this.compile(tpl, {
       profile: this.props.data.profile
+    })
+  }
+
+  _addEvents() {
+    const {events = {}}: any = this.props
+    const button = this._element!.querySelector("button")
+    Object.keys(events).forEach(eventName => {
+      button!.addEventListener(eventName, events[eventName])
     })
   }
 }

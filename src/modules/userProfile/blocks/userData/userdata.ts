@@ -6,7 +6,7 @@ import { Block } from "../../../../utils/Block"
 import { IInputProfile } from "../../components/input/input"
 
 export interface IUserData {
-  [key: string]: Block<IInputProfile> | {
+  [key: string]: Block<IInputProfile>[] | {
     [key: string]: string
   }
 }
@@ -18,7 +18,7 @@ export class UserData extends Block<IUserData> {
 
   render() {
     return this.compile(tpl, {
-      title: this.props.data.title
+      login: this.props.login
     })
   }
 }

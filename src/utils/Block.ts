@@ -1,5 +1,6 @@
 import {EventBus} from "./EventBus"
 import { v4 as makeUUID } from "uuid"
+import { isEqual } from "./isEqual"
 
 export class Block<T> {
 
@@ -16,7 +17,7 @@ export class Block<T> {
   }
   private eventBus: () => EventBus
   protected props: {[key: string]: {[key: string]: string | number | boolean}}
-  protected children: {[key: string]: Block<T>}
+  public children: {[key: string]: Block<T>}
   private _id: string | null = null
 
   constructor(tagName="div", propsAndChildren: T) {
@@ -68,7 +69,6 @@ export class Block<T> {
     const block = this.render()
     this._removeEvents()
     this._element!.innerHTML = ""
-    this._removeEvents()
     this._element!.append(block)
     this._addEvents()
     this._addAttributes()
@@ -80,7 +80,6 @@ export class Block<T> {
 
   private _componentDidMount(): void {
     this.componentDidMount()
-
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount()
     })
@@ -97,23 +96,20 @@ export class Block<T> {
     }
   }
 
-  private _componentDidUpdate(
-    oldProps: Record<string, unknown>, 
-    newProps: Record<string, unknown>
-    ): void {
+  private _componentDidUpdate(oldProps: T, newProps: T): void {
     if(this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected componentDidUpdate(
-    oldProps: Record<string, unknown>, 
-    newProps: Record<string, unknown>
-    ) {
+  protected componentDidUpdate(oldProps: T, newProps: T): boolean {
+    if(isEqual(oldProps, newProps)) {
+      return false
+    }
     return true
   }
 
-  setProps = (nextProps: string) => {
+  setProps = (nextProps:T) => {
     if(!nextProps) {
       return
     }
@@ -125,25 +121,19 @@ export class Block<T> {
     return this._element;
   }
 
-  getContent(): HTMLElement | null{
+  getContent(): HTMLElement | null{   
     return this.element;
   }
 
   _getChildren(propsAndChildren: T) {
-    const children: {[key: string]: Block<T>} = {}
-    const props: any = {}
+    const children: {[key: string]: Block<T> | Array<Block<T>>} = {}
+    const props: any = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+    Object.entries(propsAndChildren as Record<string, unknown>).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value
       } else if(Array.isArray(value)) {
-        value.forEach(item => {
-          Object.entries(item).forEach(([key, value]) => {
-            if (value instanceof Block) {
-              children[key] = value
-          } 
-        })
-        })
+        children[key] = value.slice()
       } else {
         props[key] = value
       }
@@ -155,23 +145,38 @@ export class Block<T> {
     const propsAndStubs = { ...props }
 
     Object.entries(this.children).forEach(([key, child]) => {
+      if (Array.isArray(child)) {
+        propsAndStubs[key] = " "
+        child.forEach(item => {
+          propsAndStubs[key] += `<div data-id="${item._id}"></div>`
+        })
+      } else {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`
-    });
+      }
+    })
 
     const html = template(propsAndStubs)
-
     const fragment = document.createElement("template")
-
     fragment.innerHTML = html
     
     Object.values(this.children).forEach(child => {
+      if (Array.isArray(child)) {
+        child.forEach(item => {
+          const stub = fragment.content.querySelector(`[data-id="${item._id}"]`)
+          if(!stub) {
+            return
+          }
+          stub.replaceWith(item.getContent()!)
+        })
+      } else {
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
-        
         if(!stub) {
           return
         }
         stub.replaceWith(child.getContent()!)
+      }
     })
+
     return fragment.content
   }
   
@@ -232,5 +237,17 @@ export class Block<T> {
         this._element!.setAttribute(key, value)
       }
     })
+  }
+
+  show() {
+    if(this._element!.style.display = "none") {
+      this._element!.style.display = "block"
+    }
+  }
+
+  hide() {
+    if(this._element!.style.display = "block") {
+      this._element!.style.display = "none"
+    }
   }
 }

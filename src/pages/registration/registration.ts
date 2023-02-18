@@ -1,9 +1,11 @@
+//HTML's template
 import tpl from "./registration.hbs"
+//Component's template
 import { Block } from "../../utils/Block"
 //type
 import { IInput } from "../../components/input/input"
 
-interface IRegistration {
+export interface IRegistration {
   [key: string]: {
     [key: string]: string | any
   } | Block<IInput>
@@ -36,7 +38,15 @@ export class Registration extends Block<IRegistration> {
         if(eventName !== "click" && el.tagName == "INPUT") {
           el.addEventListener(eventName, events[eventName])
         } else if(eventName == "click" && el.tagName == "BUTTON") {
-          el.addEventListener(eventName, events[eventName])
+          const element: HTMLElement = <HTMLElement>el
+            switch(element.dataset.handler) {
+              case "registration": 
+                el.addEventListener(eventName, events[eventName][0])
+                break
+              case "changepage":
+                el.addEventListener(eventName, events[eventName][1])
+                break
+            }
         }
       })
     })

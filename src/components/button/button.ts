@@ -3,7 +3,7 @@ import { Block } from "../../utils/Block"
 
 export interface IButton {
   [key: string]: string | {
-    [key: string]: string 
+    [key: string]: string | ((event: MouseEvent) => void)
   }
 }
 

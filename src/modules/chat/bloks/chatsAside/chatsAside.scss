@@ -8,7 +8,7 @@
   left: 0;
   top: 0;
   overflow-x: hidden;
-  background-color: #fbfbfb;
+  background-color: $profile_aside_bg_color;
   box-sizing: border-box;
 }
 
@@ -18,19 +18,19 @@
   flex-direction: column;
   padding: 1em;
   gap: 1em;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid $chat_border_color;
 }
 
 .chat__aside-header__button {
   border: none;
-  background-color: #fbfbfb;
+  background-color: $profile_aside_bg_color;
   align-self: flex-end;
 }
 
 .chat__aside-header__link {
   position: relative;
   text-decoration: none;
-  color: #999;
+  color: $input_label_text_color;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -86,17 +86,17 @@
   transform: rotate(45deg);
 }
 
-.chat__aside-header__label input {
+.chat__aside-header__label .input {
   width: 100%;
   height: 2em;
   padding: 0;
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
-  background-color: #efefef;
+  background-color: $chat_aside_input_bg_color;
 }
 
-.chat__aside-header__label input::placeholder {
+.chat__aside-header__label .input::placeholder {
   text-align: center;
   color: $input_label_text_color;
   font-family: Inter, Arial, sans-serif;

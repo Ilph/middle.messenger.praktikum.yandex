@@ -1,3 +1,4 @@
+//Components
 import { Error404, Error500 } from "./error"
 
 const props = {
@@ -12,5 +13,10 @@ const props = {
   }
 }
 
-export const error404 = new Error404(props)
-export const error500 = new Error500(props)
+export function error404Instance() {
+  return new Error404(props)
+}
+
+export function error500Instance() {
+  return new Error500(props)
+}
