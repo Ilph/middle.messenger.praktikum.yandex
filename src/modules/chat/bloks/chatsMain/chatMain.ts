@@ -7,8 +7,7 @@ import { Message, IMessage } from "../../component/message/message"
 import dot from "../../../../../static/icons/3dot.png"
 import clip from "../../../../../static/icons/clip.png"
 import arrowRigth from "../../../../../static/icons/arrowRigth.png"
-//utils
-import { isEqual } from "../../../../utils/isEqual"
+
 
 export interface ChatMainType {
   [key: string]: string | Block<IMessage>[] | {
@@ -23,6 +22,7 @@ export class ChatMain extends Block<ChatMainType> {
 
   private createMessages(props: any) {
     const selectedChat = props.selectedChat
+  
     return props.messages[selectedChat!].map( (elements: any) => {
       const messageContent = JSON.parse(elements)
       const milliseconds = Date.parse(messageContent.time)
@@ -39,7 +39,7 @@ export class ChatMain extends Block<ChatMainType> {
     })
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+  protected componentDidUpdate(newProps: any): boolean {
     const childMessage = this.children as unknown
     if(newProps.selectedChat) {
       (childMessage as Record<string, unknown>).messagesInstance = this.createMessages(newProps)

@@ -28,7 +28,7 @@ export class ProfileData extends Block<IProfileData> {
     AuthController.fetchUser()
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+  protected componentDidUpdate(newProps: any): boolean {
 
     const childUserData = this.children.userData as unknown
     (childUserData as Block<IUserData>).setProps({login: newProps.data.login})

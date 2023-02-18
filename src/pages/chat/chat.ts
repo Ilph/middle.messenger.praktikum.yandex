@@ -30,7 +30,7 @@ export class ChatPage extends Block<IChatType> {
     return state.map((data: any) => {
       return new chatWithStore({
         title: data.title,
-        created_by: data.created_by,
+        created_by: data.last_message.user.login,
         last_message: data.last_message.content,
         unread_count: data.unread_count,
         events: {
