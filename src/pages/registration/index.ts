@@ -8,98 +8,96 @@ import {
   checkInputFocusOut,
   getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
-import { router } from "../../index"
-import { UserRegistration } from "../../controllers/user-Registration"
+import router from "../../utils/Router/Router"
+import AuthController from "../../controllers/auth-controller"
 
 export function registrationInstance() {
 
-  const userRegistration = new UserRegistration()
-
-const propsInput = {
-  email: {
-    data: {
-      id: "email",
-      name: "email",
-      type: "email", 
-      label: "Email",
-      helperText: "Неверный email"
-    },
-    attributes: { 
-      class: "input-container input-container_margin",
+  const propsInput = {
+    email: {
+      data: {
+        id: "email",
+        name: "email",
+        type: "email", 
+        label: "Email",
+        helperText: "Неверный email"
       },
-  },
-  login:{
-    data: {
-      id: "login",
-      name: "login",
-      type: "text", 
-      label: "Login",
-      helperText: "Неверный логин"
+      attributes: { 
+        class: "input-container input-container_margin",
+        },
     },
-    attributes: { 
-      class: "input-container input-container_margin",
+    login:{
+      data: {
+        id: "login",
+        name: "login",
+        type: "text", 
+        label: "Login",
+        helperText: "Неверный логин"
+      },
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  firstName: {
-    data: {
-      id: "first_name",
-      name: "first_name",
-      type: "text", 
-      label: "Имя",
-      helperText: "Неверный формат имени"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    firstName: {
+      data: {
+        id: "first_name",
+        name: "first_name",
+        type: "text", 
+        label: "Имя",
+        helperText: "Неверный формат имени"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  secondName: {
-    data: {
-      id: "second_name",
-      name: "secondName",
-      type: "text", 
-      label: "Фамилия",
-      helperText: "Неверный формаь Фамилии"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    secondName: {
+      data: {
+        id: "second_name",
+        name: "secondName",
+        type: "text", 
+        label: "Фамилия",
+        helperText: "Неверный формаь Фамилии"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  phone: {
-    data: {
-      id: "phone",
-      name: "phone",
-      type: "text", 
-      label: "Телефон",
-      helperText: "Неверный формат телефона"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    phone: {
+      data: {
+        id: "phone",
+        name: "phone",
+        type: "text", 
+        label: "Телефон",
+        helperText: "Неверный формат телефона"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  password: {
-    data: {
-      id: "password",
-      name: "password",
-      type: "password", 
-      label: "Password",
-      helperText: "Неверный пароль"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    password: {
+      data: {
+        id: "password",
+        name: "password",
+        type: "password", 
+        label: "Password",
+        helperText: "Неверный пароль"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  passwordRepeat: {
-    data: {
-      id: "repeatPassword",
-      name: "password_repeat",
-      type: "password", 
-      label: "Passwors (repeat)",
-      helperText: "Неверный пароль"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    passwordRepeat: {
+      data: {
+        id: "repeatPassword",
+        name: "password_repeat",
+        type: "password", 
+        label: "Passwors (repeat)",
+        helperText: "Неверный пароль"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
 }
 
 const propsButton = {
@@ -114,7 +112,7 @@ const propsButton = {
     click: (event: MouseEvent) => {
       event.preventDefault()
       const data = getDataInput()
-      userRegistration.registration(data)
+      AuthController.signup(data)
     }
   }
 }

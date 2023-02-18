@@ -3,7 +3,7 @@
     <div class="chat-list__wrapper-img">
       <img class="chat-list__img"/>
     </div>
-    <p class="chat-header__name">Ильфат</p>
+    <p class="chat-header__name">{{login}}</p>
   </div>
 
   <div class="chat-header__dropdown">
@@ -11,8 +11,10 @@
       <img src={{{dots}}} class="chat-header__dots"/>
     </button>
     <div class="chat-header__dropdown-menu">
-      <button data-modal="chatAddUser"> Добавить пользователя</button>
-      <button data-modal="chatDeleteUser"> Удалить пользователя</button>
+      <button data-modal="chatAddUser" data-chat="addUser"> Добавить пользователя</button>
+      <button data-modal="chatDeleteUser" data-chat="deleteUser"> Удалить пользователя</button>
+      <button data-modal="chatAdd" data-chat="addChat"> Добавить чат</button>
+      <button data-modal="chatDelete" data-chat="deleteChat"> Удалить чат</button>
     </div>
   </div>
   
@@ -21,11 +23,7 @@
 <section class="chat-body">
   <h2 class="chat-body__title">19 Июля</h2>
   <div class="chat-body__wrapper-text">
-    
-    <p class="chat-body__message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae, molestias excepturi provident deserunt sapiente consectetur suscipit tenetur illo earum quis. Odit reiciendis illo culpa quia mollitia delectus iure corporis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae, molestias excepturi provident deserunt sapiente consectetur suscipit tenetur illo earum quis. Odit reiciendis illo culpa quia mollitia delectus iure corporis.<span>9:00</span></p>
-
-    <p class="chat-body__message rigth">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quae, molestias excepturi provident deserunt sapiente consectetur suscipit tenetur illo earum quis. Odit reiciendis illo culpa quia mollitia delectus iure corporis.<span>9:00</span></p>
-
+    {{{messagesInstance}}}
   </div>
 </section>
 
@@ -49,7 +47,7 @@
   </div>
 
   <div>
-    <button class="aside__button">
+    <button class="aside__button" data-chat="sendMessage">
       <picture>
         <img src={{{arrowRigth}}}>
       </picture>

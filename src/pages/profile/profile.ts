@@ -9,9 +9,9 @@ import { IAside } from "../../modules/userProfile/blocks/aside/aside"
 import { IAvatar } from "../../modules/userProfile/components/image/avatar"
 import { IUserChange } from "../../modules/userProfile/blocks/userChange/userChange"
 import { IUserData } from "../../modules/userProfile/blocks/userData/userdata"
-import { UserProfileDataController } from "../../controllers/user-ProfileData"
-
-const userProfileDataController = new UserProfileDataController()
+import { InputProfile } from "../../modules/userProfile/components/input/input"
+import AuthController from "../../controllers/auth-controller"
+import { isEqual } from "../../utils/isEqual"
 
 export interface IProfile {
   aside: Block<IAside>,
@@ -20,17 +20,33 @@ export interface IProfile {
   userChange: Block<IUserChange>
 }
 
+const userFields = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone']
+
 export class Profile extends Block<IProfile> {
   constructor(props: IProfile) {
     super("section", props)
-    console.log(this.props)
+    AuthController.fetchUser()
+  }
+
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+
+    if(isEqual(oldProps, newProps)) {
+      return false
+    }
+
+    const childUserData = this.children.userData as unknown
+    (childUserData as Block<IUserData>).setProps({login: newProps.data.login})
+
+    const childInputs = (childUserData as Profile).children.inputs as unknown
     
-    userProfileDataController.getProfileData()
+    (childInputs as InputProfile[]).forEach((element, i ) => {
+      element.setProps({placeholder: newProps.data[userFields[i]]})
+    })
+
+    return false
   }
 
   render() {
-    return this.compile(tpl, {
-      text: "TestText"
-    })
+    return this.compile(tpl, {})
   }
 }

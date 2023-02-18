@@ -1,9 +1,14 @@
-export class BaseAPI {
-  create() { throw new Error("Not implemented")}
+import { HTTP } from "../utils/Fetch"
 
-  request() { throw new Error("Not implemented")}
+export abstract class BaseAPI {
+  protected http: HTTP
 
-  update() { throw new Error("Not implemented")}
+  protected constructor(api: string) {
+    this.http = new HTTP(api)
+  }
 
-  delete() { throw new Error("Not implemented")}
+  public abstract create?(data: any): Promise<any>
+  public abstract request?(data?: string | number): Promise<any>
+  public abstract update?( data: unknown, identifier?: string | number): Promise<any>
+  public abstract delete?(identifier: string | number): Promise<any> 
 }

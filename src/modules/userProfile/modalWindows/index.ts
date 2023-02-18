@@ -3,27 +3,18 @@ import { ModalWindowAvatar } from "./modal"
 import { Button } from "../../../components/button/button"
 import { Input } from "../../../components/input/input"
 import { InputAvatarAdd } from "./components/input/input"
+//Controllers
+import ChatController from "../../../controllers/chats-controllers"
+//store
+import store from "../../../utils/Store/store"
 //utils
 import { checkInputFocusIn, checkInputFocusOut } from "../../../utils/checkUtilsInput/checkInputs"
 
-const inputAvatarAdd = new InputAvatarAdd({
-  attributes: {
-    class: "modal-input"
-  }
-})
-
-const buttonPropsAvatar = {
-  data: {
-    value: "Поменять"
-  },
-  attributes: {
-    class: "button"
-  }
+function sendAvatar(event: MouseEvent) {
+  event.preventDefault()
 }
 
-const buttonAvatar = new Button(buttonPropsAvatar)
-
-const propsAvatar = {
+export const modalWindowAvatar = new ModalWindowAvatar({
   data: {
     title: "Загрузить файл",
   },
@@ -31,39 +22,25 @@ const propsAvatar = {
     class: "modal-overlay",
     "data-close": "true"
   },
-  input: inputAvatarAdd,
-  button: buttonAvatar
-}
+  input: new InputAvatarAdd({
+    attributes: {
+      class: "modal-input"
+    }
+  }),
+  button: new Button({
+    data: {
+      value: "Поменять"
+    },
+    attributes: {
+      class: "button"
+    },
+    events: {
+      click: sendAvatar
+    }
+  })
+})
 
-export const modalWindowAvatar = new ModalWindowAvatar(propsAvatar)
-
-const inputPropsLogin = { 
-  attributes: { 
-  class: "input-container input-container_margin",
-  },
-  data: {
-    id: "login",
-    name: "login",
-    type: "text",
-    label: "Login",
-    helperText: "Неверный логин"
-  }
-}
-
-const inputAddUser = new Input(inputPropsLogin)
-
-const buttonPropsAddUser = {
-  data: {
-    value: "Добавить"
-  },
-  attributes: {
-    class: "button"
-  }
-}
-
-const buttonAddUser = new Button(buttonPropsAddUser)
-
-const propsAddUser = {
+export const modalWindowAddUser = new ModalWindowAvatar({
   data: {
     title: "Добавить пользователя",
   },
@@ -76,39 +53,44 @@ const propsAddUser = {
     blur: checkInputFocusOut,
     click: () => {console.log("AddUser")}
   },
-  input: inputAddUser,
-  button: buttonAddUser
-}
+  input: new Input({
+    attributes: { 
+      class: "input-container input-container_margin",
+      },
+      data: {
+        id: "ID_user",
+        name: "ID_user",
+        type: "text",
+        label: "ID_user",
+        helperText: "Неверный ID"
+      }
+    }),
+  button: new Button({
+    data: {
+      value: "Добавить пользователя"
+    },
+    attributes: {
+      class: "button"
+    },
+    events: {
+      click: (event: MouseEvent) => {
+        event.preventDefault()
+        const input = document.querySelector("#ID_user") as HTMLInputElement
+        const nameChat = input.value
+        input.value = ""
+        const newProps = store.getState()
+        const modal = document.querySelectorAll("#modal")
+        modal?.forEach(item => {
+          item.classList.remove("open")
+        })
+        ChatController.addUserToChat(newProps.selectedId, +nameChat)
+      }
+    }
+  })
+})
 
-export const modalWindowAddUser = new ModalWindowAvatar(propsAddUser)
 
-const inputPropsLoginDelete = { 
-  attributes: { 
-  class: "input-container input-container_margin",
-  },
-  data: {
-    id: "login",
-    name: "login",
-    type: "text",
-    label: "Login",
-    helperText: "Неверный логин"
-  }
-}
-
-const inputDeleteUser = new Input(inputPropsLoginDelete)
-
-const buttonPropsDeleteUser = {
-  data: {
-    value: "Удалить"
-  },
-  attributes: {
-    class: "button"
-  }
-}
-
-const buttonDeleteUser = new Button(buttonPropsDeleteUser)
-
-const propsDeleteUser = {
+export const modalWindowDeleteUser = new ModalWindowAvatar({
   data: {
     title: "Удалить пользователя"
   },
@@ -121,9 +103,82 @@ const propsDeleteUser = {
     blur: checkInputFocusOut,
     click: () => {console.log("DeleteUser")}
   },
-  input: inputDeleteUser,
-  button: buttonDeleteUser
-}
+  input: new Input({
+    attributes: { 
+      class: "input-container input-container_margin",
+      },
+      data: {
+        id: "ID_user",
+        name: "ID_user",
+        type: "text",
+        label: "ID user",
+        helperText: "Неверный ID"
+      }
+    }),
+  button: new Button({
+    data: {
+      value: "Удалить пользователя"
+    },
+    attributes: {
+      class: "button"
+    },
+    events: {
+      click: (event: MouseEvent) => {
+        event.preventDefault()
+        const input = document.querySelector("#ID_user") as HTMLInputElement
+        const nameChat = input.value
+        input.value = ""
+        const newProps = store.getState()
+        const modal = document.querySelectorAll("#modal")
+        modal?.forEach(item => {
+          item.classList.remove("open")
+        })
+        ChatController.deleteUserToChat(newProps.selectedId, +nameChat)
+      }
+    }
+  })
+})
 
-export const modalWindowDeleteUser = new ModalWindowAvatar(propsDeleteUser)
 
+export const modalWindowAddChat = new ModalWindowAvatar({
+  data: {
+    title: "Добавить чат"
+  },
+  attributes: {
+    class: "modal-overlay",
+    "data-close": "true"
+  },
+  input: new Input({
+    attributes: { 
+      class: "input-container input-container_margin",
+      },
+      data: {
+        id: "nameChat",
+        name: "nameChat",
+        type: "text",
+        label: "Chat names",
+        helperText: "Неверный название чата"
+      }
+    }),
+  button: new Button({
+    data: {
+      value: "Добавить чат"
+    },
+    attributes: {
+      class: "button"
+    },
+    events: {
+      click: (event: MouseEvent) => {
+        event.preventDefault()
+        const input = document.querySelector("#nameChat") as HTMLInputElement
+        const nameChat = input.value
+        input.value = ""
+        ChatController.addChat(nameChat)
+        const modal = document.querySelectorAll("#modal")
+        modal?.forEach(item => {
+          item.classList.remove("open")
+        })
+      }
+    }
+  })
+})

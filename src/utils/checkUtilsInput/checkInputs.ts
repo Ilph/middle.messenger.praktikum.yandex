@@ -75,8 +75,8 @@ export const checkInputFocusOut = (event: FocusEvent) => {
   })
 }
 
-export function getDataInput(): Record<string, string> {
-  const inputsData:Record<string, string> = {}
+export function getDataInput() {
+  const inputsData: any = {}
   const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("form input")
   inputs.forEach(item => {
     inputsData[item.id] = item.value

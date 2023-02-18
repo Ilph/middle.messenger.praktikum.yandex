@@ -1,5 +1,6 @@
 import {EventBus} from "./EventBus"
 import { v4 as makeUUID } from "uuid"
+import { isEqual } from "./isEqual"
 
 export class Block<T> {
 
@@ -16,7 +17,7 @@ export class Block<T> {
   }
   private eventBus: () => EventBus
   protected props: {[key: string]: {[key: string]: string | number | boolean}}
-  protected children: {[key: string]: Block<T>}
+  public children: {[key: string]: Block<T>}
   private _id: string | null = null
 
   constructor(tagName="div", propsAndChildren: T) {
@@ -101,8 +102,10 @@ export class Block<T> {
     }
   }
 
-  protected componentDidUpdate(oldProps: T, newProps: T) {
-    // console.log(oldProps, newProps)
+  protected componentDidUpdate(oldProps: T, newProps: T): boolean {
+    if(isEqual(oldProps, newProps)) {
+      return false
+    }
     return true
   }
 
@@ -119,7 +122,6 @@ export class Block<T> {
   }
 
   getContent(): HTMLElement | null{   
-    
     return this.element;
   }
 

@@ -18,29 +18,30 @@ interface IOptions {
 type OptionsWithoutMethod = Omit<IOptions, 'method'>
 
 export class HTTP {
-  public api: string
-  constructor(api: string) {
-    this.api = api
+  static API_URL = "https://ya-praktikum.tech/api/v2"
+  protected endpoint: string
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTP.API_URL}${endpoint}`
   }
 
-  get = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
-    const url = this.api +halfurl
+  public get = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+    const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
-  post = (halfurl: string, options: OptionsWithoutMethod = {}) => {
-    const url = this.api +halfurl
+  public post = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+    const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
-  put = (halfurl: string, options: OptionsWithoutMethod = {}) => {
-    const url = this.api +halfurl
+  public put = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+    const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
-  delete = (halfurl: string, options: OptionsWithoutMethod = {}) => {
-    const url = this.api +halfurl
+  public delete = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+    const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
 
-  _request = (url: string, options: IOptions = {method: METHODS.GET}, timeout = 5000): Promise<XMLHttpRequest> => {
+  private _request = (url: string, options: IOptions = {method: METHODS.GET}, timeout = 5000): Promise<XMLHttpRequest> => {
     const {headers = {}, method, body} = options
 
     return new Promise(function(resolve, reject) {
@@ -66,21 +67,21 @@ export class HTTP {
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
+      xhr.responseType = 'json'
 
       xhr.onload = function() {
         resolve(xhr)
       }
 
-      xhr.onabort = reject
-      xhr.onerror = reject
-
+      xhr.onabort = () => reject({reason: 'abort'})
+      xhr.onerror = () => reject({reason: 'network error'})
       xhr.timeout = timeout
-      xhr.ontimeout = reject
+      xhr.ontimeout = () => reject({reason: 'timeout'})
 
       if (isGet || !body) {
         xhr.send()
       } else {
-        xhr.send(body)
+        xhr.send(JSON.stringify(body))
       }
     })
   }

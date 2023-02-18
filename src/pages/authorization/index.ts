@@ -9,12 +9,11 @@ import {
   getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
 //controllers
-import { UserLoginController } from "../../controllers/user-Login"
+import AuthController from "../../controllers/auth-controller"
 //Router
-import { router } from "../../index"
+import router from "../../utils/Router/Router"
 
 export function loginInstance() {
-  const userLoginController = new UserLoginController()
 
   const propsInput = {
     login: { 
@@ -56,7 +55,7 @@ export function loginInstance() {
       click: (event: MouseEvent) => {
         event.preventDefault()
         const data = getDataInput()
-        userLoginController.login(data)
+        AuthController.signin(data)
       }
     }
   }

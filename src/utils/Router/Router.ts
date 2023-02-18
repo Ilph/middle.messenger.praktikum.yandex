@@ -1,7 +1,7 @@
 import { Route } from "./Route"
 
 export class Router {
-
+  private static _instance: Router
   private _currentRoute: any | null
   private _rootQuery: string
   public routes: any[]
@@ -28,7 +28,8 @@ export class Router {
 
   start () {
     window.onpopstate = (event: PopStateEvent) => {
-      this._onRoute(event.currentTarget!.location.pathname)
+      const target = event.currentTarget as Window
+      this._onRoute(target.location.pathname)
     }
     
     this._onRoute(window.location.pathname)
@@ -63,3 +64,5 @@ export class Router {
     return this.routes.find(route => route.match(pathname))
   }
 }
+
+export default new Router("root")

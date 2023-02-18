@@ -18,7 +18,7 @@ export class UserData extends Block<IUserData> {
 
   render() {
     return this.compile(tpl, {
-      title: this.props.data.title
+      login: this.props.login
     })
   }
 }

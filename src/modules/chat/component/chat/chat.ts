@@ -1,5 +1,6 @@
 import tpl from "./chat.hbs"
 import { Block } from "../../../../utils/Block"
+import { connect } from "../../../../utils/Store/connect"
 
 export interface IChat {
   [key: string]: {
@@ -11,18 +12,20 @@ export interface IChat {
   }
 }
 
-export class Chat extends Block<IChat> {
+class Chat extends Block<IChat> {
   constructor(props: IChat) {
     super("div", props)
   }
 
   render() {
     return this.compile(tpl, {
-      name: this.props.data.name,
-      you: this.props.data.you,
-      sometext: this.props.data.sometext,
-      date: this.props.data.date,
-      quantity: this.props.data.quantity
+      title: this.props.title,
+      created_by: this.props.created_by,
+      last_message: this.props.last_message,
+      unread_count: this.props.unread_count
     })
   }
 }
+
+const wrapper = connect((state: any) => state)
+export const chatWithStore = wrapper(Chat)

@@ -1,5 +1,5 @@
 import { Aside } from "./aside"
-import { router } from "../../../../index"
+import router from "../../../../utils/Router/Router"
 
 const props = {
   attributes: {

@@ -5,10 +5,11 @@ import { InputProfile } from "../../components/input/input"
 const propsInput = {
   email: {
     data: {
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: `zxc`,
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -17,10 +18,11 @@ const propsInput = {
   },
   login: {
     data: {
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: `qw`,
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -29,10 +31,11 @@ const propsInput = {
   },
   firstName: {
     data: {
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: `qwe`,
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -41,10 +44,11 @@ const propsInput = {
   },
   secondName: {
     data: {
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: `qwe`,
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -53,10 +57,11 @@ const propsInput = {
   },
   displayName: {
     data: {
+      idName: "display_name",
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: `qwe`,
+      placeholder: "неуказан",
       disabled: "disabled"
     },
     attributes: {
@@ -65,10 +70,11 @@ const propsInput = {
   },
   phone: {
     data: {
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: `qwe`,
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -86,18 +92,17 @@ const phone = new InputProfile(propsInput.phone)
 
 const props = {
   data: {
-    title: "Иван"
+    login: "is loading",
   },
   inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
 export const userData = new UserData(props)
 
-
 const propsInputProfileData = {
   email: {
     data: {
-      id: "email",
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
@@ -111,7 +116,7 @@ const propsInputProfileData = {
   },
   login: {
     data: {
-      id: "login",
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
@@ -125,7 +130,7 @@ const propsInputProfileData = {
   },
   firstName: {
     data: {
-      id: "firstName",
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
@@ -139,7 +144,7 @@ const propsInputProfileData = {
   },
   secondName: {
     data: {
-      id: "secondName",
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
@@ -153,11 +158,11 @@ const propsInputProfileData = {
   },
   displayName: {
     data: {
-      id: "displayName",
+      idName: "display_name",
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "Неуказан",
       disabled: ""
     },
     attributes: {
@@ -166,7 +171,7 @@ const propsInputProfileData = {
   },
   phone: {
     data: {
-      id: "phone",
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",

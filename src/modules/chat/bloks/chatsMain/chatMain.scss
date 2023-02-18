@@ -1,4 +1,5 @@
 .chat__section {
+  width: 87%;
   height: 100%;
   position: fixed;
   margin-left: 20rem;
@@ -38,7 +39,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  height: 90px;
+  height: 120px;
   position: absolute;
   width: 210px;
   top: calc(100% + 2rem);
@@ -74,23 +75,6 @@
   font-size: 12px;
   color: $input_label_text_color;
   margin-bottom: 1rem;
-}
-
-.chat-body__message {
-  width: 40%;
-  background: $chat_body_bg_color;
-}
-
-.chat-body__message span {
-  display: inline-block;
-  width: 10%;
-  text-align: right;
-  color: $input_label_text_color;
-}
-
-.rigth {
-  align-self: flex-end;
-  background: $chat_bodyrigth_bg_color;
 }
 
 .chat-footer {

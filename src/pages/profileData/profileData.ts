@@ -9,6 +9,10 @@ import { IAside } from "../../modules/userProfile/blocks/aside/aside"
 import { IAvatar } from "../../modules/userProfile/components/image/avatar"
 import { IUserData } from "../../modules/userProfile/blocks/userData/userdata"
 import { IButton } from "../../components/button/button"
+import { InputProfile } from "../../modules/userProfile/components/input/input"
+
+import AuthController from "../../controllers/auth-controller"
+import { isEqual } from "../../utils/isEqual"
 
 export interface IProfileData {
   aside: Block<IAside>,
@@ -17,9 +21,30 @@ export interface IProfileData {
   save: Block<IButton>
 }
 
+const userFields = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone']
+
 export class ProfileData extends Block<IProfileData> {
   constructor(props: IProfileData) {
     super("section", props)
+    AuthController.fetchUser()
+  }
+
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+
+    if(isEqual(oldProps, newProps)) {
+      return false
+    }
+
+    const childUserData = this.children.userData as unknown
+    (childUserData as Block<IUserData>).setProps({login: newProps.data.login})
+
+    const childInputs = (childUserData as ProfileData).children.inputs as unknown
+    
+    (childInputs as InputProfile[]).forEach((element, i ) => {
+      element.setProps({placeholder: newProps.data[userFields[i]]})
+    })
+
+    return false
   }
 
   render() {

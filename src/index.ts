@@ -7,22 +7,23 @@ import { profileDataInstance } from "./pages/profileData/index"
 import { profilePasswordInstance } from "./pages/profilePassword/index"
 import { chatInstance } from "./pages/chat/index"
 //Router
-import { Router } from "./utils/Router/Router"
+import router from "./utils/Router/Router"
+
 //styles
 import "./styles/main.scss"
 
-export const router = new Router("root")
-
-router
-  .use("/", loginInstance)
-  .use("/sign-up", registrationInstance)
-  .use("/settings", profileInstance)
-  .use("/messenger", chatInstance)
-  .use("/profileData", profileDataInstance)
-  .use("/profilePassword", profilePasswordInstance)
-  .use("/error500", error500Instance)
-  .use("/error404", error404Instance)
-  .start()
+window.addEventListener("DOMContentLoaded", async () => {
+  router
+    .use("/", loginInstance)
+    .use("/sign-up", registrationInstance)
+    .use("/settings", profileInstance)
+    .use("/messenger", chatInstance)
+    .use("/profileData", profileDataInstance)
+    .use("/profilePassword", profilePasswordInstance)
+    .use("/error500", error500Instance)
+    .use("/error404", error404Instance)
+    .start()
+})
 
 
 // const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()

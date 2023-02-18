@@ -1,12 +1,17 @@
 import { EventBus } from "../EventBus"
-import { set, Indexed } from "../set"
+import { set } from "../set"
+import { User } from "../../api/auth-api"
 
 export enum StoreEvents {
   Updated = "updated"
 }
 
+export interface State {
+  user: User,
+}
+
 class Store extends EventBus {
-  public state: Indexed = {}
+  private state: any = {}
 
   public getState() {
     return this.state
