@@ -33,6 +33,7 @@ export default class WSTransport extends EventBus {
     return new Promise((resolve) => {
       this.on(WSTransportEvents.Connected, () => {
         resolve()
+        console.log("Соединение установлено")
       })
     })
   }

@@ -42,9 +42,13 @@ export class AuthController {
         throw new Error("Некорректные данные")
       }
 
-      await this.api.signup(data)
+      const response = await this.api.signup(data)
+      if(response !== 200) {
+        router.go("/")
+        return
+      }
       await this.fetchUser()
-      router.go("/settings")
+      router.go("/messenger")
     } catch (e: any) {
       console.error(e.message)
     }

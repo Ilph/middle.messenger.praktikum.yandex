@@ -29,20 +29,19 @@ class MessagesController {
     const userId = store.getState().user.data.id
 
     const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`)
-
     this.sockets.set(id, wsTransport)
-
     await wsTransport.connect()
+    this.sendMessage(id, "Первое сообщение")
 
     this.subscribe(wsTransport, id)
     // this.fetchOldMessages(id)
   }
 
   sendMessage(id: number, message: string) {
-    const socket = this.sockets.get(id);
+    const socket = this.sockets.get(id)
 
     if (!socket) {
-      throw new Error(`Chat ${id} is not connected`);
+      throw new Error(`Chat ${id} is not connected`)
     }
 
     socket.send({
@@ -65,7 +64,7 @@ class MessagesController {
     Array.from(this.sockets.values()).forEach(socket => socket.close());
   }
 
-  private onMessage(id: number, messages: Message | Message[]) {
+  private onMessage(id: number, messages: any) {
     let messagesToAdd: Message[] = []
 
     if (Array.isArray(messages)) {

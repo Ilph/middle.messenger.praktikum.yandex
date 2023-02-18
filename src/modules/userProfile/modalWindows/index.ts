@@ -83,7 +83,7 @@ export const modalWindowAddUser = new ModalWindowAvatar({
         modal?.forEach(item => {
           item.classList.remove("open")
         })
-        ChatController.addUserToChat(newProps.selectedId, +nameChat)
+        ChatController.addUserToChat(newProps.selectedChat, +nameChat)
       }
     }
   })
