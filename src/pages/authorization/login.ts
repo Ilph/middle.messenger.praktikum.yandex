@@ -5,9 +5,6 @@ import { Block } from "../../utils/Block"
 //type
 import { IButton } from "../../components/button/button"
 import { IInput } from "../../components/input/input"
-//store
-// import store, { StoreEvents } from "../../store/store"
-
 
 export interface ILogin {
   data: {

@@ -16,23 +16,20 @@ export interface ChatMainType {
   }
 }
 
-interface MessengerProps {
-  selectedChat: number | undefined;
-  messages: any;
-  userId: number;
-}
-
 export class ChatMain extends Block<ChatMainType> {
   constructor(props: ChatMainType) {
     super("section", props)
   }
 
-  private createMessages(props: MessengerProps) {
+  private createMessages(props: any) {
     const selectedChat = props.selectedChat
-    return props.messages[selectedChat!].map( (data: any) => {
+    return props.messages[selectedChat!].map( (elements: any) => {
       return new Message({
-        content: data,
-        isMine: true
+        content: elements,
+        attributes: {
+          class: "chat-body__wrapper-text"
+        },
+        isMine: props.user.data.id === elements.user_id
       })
     })
   }

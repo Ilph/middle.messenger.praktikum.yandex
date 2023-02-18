@@ -12,7 +12,6 @@ import { IButton } from "../../components/button/button"
 import { InputProfile } from "../../modules/userProfile/components/input/input"
 
 import AuthController from "../../controllers/auth-controller"
-import { isEqual } from "../../utils/isEqual"
 
 export interface IProfileData {
   aside: Block<IAside>,
@@ -30,10 +29,6 @@ export class ProfileData extends Block<IProfileData> {
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-
-    if(isEqual(oldProps, newProps)) {
-      return false
-    }
 
     const childUserData = this.children.userData as unknown
     (childUserData as Block<IUserData>).setProps({login: newProps.data.login})

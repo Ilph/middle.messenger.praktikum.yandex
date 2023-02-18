@@ -5,7 +5,10 @@ import { Block } from "../../../../utils/Block"
 
 export interface IMessage {
   content: string,
-  isMine: boolean
+  isMine: boolean,
+  attributes: {
+    class: string
+  }
 }
 
 export class Message extends Block<IMessage> {

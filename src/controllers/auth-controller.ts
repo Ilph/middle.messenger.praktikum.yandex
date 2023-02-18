@@ -17,10 +17,13 @@ export class AuthController {
         throw new Error("Некорректный логин или пароль")
       }
 
-      await this.api.signin(data)
+     const response = await this.api.signin(data)
+     if(response !== 200) {
+       router.go("/")
+       return
+     }
       await this.fetchUser()
-
-      router.go("/settings")
+      router.go("/messenger")
     } catch (e: any) {
       console.error(e);
     }

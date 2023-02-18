@@ -38,7 +38,7 @@ export class AuthAPI extends BaseAPI {
       },
       body: data
     })
-    .then(xhr => xhr.response)
+    .then(xhr => xhr.status)
   }
 
   async signup(data: SignupData) {

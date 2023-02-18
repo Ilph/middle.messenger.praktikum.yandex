@@ -61,7 +61,7 @@ const propsInput = {
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "неуказан",
+      placeholder: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -106,7 +106,7 @@ const propsInputProfileData = {
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный email"
     },
@@ -120,7 +120,7 @@ const propsInputProfileData = {
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный логин"
     },
@@ -134,7 +134,7 @@ const propsInputProfileData = {
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод имени"
     },
@@ -148,7 +148,7 @@ const propsInputProfileData = {
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод фамилии"
     },
@@ -162,7 +162,7 @@ const propsInputProfileData = {
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "Неуказан",
+      placeholder: "...loading",
       disabled: ""
     },
     attributes: {
@@ -175,7 +175,7 @@ const propsInputProfileData = {
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: "...loading",
       disabled: "",
       helperText: "Неверный ввод номера"
     },

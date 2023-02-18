@@ -11,7 +11,6 @@ import { IUserChange } from "../../modules/userProfile/blocks/userChange/userCha
 import { IUserData } from "../../modules/userProfile/blocks/userData/userdata"
 import { InputProfile } from "../../modules/userProfile/components/input/input"
 import AuthController from "../../controllers/auth-controller"
-import { isEqual } from "../../utils/isEqual"
 
 export interface IProfile {
   aside: Block<IAside>,
@@ -30,10 +29,6 @@ export class Profile extends Block<IProfile> {
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
 
-    if(isEqual(oldProps, newProps)) {
-      return false
-    }
-
     const childUserData = this.children.userData as unknown
     (childUserData as Block<IUserData>).setProps({login: newProps.data.login})
 
@@ -43,7 +38,7 @@ export class Profile extends Block<IProfile> {
       element.setProps({placeholder: newProps.data[userFields[i]]})
     })
 
-    return false
+    return true
   }
 
   render() {
