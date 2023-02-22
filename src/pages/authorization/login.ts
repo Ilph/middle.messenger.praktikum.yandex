@@ -8,8 +8,7 @@ import { IInput } from "../../components/input/input"
 
 export interface ILogin {
   data: {
-    entry: string;
-    registration: string
+    entry: string
   },
   attributes: {
     class: string
@@ -29,8 +28,7 @@ export class Login extends Block<ILogin> {
 
   render() {
     return this.compile(tpl, {
-      entry: this.props.data.entry,
-      registration: this.props.data.registration
+      entry: this.props.data.entry
     })
   }
 

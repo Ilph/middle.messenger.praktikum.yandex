@@ -13,7 +13,6 @@ export class Button extends Block<IButton> {
   }
   
   render() {
-
     return this.compile(buttonTpl, {
       value: this.props.data.value
     })

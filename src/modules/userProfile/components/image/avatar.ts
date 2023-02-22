@@ -1,5 +1,6 @@
 import tpl from "./avatar.hbs"
 import { Block } from "../../../../utils/Block"
+import { createModal } from "../../utils/createModalWindow"
 
 export interface IAvatar {
   attributes: {
@@ -16,16 +17,7 @@ export class Avatar extends Block<IAvatar> {
     return this.compile(tpl, {})
   }
 
-  _addEvents() {
-    const {events = {}}: any = this.props
-    const input = this._element!.querySelector("input[type=text]")
-
-    if(!this.props.events) {
-        return
-      }
-    
-    Object.keys(events).forEach((name) => {
-      input!.addEventListener(name, events[name])
-    })
+  protected componentDidMount() {
+    createModal("input")
   }
 }

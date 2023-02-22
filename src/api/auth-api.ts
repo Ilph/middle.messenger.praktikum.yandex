@@ -51,14 +51,14 @@ export class AuthAPI extends BaseAPI {
     }).then(xhr => xhr.status)
   }
 
-  async read(): Promise<User> {
+  async read(): Promise<XMLHttpRequest> {
     return this.http.get("/user", {
       credentials: 'include',
       headers: {
         'content-type': 'application/json'
       }
     })
-    .then(xhr => xhr.response)
+    .then(xhr => xhr)
   }
 
   async logout() {

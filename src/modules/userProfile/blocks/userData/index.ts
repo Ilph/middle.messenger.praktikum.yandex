@@ -92,7 +92,7 @@ const phone = new InputProfile(propsInput.phone)
 
 const props = {
   data: {
-    login: "is loading",
+    login: "...loading",
   },
   inputs: [email, login, firstName, secondName, displayName, phone]
 }

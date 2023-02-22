@@ -8,7 +8,7 @@ export function createModal(selector: string) {
   modal.classList.add("modal")
   modal.setAttribute("id", "modal")
   document.body.appendChild(modal)
-
+ 
   function handler(event: MouseEvent) {
     const target: HTMLElement = <HTMLElement>event.target
     switch(target!.dataset.modal) {

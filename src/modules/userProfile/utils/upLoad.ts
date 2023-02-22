@@ -1,8 +1,9 @@
+
 export function upLoad() {
+
   const input = document.querySelector("#file") as HTMLInputElement
   const labelText = document.querySelector(".modal-input__label") as HTMLLabelElement
   const titleText = document.querySelector(".modal-window__title") as HTMLElement
-
   input.setAttribute("accept", ".png,.jpeg,.jpg,.gif") 
 
   const changeHandler = (event: Event) => {
@@ -11,6 +12,7 @@ export function upLoad() {
       const {files} = target
       const fileType = files[0].type
       labelText.textContent = fileType
+      labelText.appendChild(target)
       titleText.textContent = "Файл загружен"
     }
   }

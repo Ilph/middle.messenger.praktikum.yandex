@@ -12,11 +12,9 @@ export class AuthController {
 
   async signin(data: SigninData) {
     try {
-
       if(!checkLogin(data.login!) && !checkPassword(data.password!)) {
         throw new Error("Некорректный логин или пароль")
       }
-
      const response = await this.api.signin(data)
      if(response !== 200) {
        router.go("/")
@@ -25,7 +23,7 @@ export class AuthController {
       await this.fetchUser()
       router.go("/messenger")
     } catch (e: any) {
-      console.error(e);
+      console.error(e)
     }
   }
 
@@ -55,8 +53,16 @@ export class AuthController {
   }
 
   async fetchUser() {
-    const user = await this.api.read()
-    store.set("user.data", user)
+    try {
+      const xhr = await this.api.read()
+      if(xhr.status !== 200 ) {
+        throw new Error(JSON.stringify(xhr.response))
+      }
+      const user = xhr.response
+      store.set("user.data", user)
+    } catch(e) {
+      throw e
+    }
   }
 
   async logout() {

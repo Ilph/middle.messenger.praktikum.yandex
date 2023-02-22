@@ -31,8 +31,6 @@ export class ProfileData extends Block<IProfileData> {
   protected componentDidUpdate(newProps: any): boolean {
 
     const childUserData = this.children.userData as unknown
-    (childUserData as Block<IUserData>).setProps({login: newProps.data.login})
-
     const childInputs = (childUserData as ProfileData).children.inputs as unknown
     
     (childInputs as InputProfile[]).forEach((element, i ) => {

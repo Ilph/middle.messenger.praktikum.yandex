@@ -45,7 +45,7 @@ export default class WSTransport extends EventBus {
   private setupPing() {
     this.pingInterval = setInterval(() => {
       this.send({ type: 'ping' })
-    }, 5000)
+    }, 50000)
 
     this.on(WSTransportEvents.Close, () => {
       clearInterval(this.pingInterval)
@@ -67,9 +67,9 @@ export default class WSTransport extends EventBus {
       this.emit(WSTransportEvents.Error, {...event})
     })
 
-    socket.addEventListener('message', (message) => {
-      const data = message.data
-
+    socket.addEventListener('message', (message: MessageEvent<any>) => {
+      const data = JSON.parse(message.data)
+    
       if (data.type && data.type === 'pong') {
         return
       }

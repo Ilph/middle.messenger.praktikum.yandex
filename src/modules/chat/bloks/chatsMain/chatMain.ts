@@ -3,10 +3,13 @@ import tpl from "./chatMain.hbs"
 //Component's template
 import { Block } from "../../../../utils/Block"
 import { Message, IMessage } from "../../component/message/message"
+//types
+import {Message as Mes} from "../../../../controllers/messages-controller"
 //icons
 import dot from "../../../../../static/icons/3dot.png"
 import clip from "../../../../../static/icons/clip.png"
 import arrowRigth from "../../../../../static/icons/arrowRigth.png"
+import { createModal } from "../../../userProfile/utils/createModalWindow"
 
 
 export interface ChatMainType {
@@ -22,21 +25,39 @@ export class ChatMain extends Block<ChatMainType> {
 
   private createMessages(props: any) {
     const selectedChat = props.selectedChat
-  
-    return props.messages[selectedChat!].map( (elements: any) => {
-      const messageContent = JSON.parse(elements)
-      const milliseconds = Date.parse(messageContent.time)
-      const date = new Date(milliseconds)
-      const time = `${date.getHours()}:${date.getMinutes()}`
-      return new Message({
-        content: messageContent.content,
-        time: time,
-        attributes: {
-          class: "chat-body__wrapper-text"
-        },
-        isMine: props.user.data.id === messageContent.user_id
-      })
+    const allMessages: Block<IMessage>[] = []
+    props.messages[selectedChat].forEach((elements: Mes) => {
+      if(Array.isArray(elements)) {
+        elements.forEach((item) => {
+          const milliseconds = Date.parse(item.time)
+          const date = new Date(milliseconds)
+          const time = `${date.getHours()}:${date.getMinutes()}`
+          const mes = new Message({
+            content: item.content,
+            time: time,
+            attributes: {
+              class: "chat-body__wrapper-text"
+            },
+            isMine: props.user.data.id === item.user_id
+          })
+          allMessages.push(mes)
+        })
+      } else {
+        const milliseconds = Date.parse(elements.time)
+          const date = new Date(milliseconds)
+          const time = `${date.getHours()}:${date.getMinutes()}`
+          const mes = new Message({
+            content: elements.content,
+            time: time,
+            attributes: {
+              class: "chat-body__wrapper-text"
+            },
+            isMine: props.user.data.id === elements.user_id
+          })
+          allMessages.push(mes)
+      }
     })
+    return allMessages
   }
 
   protected componentDidUpdate(newProps: any): boolean {
@@ -44,9 +65,11 @@ export class ChatMain extends Block<ChatMainType> {
     if(newProps.selectedChat) {
       (childMessage as Record<string, unknown>).messagesInstance = this.createMessages(newProps)
     }
+
     return true
   }
 
+  
   render() {
     return this.compile(tpl, {
       login: this.props.login,
@@ -55,11 +78,14 @@ export class ChatMain extends Block<ChatMainType> {
       arrowRigth: arrowRigth
     })
   }
-
+  
+  protected componentDidMount() {
+    createModal(".chat-header__dropdown-menu button")
+  }
+  
   _addEvents() {
     const {events = {}}: any = this.props
     const buttons = Array.from(this._element!.querySelectorAll("button"))
-
     buttons.forEach(el => {
       if(!this.props.events) {
         return
