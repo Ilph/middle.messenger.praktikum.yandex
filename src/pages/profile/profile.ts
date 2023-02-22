@@ -28,17 +28,15 @@ export class Profile extends Block<IProfile> {
   }
 
   protected componentDidUpdate(newProps: any): boolean {
-
     const childUserData = this.children.userData as unknown
-    (childUserData as Block<IUserData>).setProps({login: newProps.data.login})
+    (childUserData as Block<IUserData>).setProps({data: {login: newProps.data.login}})
 
     const childInputs = (childUserData as Profile).children.inputs as unknown
-    
     (childInputs as InputProfile[]).forEach((element, i ) => {
       element.setProps({placeholder: newProps.data[userFields[i]]})
     })
 
-    return true
+    return false
   }
 
   render() {

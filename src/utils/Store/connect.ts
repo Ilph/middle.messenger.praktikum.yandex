@@ -9,7 +9,7 @@ export function connect(mapStateToProps: any) {
 
         store.on(StoreEvents.Updated, () => {
           const stateProps = mapStateToProps(store.getState())
-          previousState = stateProps
+          // previousState = stateProps
           this.setProps({ ...stateProps })
         })
       }

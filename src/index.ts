@@ -11,6 +11,8 @@ import router from "./utils/Router/Router"
 
 //styles
 import "./styles/main.scss"
+//Controllers
+import AuthController from "./controllers/auth-controller"
 
 window.addEventListener("DOMContentLoaded", async () => {
   router
@@ -22,28 +24,27 @@ window.addEventListener("DOMContentLoaded", async () => {
     .use("/profilePassword", profilePasswordInstance)
     .use("/error500", error500Instance)
     .use("/error404", error404Instance)
-    .start()
+
+
+  let isProtectedRoute = true
+
+  switch(window.location.pathname) {
+    case("/"):
+    case("/sign-up"):
+      isProtectedRoute = false
+      break
+  }
+  try {
+    await AuthController.fetchUser()
+    router.start()
+    if(!isProtectedRoute) {
+      router.go("/messenger")
+    }
+  } catch(e) {
+    router.start()
+    console.log(e)
+    if(isProtectedRoute) {
+      router.go("/")
+    }
+  }
 })
-
-
-// const baseUrl = window.location.protocol.toString() + "//"+ window.location.host.toString()
-
-// if (window.location.href ==  baseUrl + "/") {
-//   render("root", login)
-// } else if (window.location.href == baseUrl + "/reg") {
-//   render("root", registration)
-// } else if (window.location.href == baseUrl + "/error500") {
-//   render("root", error500)
-// } else if (window.location.href == baseUrl + "/error404") {
-//   render("root", error404)
-// } else if (window.location.href == baseUrl + "/profile") {
-//   render("root", profile)
-// } else if (window.location.href == baseUrl + "/profilePassword") {
-//   render("root", profilePassword)
-// } else if (window.location.href == baseUrl + "/chat") {
-//   render("root", chat)
-//   createModal(".chat-header__dropdown-menu button")
-// } else if (window.location.href == baseUrl + "/profileData") {
-//   render("root", profileData)
-//   createModal(".avatar__input")
-// } 

@@ -86,8 +86,7 @@ export function loginInstance() {
   
   const props = {
     data: {
-      entry: "Вход",
-      registration: "Registration"
+      entry: "Вход"
     },
     attributes: {
       class: "section"
@@ -99,6 +98,5 @@ export function loginInstance() {
     inputs: [inputLogin, inputPassword],
     button: [button, button2]
   }
-
   return new Login(props)
 }

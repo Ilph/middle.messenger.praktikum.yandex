@@ -18,14 +18,6 @@ export class InputProfile extends Block<IInputProfile> {
     super("div", props)
   }
 
-  setProps = (nextProps:IInputProfile) => {
-    if(!nextProps) {
-      return
-    }
-
-    Object.assign(this.props, nextProps)
-  }
-
   render() {
     return this.compile(tpl, {
       idName: this.props.data.idName,

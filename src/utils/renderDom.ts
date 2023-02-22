@@ -1,6 +1,7 @@
 export function render(query:string, block: any) {
   const root = document.getElementById(query) as HTMLElement
   root.appendChild(block.getContent()!)
+  block.dispatchComponentDidMount()
   return root
 }
 

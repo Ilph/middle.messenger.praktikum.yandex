@@ -6,7 +6,7 @@ export class Block<T> {
 
   static EVENTS = {
     INIT: "init",
-    FLOW_CDM: "flow:componentt-did-mount",
+    FLOW_CDM: "flow:component-did-mount",
     FLOW_CDU: "flow:component-did-update",
     FLOW_RENDER: "flow:render"
   }
@@ -80,20 +80,26 @@ export class Block<T> {
 
   private _componentDidMount(): void {
     this.componentDidMount()
-    Object.values(this.children).forEach(child => {
-      child.dispatchComponentDidMount()
-    })
   }
 
-  protected componentDidMount(): boolean {
-    return true
+  protected componentDidMount() {
   }
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
-    if(Object.keys(this.children).length) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
-    }
+    Object.values(this.children).forEach(child => {
+      if (Array.isArray(child) && child.length) {
+        child.forEach(ch => {
+          if(ch instanceof Block) {
+            ch.dispatchComponentDidMount()
+          }
+        })
+      } else if(Array.isArray(child) && !child.length) {
+        return
+      } else {
+        child.dispatchComponentDidMount()
+      }
+    })
   }
 
   private _componentDidUpdate(oldProps: T, newProps: T): void {
@@ -109,12 +115,13 @@ export class Block<T> {
     return true
   }
 
-  setProps = (nextProps:T) => {
+  public setProps = (nextProps:T): T | void=> {
     if(!nextProps) {
       return
     }
-
+    // let oldTarget = {...this.props}
     Object.assign(this.props, nextProps)
+    // this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, this.props)
   }
 
   get element(): HTMLElement | null{
@@ -194,7 +201,6 @@ export class Block<T> {
         prop: string, value) {
         const oldTarget: any = {...target}
         target[prop] = value
-  
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
         return true
       },

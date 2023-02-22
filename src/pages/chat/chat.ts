@@ -5,10 +5,10 @@ import { Block } from "../../utils/Block"
 import ChatsController from "../../controllers/chats-controllers"
 import AuthController from "../../controllers/auth-controller"
 import { ChatMainType } from "../../modules/chat/bloks/chatsMain/chatMain"
-import { isEqual } from "../../utils/isEqual"
+// import { isEqual } from "../../utils/isEqual"
 import { ChatAside } from "../../modules/chat/bloks/chatsAside/chatsAside"
 import { chatWithStore } from "../../modules/chat/component/chat/chat"
-import { createModal } from "../../modules/userProfile/utils/createModalWindow"
+import { isEqual } from "../../utils/isEqual"
 
 export interface IChatType {
   [key: string]: {
@@ -26,13 +26,17 @@ export class ChatPage extends Block<IChatType> {
     ChatsController.fetchChats()
     AuthController.fetchUser()
   }
+
   private createChats(state: any) {
     return state.map((data: any) => {
       return new chatWithStore({
         title: data.title,
-        created_by: data.last_message.user.login,
-        last_message: data.last_message.content,
+        created_by: data.last_message == null ? "" : data.last_message.user.login,
+        last_message: data.last_message == null ? "" : data.last_message.content,
         unread_count: data.unread_count,
+        attributes: {
+          class: "chat-lists"
+        },
         events: {
           click: () => {
             ChatsController.selectChat(data.id)
@@ -42,21 +46,19 @@ export class ChatPage extends Block<IChatType> {
     })
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any) { 
+  protected componentDidUpdate(oldProps: any, newProps: any) {
     if(isEqual(oldProps, newProps)) {
       return false
     }
-    createModal(".chat-header__dropdown-menu button")
+    
     const childChatMain = this.children.chatMain as unknown
     (childChatMain as Block<ChatMainType>).setProps({login: newProps.user.data.login})
 
     const childChatAside = this.children.chatAside as unknown
-
     if(newProps.chats) {
       (childChatAside as Block<ChatAside>).children.chats = this.createChats(newProps.chats)
     }
-
-    return false
+    return true
   }
 
   render() {
