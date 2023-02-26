@@ -38,6 +38,10 @@ class ChatsController {
     this.fetchChats()
   }
 
+  addAvatarToChat(form: FormData) {
+    this.api.addAvatar(form)
+  }
+
   getToken(id: number) {
     return this.api.getToken(id)
   }

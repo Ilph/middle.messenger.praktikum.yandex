@@ -72,6 +72,7 @@ export class ChatMain extends Block<ChatMainType> {
   
   render() {
     return this.compile(tpl, {
+      avatarChatMain: this.props.data.avatarChatMain,
       login: this.props.login,
       dots: dot,
       clip: clip,

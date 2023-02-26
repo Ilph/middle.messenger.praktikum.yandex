@@ -30,6 +30,7 @@ export class ChatPage extends Block<IChatType> {
   private createChats(state: any) {
     return state.map((data: any) => {
       return new chatWithStore({
+        avatarChat: `https://ya-praktikum.tech/api/v2/resources${data.avatar}`,
         title: data.title,
         created_by: data.last_message == null ? "" : data.last_message.user.login,
         last_message: data.last_message == null ? "" : data.last_message.content,
@@ -50,15 +51,15 @@ export class ChatPage extends Block<IChatType> {
     if(isEqual(oldProps, newProps)) {
       return false
     }
-    
+
     const childChatMain = this.children.chatMain as unknown
-    (childChatMain as Block<ChatMainType>).setProps({login: newProps.user.data.login})
+    (childChatMain as Block<ChatMainType>).setProps({login: newProps.user.data.login, data: {avatarChatMain: `https://ya-praktikum.tech/api/v2/resources${newProps.user.data.avatar}`}})
 
     const childChatAside = this.children.chatAside as unknown
     if(newProps.chats) {
       (childChatAside as Block<ChatAside>).children.chats = this.createChats(newProps.chats)
     }
-    return true
+    return false
   }
 
   render() {

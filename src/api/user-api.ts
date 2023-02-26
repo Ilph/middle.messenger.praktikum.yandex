@@ -34,13 +34,11 @@ export class UserAPI extends BaseAPI {
 
   async updateAvatar(form: FormData, endpoint: string) {
     return this.http.put(endpoint, {
-      credentials: 'include',
-      headers: {
-        'content-type': 'multipart/form-data'
-      },
+      credentials: "include",
+      avatar: true,
       body: form
     })
-    .then(xhr => xhr.response)
+    .then(xhr => xhr.response.avatar)
   }
 
   create = undefined

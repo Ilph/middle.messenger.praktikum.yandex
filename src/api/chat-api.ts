@@ -70,15 +70,25 @@ export class ChatsAPI extends BaseAPI {
 
   deleteUsers(id: number, users: number[]): Promise<unknown> {
     return this.http.delete('/users', {
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: {
         users, 
         chatId: id
       }
     })
+    .then(xhr => xhr.response)
+  }
+
+  addAvatar(form: FormData) {
+    return this.http.put("/avatar", {
+      credentials: "include",
+      avatar: true,
+      body: form
+    })
+    .then(xhr => xhr)
   }
 
   async getToken(id: number): Promise<any> {

@@ -12,7 +12,8 @@ interface IOptions {
   method: METHODS,
   body?: any,
   timeout?: number,
-  credentials?: string
+  credentials?: string,
+  avatar?: boolean
 }
 
 type OptionsWithoutMethod = Omit<IOptions, 'method'>
@@ -52,6 +53,7 @@ export class HTTP {
 
       const xhr = new XMLHttpRequest()
       const isGet = method === METHODS.GET
+      const avatar = options.avatar ?? false
 
       xhr.open(
         method, 
@@ -80,6 +82,8 @@ export class HTTP {
 
       if (isGet || !body) {
         xhr.send()
+      } else if(avatar) {
+        xhr.send(body)
       } else {
         xhr.send(JSON.stringify(body))
       }

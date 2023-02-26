@@ -12,6 +12,8 @@ import {
   getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
 import UserController from "../../controllers/user-controllers"
+import { connect } from "../../utils/Store/connect"
+
 const propsInputProfilepassword = {
   oldPassword: {
     data: {
@@ -33,6 +35,7 @@ const propsInputProfilepassword = {
       name: "Новый пароль",
       nameInput: "new_password",
       types: "password",
+      value: "",
       placeholder: "password",
       disabled: "",
       helperText: "Неверный пароль"
@@ -72,13 +75,15 @@ const buttonProps = {
     click: (event: MouseEvent) => {
       event.preventDefault()
       const data = getDataInput()
-      console.log(data)
       UserController.changeUserPassword(data)
     }
   }
 }
 
 const button = new Button(buttonProps)
+
+const wrapper = connect((state: any) => state.user)
+const profileData = wrapper(ProfilePassword)
 
 export function profilePasswordInstance() {
   const props = {
@@ -97,5 +102,5 @@ export function profilePasswordInstance() {
     save: button
   }
   
-  return new ProfilePassword(props)
+  return new profileData(props)
 }

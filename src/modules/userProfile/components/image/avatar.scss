@@ -6,11 +6,15 @@
   height: 130px;
   border-radius: 50%;
   background-color: #efefef;
-  background-image: url("/static/icons/iconAvatar.png");
-  background-origin: border-box;
-  background-size: 35%;
-  background-repeat: no-repeat;
-  background-position: center;
+}
+
+.avatar__label img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 .avatar__text {

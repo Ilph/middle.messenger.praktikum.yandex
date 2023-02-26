@@ -2,9 +2,13 @@ import tpl from "./avatar.hbs"
 import { Block } from "../../../../utils/Block"
 import { createModal } from "../../utils/createModalWindow"
 
+
 export interface IAvatar {
-  attributes: {
+  attributes?: {
     class: string
+  },
+  data: {
+    avatar: string
   }
 }
 
@@ -14,10 +18,12 @@ export class Avatar extends Block<IAvatar> {
   }
 
   render() {
-    return this.compile(tpl, {})
+    return this.compile(tpl, {
+      avatar: this.props.data.avatar
+    })
   }
 
   protected componentDidMount() {
-    createModal("input")
+    createModal(".avatar__input")
   }
 }

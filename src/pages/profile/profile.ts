@@ -28,14 +28,16 @@ export class Profile extends Block<IProfile> {
   }
 
   protected componentDidUpdate(newProps: any): boolean {
+    const childAvatar = this.children.avatar as unknown
+    (childAvatar as Block<IAvatar>).setProps({data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}})
+
     const childUserData = this.children.userData as unknown
     (childUserData as Block<IUserData>).setProps({data: {login: newProps.data.login}})
 
     const childInputs = (childUserData as Profile).children.inputs as unknown
     (childInputs as InputProfile[]).forEach((element, i ) => {
-      element.setProps({placeholder: newProps.data[userFields[i]]})
+      element.setProps({value: newProps.data[userFields[i]]})
     })
-
     return false
   }
 
