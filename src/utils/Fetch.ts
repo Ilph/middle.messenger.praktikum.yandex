@@ -15,8 +15,8 @@ interface IOptions {
   credentials?: string,
   avatar?: boolean
 }
-
 type OptionsWithoutMethod = Omit<IOptions, 'method'>
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
 
 export class HTTP {
   static API_URL = "https://ya-praktikum.tech/api/v2"
@@ -25,19 +25,19 @@ export class HTTP {
     this.endpoint = `${HTTP.API_URL}${endpoint}`
   }
 
-  public get = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public get: HTTPMethod = (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
-  public post = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public post: HTTPMethod = (halfurl, options= {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
-  public put = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public put: HTTPMethod = (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
-  public delete = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public delete: HTTPMethod= (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
