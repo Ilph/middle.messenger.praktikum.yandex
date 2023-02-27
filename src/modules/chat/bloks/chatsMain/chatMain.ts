@@ -10,6 +10,7 @@ import dot from "../../../../../static/icons/3dot.png"
 import clip from "../../../../../static/icons/clip.png"
 import arrowRigth from "../../../../../static/icons/arrowRigth.png"
 import { createModal } from "../../../userProfile/utils/createModalWindow"
+import { isEqual } from "../../../../utils/isEqual"
 
 
 export interface ChatMainType {
@@ -60,20 +61,22 @@ export class ChatMain extends Block<ChatMainType> {
     return allMessages
   }
 
-  protected componentDidUpdate(newProps: any): boolean {
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    if(isEqual(oldProps, newProps)) {
+      return false
+    }
+
     const childMessage = this.children as unknown
     if(newProps.selectedChat) {
       (childMessage as Record<string, unknown>).messagesInstance = this.createMessages(newProps)
     }
-
     return true
   }
 
-  
   render() {
     return this.compile(tpl, {
       avatarChatMain: this.props.data.avatarChatMain,
-      login: this.props.login,
+      login: this.props.data.login,
       dots: dot,
       clip: clip,
       arrowRigth: arrowRigth
@@ -81,7 +84,11 @@ export class ChatMain extends Block<ChatMainType> {
   }
   
   protected componentDidMount() {
-    createModal(".chat-header__dropdown-menu button")
+    const modal = document.querySelector("#modal")
+    if(modal) {
+      return
+    }
+    createModal()
   }
   
   _addEvents() {
@@ -100,6 +107,18 @@ export class ChatMain extends Block<ChatMainType> {
             break
           case("deleteChat"):
             el.addEventListener(eventName, events[eventName][1])
+            break
+          case("addUser"):
+            el.addEventListener(eventName, events[eventName][2])
+            break
+          case("deleteUser"):
+            el.addEventListener(eventName, events[eventName][3])
+            break
+          case("addChat"):
+            el.addEventListener(eventName, events[eventName][4])
+            break
+          case("addAvatarChat"):
+            el.addEventListener(eventName, events[eventName][5])
             break
         }
       })

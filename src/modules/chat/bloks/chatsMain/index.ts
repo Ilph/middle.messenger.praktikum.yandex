@@ -5,9 +5,19 @@ import store from "../../../../utils/Store/store"
 import ChatsControllers from "../../../../controllers/chats-controllers"
 import { checkMessage } from "../../../../utils/checkUtilsInput/checkInputs"
 import avatar from "../../../../../static/icons/iconAvatar.png"
+import { modalWindowAddUser, modalWindowDeleteUser, modalWindowAddChat, modalWindowAddAvatarChat } from "../../../userProfile/modalWindows/index"
+import { upLoad } from "../../../userProfile/utils/upLoad"
 
 const wrapper = connect((state: any) => {
-  return state
+  if(state.user) {
+    return {
+      ...state,
+      data: {
+        avatarChatMain: `https://ya-praktikum.tech/api/v2/resources${state.user.data.avatar}`,
+        login: state.user.data.login
+      }
+    }
+  }
 })
 
 const chatMainWithStore = wrapper(ChatMain)
@@ -28,17 +38,47 @@ function deleteChat(event: MouseEvent) {
   const newProps = store.getState()
   ChatsControllers.deleteChat(newProps.selectedChat)
 }
+
+function addUser(event: MouseEvent) {
+  event.preventDefault()
+  const modal = document.querySelector("#modal") as HTMLElement
+  modal.appendChild(modalWindowAddUser.getContent()!)
+  modal.classList.add("open")
+}
+
+function deleteUser(event: MouseEvent) {
+  event.preventDefault()
+  const modal = document.querySelector("#modal") as HTMLElement
+  modal.appendChild(modalWindowDeleteUser.getContent()!)
+  modal.classList.add("open")
+}
+
+function addChat(event: MouseEvent) {
+  event.preventDefault()
+  const modal = document.querySelector("#modal") as HTMLElement
+  modal.appendChild(modalWindowAddChat.getContent()!)
+  modal.classList.add("open")
+}
+
+function addAvatarToChat(event: MouseEvent) {
+  event.preventDefault()
+  const modal = document.querySelector("#modal") as HTMLElement
+  modal.appendChild(modalWindowAddAvatarChat.getContent()!)
+  modal.classList.add("open")
+  upLoad()
+}
+
 const props = {
   data: {
-    avatarChatMain: avatar
+    avatarChatMain: avatar,
+    login: "...loading"
   },
-  login: "...loading",
   attributes: {
     class: "chat__section"
   },
   messagesInstance: [],
   events: {
-    click: [sendMessage, deleteChat]
+    click: [sendMessage, deleteChat, addUser, deleteUser, addChat, addAvatarToChat]
   }
 }
 

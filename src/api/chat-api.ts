@@ -88,7 +88,7 @@ export class ChatsAPI extends BaseAPI {
       avatar: true,
       body: form
     })
-    .then(xhr => xhr)
+    .then(xhr => xhr.response)
   }
 
   async getToken(id: number): Promise<any> {

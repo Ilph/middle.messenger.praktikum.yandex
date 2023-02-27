@@ -18,7 +18,6 @@ class Chat extends Block<IChat> {
   }
 
   render() {
-    console.log(this.props)
     return this.compile(tpl, {
       avatarChat: this.props.avatarChat,
       title: this.props.title,

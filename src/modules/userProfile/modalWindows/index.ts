@@ -16,6 +16,7 @@ function sendAvatar(event: MouseEvent) {
   event.preventDefault()
   const input = document.querySelector("#file") as HTMLInputElement
   const modal = document.querySelector("#modal")
+  const child = document.querySelector(".modal-overlay")
   const formData = new FormData()
   const img = input!.files![0]
   if(!img) {
@@ -25,6 +26,7 @@ function sendAvatar(event: MouseEvent) {
   UserController.changeUserAvatar(formData)
   modal!.classList.remove("open")
   returnModalWindow()
+  modal!.removeChild(child!)
 }
 
 export const modalWindowAvatar = new ModalWindowAvatar({
@@ -55,6 +57,8 @@ export const modalWindowAvatar = new ModalWindowAvatar({
 
 function sendAvatarChat(event: MouseEvent) {
   event.preventDefault()
+  const modal = document.querySelector("#modal")
+  const child = document.querySelector(".modal-overlay")
   const input = document.querySelector("#file") as HTMLInputElement
   const newProps = store.getState()
   const chatId = newProps.selectedChat
@@ -66,10 +70,9 @@ function sendAvatarChat(event: MouseEvent) {
   formData.append("avatar", img)
   formData.append("chatId", chatId)
   ChatController.addAvatarToChat(formData)
-  const modal = document.querySelectorAll("#modal")
-  modal?.forEach(item => {
-    item.classList.remove("open")
-  })
+  modal!.classList.remove("open")
+  returnModalWindow()
+  modal!.removeChild(child!)
 }
 
 export const modalWindowAddAvatarChat = new ModalWindowAvatar({
@@ -137,10 +140,8 @@ export const modalWindowAddUser = new ModalWindowAvatar({
         const nameChat = input.value
         input.value = ""
         const newProps = store.getState()
-        const modal = document.querySelectorAll("#modal")
-        modal?.forEach(item => {
-          item.classList.remove("open")
-        })
+        const modal = document.querySelector("#modal")
+        modal!.classList.remove("open")
         ChatController.addUserToChat(newProps.selectedChat, +nameChat)
       }
     }
@@ -187,10 +188,8 @@ export const modalWindowDeleteUser = new ModalWindowAvatar({
         const nameChat = input.value
         input.value = ""
         const newProps = store.getState()
-        const modal = document.querySelectorAll("#modal")
-        modal?.forEach(item => {
-          item.classList.remove("open")
-        })
+        const modal = document.querySelector("#modal")
+        modal!.classList.remove("open")
         ChatController.deleteUserToChat(newProps.selectedId, +nameChat)
       }
     }
@@ -232,10 +231,8 @@ export const modalWindowAddChat = new ModalWindowAvatar({
         const nameChat = input.value
         input.value = ""
         ChatController.addChat(nameChat)
-        const modal = document.querySelectorAll("#modal")
-        modal?.forEach(item => {
-          item.classList.remove("open")
-        })
+        const modal = document.querySelector("#modal")
+        modal!.classList.remove("open")
       }
     }
   })

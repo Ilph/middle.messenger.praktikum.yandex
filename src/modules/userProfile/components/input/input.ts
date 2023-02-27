@@ -19,7 +19,6 @@ export class InputProfile extends Block<IInputProfile> {
   }
 
   render() {
-    console.log(this.props)
     return this.compile(tpl, {
       idName: this.props.data.idName,
       names: this.props.data.name,
@@ -27,7 +26,7 @@ export class InputProfile extends Block<IInputProfile> {
       types: this.props.data.types,
       helperText: this.props.data.helperText,
       disabled: this.props.data.disabled,
-      value: this.props.data.value,
+      value: this.props.value ?? this.props.data.value,
       placeholder: this.props.data.placeholder
     })
   }

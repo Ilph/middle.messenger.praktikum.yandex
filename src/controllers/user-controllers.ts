@@ -12,7 +12,6 @@ export class UserController {
 
   async changeUserData(data: Profile) {
     try {
-
       if(!checkLogin(data.login!) && 
       !checkEmail(data.email!) &&
       !checkName(data.first_name!) &&
@@ -21,8 +20,8 @@ export class UserController {
       ) {
         throw new Error("Некорректные данные")
       }
-
-      await this.api.update(data, "/profile")
+      const profile = await this.api.update(data, "/profile")
+      store.set("user.data", profile)
       router.go("/settings")
     } catch (e: any) {
       console.error(e.message)
@@ -36,7 +35,6 @@ export class UserController {
       ) {
         throw new Error("Некорректные данные")
       }
-
       await this.api.update(data, "/password")
       router.go("/settings")
     } catch (e: any) {
@@ -48,7 +46,6 @@ export class UserController {
     try {
       const avatar = await this.api.updateAvatar(form, "/profile/avatar")
       store.set("user.data.avatar", avatar)
-      router.go("/settings")
     } catch (e: any) {
       console.error(e.message)
     }
