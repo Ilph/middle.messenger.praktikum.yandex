@@ -6,7 +6,6 @@ export function createModal() {
 
   function listener(event: MouseEvent) {
     const target = event.target as HTMLButtonElement
-    console.log(target)
     if(target.dataset.close) {
       modal.classList.remove("open")
       modal.removeChild(target)
