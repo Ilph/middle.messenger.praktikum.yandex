@@ -1,6 +1,7 @@
 //Component's template
 import { UserData } from "./userdata"
 import { InputProfile } from "../../components/input/input"
+import { connect } from "../../../../utils/Store/connect"
 
 const propsInput = {
   email: {
@@ -9,7 +10,8 @@ const propsInput = {
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "...loading",
+      placeholder: "email",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -22,7 +24,8 @@ const propsInput = {
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "login",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -35,7 +38,8 @@ const propsInput = {
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "first_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -48,7 +52,8 @@ const propsInput = {
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "second_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -61,7 +66,8 @@ const propsInput = {
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "display_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -74,7 +80,8 @@ const propsInput = {
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "phone",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -83,12 +90,17 @@ const propsInput = {
   }
 }
 
-const email = new InputProfile(propsInput.email)
-const login = new InputProfile(propsInput.login)
-const firstName = new InputProfile(propsInput.firstName)
-const secondName = new InputProfile(propsInput.secondName)
-const displayName = new InputProfile(propsInput.displayName)
-const phone = new InputProfile(propsInput.phone)
+const wrapperInput = connect((state: any) => {
+  return state
+})
+const inputProfile = wrapperInput(InputProfile)
+
+const email = new inputProfile(propsInput.email)
+const login = new inputProfile(propsInput.login)
+const firstName = new inputProfile(propsInput.firstName)
+const secondName = new inputProfile(propsInput.secondName)
+const displayName = new inputProfile(propsInput.displayName)
+const phone = new inputProfile(propsInput.phone)
 
 const props = {
   data: {
@@ -97,7 +109,14 @@ const props = {
   inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
-export const userData = new UserData(props)
+const wrapper = connect((state: any) => {
+  if(state.user) {
+     return {data: {login: state.user.data.login}}
+  }
+})
+const userDataWithStore = wrapper(UserData)
+
+export const userData = new userDataWithStore(props)
 
 const propsInputProfileData = {
   email: {
@@ -106,7 +125,8 @@ const propsInputProfileData = {
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "...loading",
+      placeholder: "email",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный email"
     },
@@ -120,7 +140,8 @@ const propsInputProfileData = {
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "login",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный логин"
     },
@@ -134,7 +155,8 @@ const propsInputProfileData = {
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "first_name",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод имени"
     },
@@ -148,7 +170,8 @@ const propsInputProfileData = {
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "second_name",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод фамилии"
     },
@@ -162,7 +185,8 @@ const propsInputProfileData = {
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "display_name",
+      value: "...loading",
       disabled: ""
     },
     attributes: {
@@ -175,7 +199,8 @@ const propsInputProfileData = {
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "...loading",
+      placeholder: "phone",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод номера"
     },

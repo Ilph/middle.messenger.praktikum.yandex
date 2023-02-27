@@ -24,7 +24,7 @@ export function checkPhone(phone: string): boolean {
 }
 
 export function checkMessage(message: string): boolean {
-  const regMessage = /\./
+  const regMessage = /^\s*$/
   return regMessage.test(message)
 }
 
@@ -84,3 +84,5 @@ export function getDataInput() {
   })
   return inputsData
 }
+
+

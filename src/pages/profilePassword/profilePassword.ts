@@ -7,6 +7,7 @@ import { IAside } from "../../modules/userProfile/blocks/aside/aside"
 import { IAvatar } from "../../modules/userProfile/components/image/avatar"
 import { IInputProfile } from "../../modules/userProfile/components/input/input"
 import { IButton } from "../../components/button/button"
+import AuthController from "../../controllers/auth-controller"
 
 export interface IProfilePassword {
   attributes: {
@@ -23,10 +24,21 @@ export interface IProfilePassword {
 export class ProfilePassword extends Block<IProfilePassword> {
   constructor(props: IProfilePassword) {
     super("section", props)
+    AuthController.fetchUser()
   }
 
   render() {
     return this.compile(tpl, {})
+  }
+
+  protected componentDidUpdate(newProps: any): boolean {
+    console.log(newProps)
+    console.log(this.props)
+
+    const childAvatar = this.children.avatar as unknown
+    (childAvatar as Block<IAvatar>).setProps({data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}})
+    
+    return false
   }
 
   _addEvents() {

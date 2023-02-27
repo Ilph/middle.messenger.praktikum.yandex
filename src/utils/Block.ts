@@ -1,6 +1,5 @@
 import {EventBus} from "./EventBus"
 import { v4 as makeUUID } from "uuid"
-import { isEqual } from "./isEqual"
 
 export class Block<T> {
 
@@ -80,9 +79,11 @@ export class Block<T> {
 
   private _componentDidMount(): void {
     this.componentDidMount()
+    
   }
 
   protected componentDidMount() {
+    
   }
 
   public dispatchComponentDidMount(): void {
@@ -103,15 +104,13 @@ export class Block<T> {
   }
 
   private _componentDidUpdate(oldProps: T, newProps: T): void {
-    if(this.componentDidUpdate(oldProps, newProps)) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+    if(!this.componentDidUpdate(oldProps, newProps)) {
+      return
     }
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
 
   protected componentDidUpdate(oldProps: T, newProps: T): boolean {
-    if(isEqual(oldProps, newProps)) {
-      return false
-    }
     return true
   }
 
@@ -119,9 +118,9 @@ export class Block<T> {
     if(!nextProps) {
       return
     }
-    // let oldTarget = {...this.props}
+    let oldTarget = {...this.props}
     Object.assign(this.props, nextProps)
-    // this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, this.props)
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, this.props)
   }
 
   get element(): HTMLElement | null{
@@ -189,7 +188,7 @@ export class Block<T> {
   
   _makePropsProxy(props: any) {
 
-    const self = this
+    // const self = this
 
     return new Proxy(props, {
       get(target: {[key: string]: () => {} | {[key: string]: string | number | boolean}},
@@ -199,9 +198,9 @@ export class Block<T> {
       },
       set(target: {[key: string]: {[key: string]: string | number | boolean}},
         prop: string, value) {
-        const oldTarget: any = {...target}
+        // const oldTarget: any = {...target}
         target[prop] = value
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
+        // self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target)
         return true
       },
       defineProperty() {

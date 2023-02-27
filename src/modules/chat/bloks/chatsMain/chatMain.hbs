@@ -1,7 +1,7 @@
 <header class="chat-header">
   <div class="chat-header__wrapper">
     <div class="chat-list__wrapper-img">
-      <img class="chat-list__img"/>
+      <img class="chat-list__img" src={{avatarChatMain}}>
     </div>
     <p class="chat-header__name">{{login}}</p>
   </div>
@@ -11,10 +11,11 @@
       <img src={{{dots}}} class="chat-header__dots"/>
     </button>
     <div class="chat-header__dropdown-menu">
-      <button data-modal="chatAddUser" data-chat="addUser"> Добавить пользователя</button>
-      <button data-modal="chatDeleteUser" data-chat="deleteUser"> Удалить пользователя</button>
-      <button data-modal="chatAdd" data-chat="addChat"> Добавить чат</button>
-      <button data-modal="chatDelete" data-chat="deleteChat"> Удалить чат</button>
+      <button data-modal="chatAddUser" data-chat="addUser">Добавить пользователя</button>
+      <button data-modal="chatDeleteUser" data-chat="deleteUser">Удалить пользователя</button>
+      <button data-modal="chatAdd" data-chat="addChat">Добавить чат</button>
+      <button data-modal="chatDelete" data-chat="deleteChat">Удалить чат</button>
+      <button data-modal="addAvatarChat" data-chat="addAvatarChat">Добавить аватар чату</button>
     </div>
   </div>
   

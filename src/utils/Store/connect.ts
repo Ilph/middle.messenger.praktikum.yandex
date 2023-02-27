@@ -4,13 +4,13 @@ export function connect(mapStateToProps: any) {
   return function wrap(Component: any){
     return class extends Component {
       constructor(props: any) {
-        let previousState = mapStateToProps(store.getState())
-        super({ ...props, ...previousState })
+        let state = mapStateToProps(store.getState())
+        super({ ...props, ...state })
 
         store.on(StoreEvents.Updated, () => {
-          const stateProps = mapStateToProps(store.getState())
-          // previousState = stateProps
-          this.setProps({ ...stateProps })
+          const newState = mapStateToProps(store.getState())
+          this.setProps({ ...newState })
+          state = newState
         })
       }
     }

@@ -27,13 +27,13 @@ export class Profile extends Block<IProfile> {
     AuthController.fetchUser()
   }
 
-  protected componentDidUpdate(newProps: any): boolean {
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+
     const childUserData = this.children.userData as unknown
-    (childUserData as Block<IUserData>).setProps({data: {login: newProps.data.login}})
 
     const childInputs = (childUserData as Profile).children.inputs as unknown
     (childInputs as InputProfile[]).forEach((element, i ) => {
-      element.setProps({placeholder: newProps.data[userFields[i]]})
+      element.setProps({value: newProps.data[userFields[i]]})
     })
 
     return false

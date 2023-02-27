@@ -1,6 +1,7 @@
 import API, { UserAPI, Profile, ProfilePassword } from "../api/user-api"
 import router from "../utils/Router/Router"
 import { checkLogin, checkPassword,  checkEmail, checkName, checkPhone} from "../utils/checkUtilsInput/checkInputs"
+import store from "../utils/Store/store"
 
 export class UserController {
   private readonly api: UserAPI
@@ -11,7 +12,6 @@ export class UserController {
 
   async changeUserData(data: Profile) {
     try {
-
       if(!checkLogin(data.login!) && 
       !checkEmail(data.email!) &&
       !checkName(data.first_name!) &&
@@ -20,8 +20,8 @@ export class UserController {
       ) {
         throw new Error("Некорректные данные")
       }
-
-      await this.api.update(data, "/profile")
+      const profile = await this.api.update(data, "/profile")
+      store.set("user.data", profile)
       router.go("/settings")
     } catch (e: any) {
       console.error(e.message)
@@ -35,7 +35,6 @@ export class UserController {
       ) {
         throw new Error("Некорректные данные")
       }
-
       await this.api.update(data, "/password")
       router.go("/settings")
     } catch (e: any) {
@@ -45,8 +44,8 @@ export class UserController {
 
   async changeUserAvatar(form: FormData) {
     try {
-      await this.api.updateAvatar(form, "/profile/avatar")
-      router.go("/settings")
+      const avatar = await this.api.updateAvatar(form, "/profile/avatar")
+      store.set("user.data.avatar", avatar)
     } catch (e: any) {
       console.error(e.message)
     }

@@ -12,10 +12,11 @@ interface IOptions {
   method: METHODS,
   body?: any,
   timeout?: number,
-  credentials?: string
+  credentials?: string,
+  avatar?: boolean
 }
-
 type OptionsWithoutMethod = Omit<IOptions, 'method'>
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
 
 export class HTTP {
   static API_URL = "https://ya-praktikum.tech/api/v2"
@@ -24,19 +25,19 @@ export class HTTP {
     this.endpoint = `${HTTP.API_URL}${endpoint}`
   }
 
-  public get = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public get: HTTPMethod = (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
-  public post = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public post: HTTPMethod = (halfurl, options= {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
-  public put = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public put: HTTPMethod = (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
-  public delete = (halfurl: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> => {
+  public delete: HTTPMethod= (halfurl, options = {}) => {
     const url = this.endpoint +halfurl
     return this._request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
@@ -52,6 +53,7 @@ export class HTTP {
 
       const xhr = new XMLHttpRequest()
       const isGet = method === METHODS.GET
+      const avatar = options.avatar ?? false
 
       xhr.open(
         method, 
@@ -80,6 +82,8 @@ export class HTTP {
 
       if (isGet || !body) {
         xhr.send()
+      } else if(avatar) {
+        xhr.send(body)
       } else {
         xhr.send(JSON.stringify(body))
       }

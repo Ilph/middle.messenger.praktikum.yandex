@@ -2,7 +2,11 @@ import { ChatAside } from "./chatsAside"
 import router from "../../../../utils/Router/Router"
 import { connect } from "../../../../utils/Store/connect"
 
-const wrapper = connect((state: any) => state)
+
+
+const wrapper = connect((state: any) => {
+  return ({chats: [...(state.chats || [])]})
+})
 const chatAsideWithStore = wrapper(ChatAside)
 
 

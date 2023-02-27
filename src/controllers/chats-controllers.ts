@@ -34,8 +34,16 @@ class ChatsController {
 
   async deleteChat(id: number) {
     await this.api.deleteChat(id)
-
     this.fetchChats()
+  }
+
+  async addAvatarToChat(form: FormData) {
+    try {
+      await this.api.addAvatar(form)
+      this.fetchChats()
+    } catch(e) {
+      console.log(e.message)
+    }
   }
 
   getToken(id: number) {

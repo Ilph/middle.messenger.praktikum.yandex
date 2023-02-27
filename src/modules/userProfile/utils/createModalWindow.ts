@@ -1,43 +1,15 @@
-import { modalWindowAvatar, modalWindowAddUser, modalWindowDeleteUser, modalWindowAddChat } from "../modalWindows/index"
-import { upLoad } from "./upLoad"
-
-
-export function createModal(selector: string) {
-  const tags = document.querySelectorAll(selector) as NodeListOf<Element>
+export function createModal() {
   const modal = document.createElement("div")
   modal.classList.add("modal")
   modal.setAttribute("id", "modal")
   document.body.appendChild(modal)
- 
-  function handler(event: MouseEvent) {
-    const target: HTMLElement = <HTMLElement>event.target
-    switch(target!.dataset.modal) {
-      case "profileData":
-        modal.appendChild(modalWindowAvatar.getContent()!)
-        upLoad()
-        break
-      case "chatAddUser":
-        modal.appendChild(modalWindowAddUser.getContent()!)
-        break
-      case "chatDeleteUser":
-        modal.appendChild(modalWindowDeleteUser.getContent()!)
-        break
-      case "chatAdd":
-        modal.appendChild(modalWindowAddChat.getContent()!)
-        break
-    }
-    modal.classList.add("open")
-  }
 
   function listener(event: MouseEvent) {
     const target = event.target as HTMLButtonElement
     if(target.dataset.close) {
       modal.classList.remove("open")
+      modal.removeChild(target)
     }
   }
-
-  tags.forEach(tag => {
-    tag.addEventListener("click", handler)
-  })
   modal.addEventListener("click", listener)
 }
