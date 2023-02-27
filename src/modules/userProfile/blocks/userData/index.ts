@@ -1,6 +1,7 @@
 //Component's template
 import { UserData } from "./userdata"
 import { InputProfile } from "../../components/input/input"
+import { connect } from "../../../../utils/Store/connect"
 
 const propsInput = {
   email: {
@@ -89,12 +90,17 @@ const propsInput = {
   }
 }
 
-const email = new InputProfile(propsInput.email)
-const login = new InputProfile(propsInput.login)
-const firstName = new InputProfile(propsInput.firstName)
-const secondName = new InputProfile(propsInput.secondName)
-const displayName = new InputProfile(propsInput.displayName)
-const phone = new InputProfile(propsInput.phone)
+const wrapperInput = connect((state: any) => {
+  return state
+})
+const inputProfile = wrapperInput(InputProfile)
+
+const email = new inputProfile(propsInput.email)
+const login = new inputProfile(propsInput.login)
+const firstName = new inputProfile(propsInput.firstName)
+const secondName = new inputProfile(propsInput.secondName)
+const displayName = new inputProfile(propsInput.displayName)
+const phone = new inputProfile(propsInput.phone)
 
 const props = {
   data: {
@@ -103,7 +109,14 @@ const props = {
   inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
-export const userData = new UserData(props)
+const wrapper = connect((state: any) => {
+  if(state.user) {
+     return {data: {login: state.user.data.login}}
+  }
+})
+const userDataWithStore = wrapper(UserData)
+
+export const userData = new userDataWithStore(props)
 
 const propsInputProfileData = {
   email: {

@@ -9,6 +9,9 @@ export interface IAvatar {
   },
   data: {
     avatar: string
+  },
+  events: {
+    click: MouseEvent
   }
 }
 
@@ -24,6 +27,10 @@ export class Avatar extends Block<IAvatar> {
   }
 
   protected componentDidMount() {
-    createModal(".avatar__input")
+    const modal = document.querySelector("#modal")
+    if(modal) {
+      return
+    }
+    createModal()
   }
 }

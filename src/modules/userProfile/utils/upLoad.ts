@@ -19,3 +19,11 @@ export function upLoad() {
 
   input.addEventListener("change", changeHandler)
 }
+
+export function returnModalWindow() {
+  const labelText = document.querySelector(".modal-input__label") as HTMLLabelElement
+  const titleText = document.querySelector(".modal-window__title") as HTMLElement
+  labelText.innerHTML = `Выбрать файл на <span>компьтере</span>
+  <input type="file" id="file" name="file" class="modal-input__input" />`
+  titleText.textContent = "Загрузить файл"
+}

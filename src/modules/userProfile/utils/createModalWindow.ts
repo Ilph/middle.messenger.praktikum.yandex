@@ -1,37 +1,36 @@
-import { modalWindowAvatar, modalWindowAddUser, modalWindowDeleteUser, modalWindowAddChat, modalWindowAddAvatarChat } from "../modalWindows/index"
-import { upLoad } from "./upLoad"
+// import { modalWindowAvatar, modalWindowAddUser, modalWindowDeleteUser, modalWindowAddChat, modalWindowAddAvatarChat } from "../modalWindows/index"
+// import { upLoad } from "./upLoad"
 
-
-export function createModal(selector: string) {
+export function createModal() {
   const modal = document.createElement("div")
   modal.classList.add("modal")
   modal.setAttribute("id", "modal")
   document.body.appendChild(modal)
-  const tags = document.querySelectorAll(selector) as NodeListOf<Element>
+  // const tags = document.querySelectorAll(selector) as NodeListOf<Element>
  
-  function handler(event: MouseEvent) {
-    const target: HTMLElement = <HTMLElement>event.target
-    switch(target!.dataset.modal) {
-      case "profileData":
-        modal.appendChild(modalWindowAvatar.getContent()!)
-        upLoad()
-        break
-      case "chatAddUser":
-        modal.appendChild(modalWindowAddUser.getContent()!)
-        break
-      case "chatDeleteUser":
-        modal.appendChild(modalWindowDeleteUser.getContent()!)
-        break
-      case "chatAdd":
-        modal.appendChild(modalWindowAddChat.getContent()!)
-        break
-      case "addAvatarChat":
-        modal.appendChild(modalWindowAddAvatarChat.getContent()!)
-        upLoad()
-        break
-    }
-    modal.classList.add("open")
-  }
+  // function handler(event: MouseEvent) {
+  //   const target: HTMLElement = <HTMLElement>event.target
+  //   switch(target!.dataset.modal) {
+  //     case "profileData":
+  //       modal.appendChild(modalWindowAvatar.getContent()!)
+  //       upLoad()
+  //       break
+  //     case "chatAddUser":
+  //       modal.appendChild(modalWindowAddUser.getContent()!)
+  //       break
+  //     case "chatDeleteUser":
+  //       modal.appendChild(modalWindowDeleteUser.getContent()!)
+  //       break
+  //     case "chatAdd":
+  //       modal.appendChild(modalWindowAddChat.getContent()!)
+  //       break
+  //     case "addAvatarChat":
+  //       modal.appendChild(modalWindowAddAvatarChat.getContent()!)
+  //       upLoad()
+  //       break
+  //   }
+  //   modal.classList.add("open")
+  // }
 
   function listener(event: MouseEvent) {
     const target = event.target as HTMLButtonElement
@@ -40,8 +39,8 @@ export function createModal(selector: string) {
     }
   }
 
-  tags.forEach(tag => {
-    tag.addEventListener("click", handler)
-  })
+  // tags.forEach(tag => {
+  //   tag.addEventListener("click", handler)
+  // })
   modal.addEventListener("click", listener)
 }

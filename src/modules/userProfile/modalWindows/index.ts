@@ -10,11 +10,12 @@ import UserController from "../../../controllers/user-controllers"
 import store from "../../../utils/Store/store"
 //utils
 import { checkInputFocusIn, checkInputFocusOut } from "../../../utils/checkUtilsInput/checkInputs"
+import { returnModalWindow } from "../utils/upLoad"
 
 function sendAvatar(event: MouseEvent) {
   event.preventDefault()
   const input = document.querySelector("#file") as HTMLInputElement
-  const modal = document.querySelectorAll("#modal")
+  const modal = document.querySelector("#modal")
   const formData = new FormData()
   const img = input!.files![0]
   if(!img) {
@@ -22,8 +23,8 @@ function sendAvatar(event: MouseEvent) {
   }
   formData.append("avatar", img)
   UserController.changeUserAvatar(formData)
-  modal?.forEach(item => {
-    item.classList.remove("open")})
+  modal!.classList.remove("open")
+  returnModalWindow()
 }
 
 export const modalWindowAvatar = new ModalWindowAvatar({

@@ -1,6 +1,7 @@
 import API, { UserAPI, Profile, ProfilePassword } from "../api/user-api"
 import router from "../utils/Router/Router"
 import { checkLogin, checkPassword,  checkEmail, checkName, checkPhone} from "../utils/checkUtilsInput/checkInputs"
+import store from "../utils/Store/store"
 
 export class UserController {
   private readonly api: UserAPI
@@ -45,7 +46,8 @@ export class UserController {
 
   async changeUserAvatar(form: FormData) {
     try {
-      await this.api.updateAvatar(form, "/profile/avatar")
+      const avatar = await this.api.updateAvatar(form, "/profile/avatar")
+      store.set("user.data.avatar", avatar)
       router.go("/settings")
     } catch (e: any) {
       console.error(e.message)
