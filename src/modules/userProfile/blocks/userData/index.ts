@@ -1,14 +1,17 @@
 //Component's template
 import { UserData } from "./userdata"
 import { InputProfile } from "../../components/input/input"
+import { connect } from "../../../../utils/Store/connect"
 
 const propsInput = {
   email: {
     data: {
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: "email",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -17,10 +20,12 @@ const propsInput = {
   },
   login: {
     data: {
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: "login",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -29,10 +34,12 @@ const propsInput = {
   },
   firstName: {
     data: {
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "first_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -41,10 +48,12 @@ const propsInput = {
   },
   secondName: {
     data: {
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: "second_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -53,10 +62,12 @@ const propsInput = {
   },
   displayName: {
     data: {
+      idName: "display_name",
       name: "Имя в чате",
-      nameInput: "emdisplay_name",
+      nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "display_name",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -65,10 +76,12 @@ const propsInput = {
   },
   phone: {
     data: {
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: "phone",
+      value: "...loading",
       disabled: "disabled"
     },
     attributes: {
@@ -77,36 +90,43 @@ const propsInput = {
   }
 }
 
-const email = new InputProfile(propsInput.email)
-const login = new InputProfile(propsInput.login)
-const firstName = new InputProfile(propsInput.firstName)
-const secondName = new InputProfile(propsInput.secondName)
-const displayName = new InputProfile(propsInput.displayName)
-const phone = new InputProfile(propsInput.phone)
+const wrapperInput = connect((state: any) => {
+  return state
+})
+const inputProfile = wrapperInput(InputProfile)
+
+const email = new inputProfile(propsInput.email)
+const login = new inputProfile(propsInput.login)
+const firstName = new inputProfile(propsInput.firstName)
+const secondName = new inputProfile(propsInput.secondName)
+const displayName = new inputProfile(propsInput.displayName)
+const phone = new inputProfile(propsInput.phone)
 
 const props = {
   data: {
-    title: "Иван"
+    login: "...loading",
   },
-  email: email,
-  login: login,
-  firstName: firstName,
-  secondName: secondName,
-  displayName: displayName,
-  phone: phone
+  inputs: [email, login, firstName, secondName, displayName, phone]
 }
 
-export const userData = new UserData(props)
+const wrapper = connect((state: any) => {
+  if(state.user) {
+     return {data: {login: state.user.data.login}}
+  }
+})
+const userDataWithStore = wrapper(UserData)
 
+export const userData = new userDataWithStore(props)
 
 const propsInputProfileData = {
   email: {
     data: {
-      id: "email",
+      idName: "email",
       name: "Почта",
       nameInput: "email",
       types: "email",
-      placeholder: "pochta@yandex.ru",
+      placeholder: "email",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный email"
     },
@@ -116,11 +136,12 @@ const propsInputProfileData = {
   },
   login: {
     data: {
-      id: "login",
+      idName: "login",
       name: "Логин",
       nameInput: "login",
       types: "text",
-      placeholder: "ivanovivan",
+      placeholder: "login",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный логин"
     },
@@ -130,11 +151,12 @@ const propsInputProfileData = {
   },
   firstName: {
     data: {
-      id: "firstName",
+      idName: "first_name",
       name: "Имя",
       nameInput: "first_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "first_name",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод имени"
     },
@@ -144,11 +166,12 @@ const propsInputProfileData = {
   },
   secondName: {
     data: {
-      id: "secondName",
+      idName: "second_name",
       name: "Фамилия",
       nameInput: "second_name",
       types: "text",
-      placeholder: "Иванов",
+      placeholder: "second_name",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод фамилии"
     },
@@ -158,11 +181,12 @@ const propsInputProfileData = {
   },
   displayName: {
     data: {
-      id: "displayName",
+      idName: "display_name",
       name: "Имя в чате",
       nameInput: "display_name",
       types: "text",
-      placeholder: "Иван",
+      placeholder: "display_name",
+      value: "...loading",
       disabled: ""
     },
     attributes: {
@@ -171,11 +195,12 @@ const propsInputProfileData = {
   },
   phone: {
     data: {
-      id: "phone",
+      idName: "phone",
       name: "Телефон",
       nameInput: "phone",
       types: "text",
-      placeholder: "+7(909)9673030",
+      placeholder: "phone",
+      value: "...loading",
       disabled: "",
       helperText: "Неверный ввод номера"
     },
@@ -196,12 +221,7 @@ const propsProfileData = {
   data: {
     title: ""
   },
-  email: emailProfileData,
-  login: loginProfileData,
-  firstName: firstNameProfileData,
-  secondName: secondNameProfileData,
-  displayName: displayNameProfileData,
-  phone: phoneProfileData
+  inputs: [emailProfileData, loginProfileData, firstNameProfileData, secondNameProfileData, displayNameProfileData, phoneProfileData]
 }
 
 export const userDataProfileData = new UserData(propsProfileData)

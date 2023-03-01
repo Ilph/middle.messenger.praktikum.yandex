@@ -9,13 +9,15 @@ import { avatarProfilePassword } from  "../../modules/userProfile/components/ima
 import {
   checkInputFocusIn,
   checkInputFocusOut,
-  checkButtonSubmit
+  getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
+import UserController from "../../controllers/user-controllers"
+import { connect } from "../../utils/Store/connect"
 
 const propsInputProfilepassword = {
   oldPassword: {
     data: {
-      id: "oldPassword",
+      idName: "oldPassword",
       name: "Старый пароль",
       nameInput: "old_password",
       types: "password",
@@ -29,10 +31,11 @@ const propsInputProfilepassword = {
   },
   newPassword: {
     data: {
-      id: "newPassword",
+      idName: "newPassword",
       name: "Новый пароль",
       nameInput: "new_password",
       types: "password",
+      value: "",
       placeholder: "password",
       disabled: "",
       helperText: "Неверный пароль"
@@ -43,7 +46,7 @@ const propsInputProfilepassword = {
   },
   repeatNewPassword: {
     data: {
-      id: "repeatPassword",
+      idName: "repeatPassword",
       name: "Повторите новый пароль",
       nameInput: "repeate_password",
       types: "password",
@@ -67,26 +70,37 @@ const buttonProps = {
   },
   attributes: {
     class: "button"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      const data = getDataInput()
+      UserController.changeUserPassword(data)
+    }
   }
 }
 
 const button = new Button(buttonProps)
 
-const props = {
-  attributes: {
-    class: "section"
-  },
-  events: {
-    focus: checkInputFocusIn,
-    blur: checkInputFocusOut,
-    click: checkButtonSubmit
-  },
-  aside: asideProfilePassword,
-  avatar: avatarProfilePassword,
-  oldPassword: oldPassword,
-  newPassword: newPassword,
-  repeatNewPassword: repeatNewPassword,
-  save: button
-}
+const wrapper = connect((state: any) => state.user)
+const profileData = wrapper(ProfilePassword)
 
-export const profilePassword = new ProfilePassword(props)
+export function profilePasswordInstance() {
+  const props = {
+    attributes: {
+      class: "section"
+    },
+    events: {
+      focus: checkInputFocusIn,
+      blur: checkInputFocusOut
+    },
+    aside: asideProfilePassword,
+    avatar: avatarProfilePassword,
+    oldPassword: oldPassword,
+    newPassword: newPassword,
+    repeatNewPassword: repeatNewPassword,
+    save: button
+  }
+  
+  return new profileData(props)
+}

@@ -1,11 +1,12 @@
-.label-container a {
+.label-container button {
   margin: 0.3em 0;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.8em;
+  color: $button_text_secondcolor;
 }
 
-.label-container:last-child a {
+.label-container:last-child button {
   color: $profile_userchange_link_color;
 }

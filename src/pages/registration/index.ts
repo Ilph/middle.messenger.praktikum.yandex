@@ -6,94 +6,98 @@ import { Button } from "../../components/button/button"
 import {
   checkInputFocusIn,
   checkInputFocusOut,
-  checkButtonSubmit
+  getDataInput
 } from "../../utils/checkUtilsInput/checkInputs"
+import router from "../../utils/Router/Router"
+import AuthController from "../../controllers/auth-controller"
 
-const propsInput = {
-  email: {
-    data: {
-      id: "email",
-      name: "email",
-      type: "email", 
-      label: "Email",
-      helperText: "Неверный email"
-    },
-    attributes: { 
-      class: "input-container input-container_margin",
+export function registrationInstance() {
+
+  const propsInput = {
+    email: {
+      data: {
+        id: "email",
+        name: "email",
+        type: "email", 
+        label: "Email",
+        helperText: "Неверный email"
       },
-  },
-  login:{
-    data: {
-      id: "login",
-      name: "login",
-      type: "text", 
-      label: "Login",
-      helperText: "Неверный логин"
+      attributes: { 
+        class: "input-container input-container_margin",
+        },
     },
-    attributes: { 
-      class: "input-container input-container_margin",
+    login:{
+      data: {
+        id: "login",
+        name: "login",
+        type: "text", 
+        label: "Login",
+        helperText: "Неверный логин"
+      },
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  firstName: {
-    data: {
-      id: "firstName",
-      name: "first_name",
-      type: "text", 
-      label: "Имя",
-      helperText: "Неверный формат имени"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    firstName: {
+      data: {
+        id: "first_name",
+        name: "first_name",
+        type: "text", 
+        label: "Имя",
+        helperText: "Неверный формат имени"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  secondName: {
-    data: {
-      id: "secondName",
-      name: "secondName",
-      type: "text", 
-      label: "Фамилия",
-      helperText: "Неверный формаь Фамилии"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    secondName: {
+      data: {
+        id: "second_name",
+        name: "secondName",
+        type: "text", 
+        label: "Фамилия",
+        helperText: "Неверный формаь Фамилии"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  phone: {
-    data: {
-      id: "phone",
-      name: "phone",
-      type: "text", 
-      label: "Телефон",
-      helperText: "Неверный формат телефона"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    phone: {
+      data: {
+        id: "phone",
+        name: "phone",
+        type: "text", 
+        label: "Телефон",
+        helperText: "Неверный формат телефона"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  password: {
-    data: {
-      id: "password",
-      name: "password",
-      type: "password", 
-      label: "Password",
-      helperText: "Неверный пароль"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    password: {
+      data: {
+        id: "password",
+        name: "password",
+        type: "password", 
+        label: "Password",
+        helperText: "Неверный пароль"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
-  passwordRepeat: {
-    data: {
-      id: "repeatPassword",
-      name: "password_repeat",
-      type: "password", 
-      label: "Passwors (repeat)",
-      helperText: "Неверный пароль"
-    }, 
-    attributes: { 
-      class: "input-container input-container_margin",
+    passwordRepeat: {
+      data: {
+        id: "repeatPassword",
+        name: "password_repeat",
+        type: "password", 
+        label: "Passwors (repeat)",
+        helperText: "Неверный пароль"
+      }, 
+      attributes: { 
+        class: "input-container input-container_margin",
+      },
     },
-  },
 }
 
 const propsButton = {
@@ -103,6 +107,29 @@ const propsButton = {
   attributes: {
     class: "button form-reg__button",
     type: "submit"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      const data = getDataInput()
+      AuthController.signup(data)
+    }
+  }
+}
+
+const propsButton2 = {
+  data: {
+    value: "sign in"
+  },
+  attributes: {
+    class: "button form-reg__button form-reg__button_secondcolor",
+    type: "submit"
+  },
+  events: {
+    click: (event: MouseEvent) => {
+      event.preventDefault()
+      router.go("/")
+    }
   }
 }
 
@@ -114,6 +141,7 @@ const phone = new Input(propsInput.phone)
 const password = new Input(propsInput.password)
 const passwordRepeat = new Input(propsInput.passwordRepeat)
 const button = new Button(propsButton)
+const button2 = new Button(propsButton2)
 
 const props = {
   data: {
@@ -125,8 +153,7 @@ const props = {
   },
   events: {
     focus: checkInputFocusIn,
-    blur: checkInputFocusOut,
-    click: checkButtonSubmit
+    blur: checkInputFocusOut
   },
   email: email,
   login: login,
@@ -135,7 +162,7 @@ const props = {
   phone: phone,
   password: password,
   passwordRepeat: passwordRepeat,
-  button: button
+  button: [button, button2]
+  }
+  return new Registration(props)
 }
-
-export const registration = new Registration(props)

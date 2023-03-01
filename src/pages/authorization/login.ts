@@ -6,23 +6,19 @@ import { Block } from "../../utils/Block"
 import { IButton } from "../../components/button/button"
 import { IInput } from "../../components/input/input"
 
-
 export interface ILogin {
   data: {
-    entry: string;
-    registration: string
+    entry: string
   },
   attributes: {
     class: string
   },
   events: {
     focus: (event: FocusEvent) => void,
-    blur: (event: FocusEvent) => void,
-    click: (event: MouseEvent) => void
+    blur: (event: FocusEvent) => void
   },
-  inputLogin: Block<IInput>,
-  inputPassword: Block<IInput>,
-  button: Block<IButton>
+  inputs: Block<IInput>[],
+  button: Block<IButton>[]
 }
 
 export class Login extends Block<ILogin> {
@@ -32,8 +28,7 @@ export class Login extends Block<ILogin> {
 
   render() {
     return this.compile(tpl, {
-      entry: this.props.data.entry,
-      registration: this.props.data.registration
+      entry: this.props.data.entry
     })
   }
 
@@ -52,7 +47,15 @@ export class Login extends Block<ILogin> {
         if(eventName !== "click" && el.tagName == "INPUT") {
           el.addEventListener(eventName, events[eventName])
         } else if(eventName == "click" && el.tagName == "BUTTON") {
-          el.addEventListener(eventName, events[eventName])
+          const element: HTMLElement = <HTMLElement>el
+            switch(element.dataset.handler) {
+              case "signin": 
+                el.addEventListener(eventName, events[eventName][0])
+                break
+              case "changepage":
+                el.addEventListener(eventName, events[eventName][1])
+                break
+            }
         }
       })
     })

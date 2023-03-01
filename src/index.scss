@@ -3,19 +3,3 @@
   display: flex;
   align-items: center;
 }
-
-.test-link {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background-color: $input_border_color;
-  width: 150px;
-  height: 150px;
-}
-
-.test-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

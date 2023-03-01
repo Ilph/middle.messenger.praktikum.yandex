@@ -2,6 +2,7 @@
 import tpl from "./chat.hbs"
 //Component's template
 import { Block } from "../../utils/Block"
+import ChatsController from "../../controllers/chats-controllers"
 
 export interface IChatType {
   [key: string]: {
@@ -11,10 +12,11 @@ export interface IChatType {
   } | any
 }
 
-export class Chat extends Block<IChatType> {
+export class ChatPage extends Block<IChatType> {
 
   constructor(props: IChatType) {
     super("section", props)
+    ChatsController.fetchChats()
   }
 
   render() {

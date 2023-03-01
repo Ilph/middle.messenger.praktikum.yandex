@@ -1,9 +1,17 @@
 import tpl from "./avatar.hbs"
 import { Block } from "../../../../utils/Block"
+import { createModal } from "../../utils/createModalWindow"
+
 
 export interface IAvatar {
-  attributes: {
+  attributes?: {
     class: string
+  },
+  data: {
+    avatar: string
+  },
+  events: {
+    click: MouseEvent
   }
 }
 
@@ -13,17 +21,16 @@ export class Avatar extends Block<IAvatar> {
   }
 
   render() {
-    return this.compile(tpl, {})
+    return this.compile(tpl, {
+      avatar: this.props.data.avatar
+    })
   }
 
-  // _addEvents() {
-  //   const {events = {}}: any = this.props
-  //   const input = this._element!.querySelector("input")
-
-  //   if(!this.props.events) {
-  //       return
-  //     }
-    
-  //   input?.addEventListener(events.name, events[events.name])
-  // }
+  protected componentDidMount() {
+    const modal = document.querySelector("#modal")
+    if(modal) {
+      return
+    }
+    createModal()
+  }
 }

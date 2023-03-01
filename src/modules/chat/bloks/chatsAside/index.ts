@@ -1,5 +1,14 @@
 import { ChatAside } from "./chatsAside"
-import { chat } from "../../component/chat/index"
+import router from "../../../../utils/Router/Router"
+import { connect } from "../../../../utils/Store/connect"
+
+
+
+const wrapper = connect((state: any) => {
+  return ({chats: [...(state.chats || [])]})
+})
+const chatAsideWithStore = wrapper(ChatAside)
+
 
 const props = {
   attributes: {
@@ -8,14 +17,13 @@ const props = {
   data: {
     profile: "Профиль",
   },
-  Chat: chat,
+  chats: [],
   events: {
     click: (event: MouseEvent) => {
-      if((event.target as HTMLElement).getAttribute("type")) {
-        console.log(event.target)
-      }
+      event.preventDefault()
+      router.go("/settings")
     }
   }
 }
 
-export const chatAside = new ChatAside(props)
+export const chatAside = new chatAsideWithStore(props)
