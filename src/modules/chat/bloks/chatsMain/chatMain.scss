@@ -1,5 +1,5 @@
 .chat__section {
-  width: 87%;
+  width: 86%;
   height: 100%;
   position: fixed;
   margin-left: 20rem;
@@ -10,10 +10,40 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 2350px) {
   .chat__section { 
-    width: 78%;
-  } 
+    width: 84%;
+  }
+ }
+
+ @media screen and (max-width: 2000px) {
+  .chat__section { 
+    width: 80%;
+  }
+ }
+
+ @media screen and (max-width: 1600px) {
+  .chat__section { 
+    width: 75%;
+  }
+ }
+
+ @media screen and (max-width: 1300px) {
+  .chat__section { 
+    width: 70%;
+  }
+ }
+
+ @media screen and (max-width: 1100px) {
+  .chat__section { 
+    width: 65%;
+  }
+ }
+
+ @media screen and (max-width: 900px) {
+  .chat__section { 
+    width: 60%;
+  }
  }
 
 .chat-header {
@@ -93,7 +123,7 @@
 .chat-footer {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   border-top: 0.1rem solid $chat_border_color;
   padding-top: 10px;
@@ -126,7 +156,7 @@
 }
 
 .chat-footer__wrapper-input {
-  width: 86%;
+  width: 100%;
 }
 
 .chat-footer__input {
