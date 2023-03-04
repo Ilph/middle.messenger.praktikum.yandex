@@ -1,0 +1,47 @@
+.avatar__label {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: #efefef;
+}
+
+.avatar__label img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar__text {
+  opacity: 0;
+  position: absolute;
+  top: 40%;
+  left: 8%;
+  font-family: Inter, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+  color: $avatar_text_hover_color;
+  display: block;
+  text-align: center;
+}
+
+.avatar__label:hover {
+  background-color: $avatar_bg_hover_color;
+}
+
+.avatar__label:hover .avatar__text {
+  opacity: 1;
+}
+
+.avatar__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

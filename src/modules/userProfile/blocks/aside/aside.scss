@@ -1,0 +1,15 @@
+.aside {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: $profile_aside_bg_color;
+}
+
+.aside__button {
+  background-color: transparent;
+}

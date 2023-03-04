@@ -1,0 +1,20 @@
+.chat-body_message-wrap {
+  display: flex;
+}
+
+.chat-body__message {
+  width: 40%;
+  background: $chat_body_bg_color;
+}
+
+.chat-body__message span {
+  display: inline-block;
+  width: 10%;
+  text-align: right;
+  color: $input_label_text_color;
+}
+
+.rigth {
+  align-self: flex-end;
+  background: $chat_bodyrigth_bg_color;
+}

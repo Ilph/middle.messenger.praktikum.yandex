@@ -1,0 +1,49 @@
+.input-container {
+  width: 100%;
+}
+
+.input-container_margin {
+  margin-bottom: 2em;
+}
+
+.input {
+  border-bottom: 1px solid $input_border_color;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.input_size {
+  width: 100%;
+}
+
+.label {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8em;
+  color: $input_label_text_color;
+  display: block;
+  transform: translateY(-1.5rem);
+  line-height: 1rem;
+  transition: 0.5s;
+}
+
+.input:focus + label,
+.input:valid + label {
+  font-size: 9px;
+  transform: translateY(-2.5rem);
+}
+
+.helpertext {
+  display: none;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  color: $modalhelper_text_color;
+}
+
+.helpertexton {
+  display: block;
+}
