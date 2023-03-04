@@ -1,15 +1,16 @@
-# 🚀 Welcome to your new awesome project!
+## Макет
+https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1&t=SvpMIJJMlWhOuZZi-0
 
-This project has been created using **webpack-cli**, you can now run
+## Описание
+Проект представляет из себя мессенджер
 
-```
-npm run build
-```
+## Команды
+npm run build:dev - запуск проекта в режиме development
+npm run build:prod - сборка проекта в режиме prodaction
+npm run serve - запуск проекта в режиме devServer
+npm run check:elt - запуск ESLint
+npm run check:slt - запуск Stylelint
+npm run check:tsc - запуск компилятора Typescript для проверки типизации
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
+## Ссылка на Netlify
+https://graceful-kangaroo-ccd14f.netlify.app
