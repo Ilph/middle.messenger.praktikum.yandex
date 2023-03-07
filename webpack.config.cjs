@@ -5,8 +5,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
-const isDevelopment = !isProduction
-
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
@@ -21,8 +19,7 @@ const config = {
     devServer: {
         open: true,
         host: "localhost",
-        port: 3000,
-        hot: isDevelopment
+        port: 3000
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -26,19 +26,19 @@ export class HTTP {
   }
 
   public get: HTTPMethod = (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
   public post: HTTPMethod = (halfurl, options= {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
   public put: HTTPMethod = (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
   public delete: HTTPMethod= (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
 

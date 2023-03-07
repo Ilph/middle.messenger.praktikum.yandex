@@ -4,10 +4,13 @@
     "module": "ES6",
     "moduleResolution": "node",
     "rootDirs": ["./src"],
-    "typeRoots": ["./types"],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types/"
+    ],
     "allowJs": true,
     "outDir": ".dist/",
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
@@ -15,5 +18,5 @@
     "noUnusedParameters": false,
     "sourceMap": true,
     "strictNullChecks": true
-  }
+  },
 }
