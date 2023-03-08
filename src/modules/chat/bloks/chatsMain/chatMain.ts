@@ -62,9 +62,6 @@ export class ChatMain extends Block<ChatMainType> {
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any): boolean {
-    if(isEqual(oldProps, newProps)) {
-      return false
-    }
 
     const childMessage = this.children as unknown
     if(newProps.selectedChat) {
