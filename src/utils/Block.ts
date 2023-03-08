@@ -79,11 +79,10 @@ export class Block<T> {
 
   private _componentDidMount(): void {
     this.componentDidMount()
-    
   }
 
   protected componentDidMount() {
-    
+    return
   }
 
   public dispatchComponentDidMount(): void {
@@ -118,7 +117,7 @@ export class Block<T> {
     if(!nextProps) {
       return
     }
-    let oldTarget = {...this.props}
+    const oldTarget = {...this.props}
     Object.assign(this.props, nextProps)
     this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, this.props)
   }
@@ -245,13 +244,13 @@ export class Block<T> {
   }
 
   show() {
-    if(this._element!.style.display = "none") {
+    if(this._element!.style.display == "none") {
       this._element!.style.display = "block"
     }
   }
 
   hide() {
-    if(this._element!.style.display = "block") {
+    if(this._element!.style.display == "block") {
       this._element!.style.display = "none"
     }
   }

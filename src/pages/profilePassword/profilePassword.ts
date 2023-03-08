@@ -31,12 +31,12 @@ export class ProfilePassword extends Block<IProfilePassword> {
     return this.compile(tpl, {})
   }
 
-  protected componentDidUpdate(newProps: any): boolean {
-    console.log(newProps)
-    console.log(this.props)
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
 
     const childAvatar = this.children.avatar as unknown
-    (childAvatar as Block<IAvatar>).setProps({data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}})
+    (childAvatar as Block<any>).setProps({
+      data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}
+    })
     
     return false
   }

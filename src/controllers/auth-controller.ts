@@ -1,7 +1,12 @@
 import API, { AuthAPI, SigninData, SignupData } from "../api/auth-api"
 import store from "../utils/Store/store"
 import router from "../utils/Router/Router"
-import { checkLogin, checkPassword, checkEmail, checkName, checkPhone} from "../utils/checkUtilsInput/checkInputs"
+import { checkLogin,
+         checkPassword,
+         checkEmail,
+         checkName,
+         checkPhone
+} from "../utils/checkUtilsInput/checkInputs"
 
 export class AuthController {
   private readonly api: AuthAPI
@@ -29,7 +34,6 @@ export class AuthController {
 
   async signup(data: SignupData) {
     try {
-
       if(!checkLogin(data.login!) && 
       !checkPassword(data.password!) &&
       !checkEmail(data.email!) &&
@@ -48,7 +52,7 @@ export class AuthController {
       await this.fetchUser()
       router.go("/messenger")
     } catch (e: any) {
-      console.error(e.message)
+      throw new Error(e.message)
     }
   }
 
@@ -61,7 +65,7 @@ export class AuthController {
       const user = xhr.response
       store.set("user.data", user)
     } catch(e) {
-      throw e
+      throw new Error(e.message)
     }
   }
 
@@ -70,7 +74,7 @@ export class AuthController {
       await this.api.logout()
       router.go("/")
     } catch (e: any) {
-      console.error(e.message)
+      throw new Error(e.message)
     }
   }
 }

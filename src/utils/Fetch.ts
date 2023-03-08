@@ -15,7 +15,7 @@ interface IOptions {
   credentials?: string,
   avatar?: boolean
 }
-type OptionsWithoutMethod = Omit<IOptions, 'method'>
+type OptionsWithoutMethod = Omit<IOptions, "method">
 type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
 
 export class HTTP {
@@ -26,23 +26,27 @@ export class HTTP {
   }
 
   public get: HTTPMethod = (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
   public post: HTTPMethod = (halfurl, options= {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
   public put: HTTPMethod = (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
   public delete: HTTPMethod= (halfurl, options = {}) => {
-    const url = this.endpoint +halfurl
+    const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
 
-  private _request = (url: string, options: IOptions = {method: METHODS.GET}, timeout = 5000): Promise<XMLHttpRequest> => {
+  private _request = (url: string, 
+                      options: IOptions = {method: METHODS.GET}, 
+                      timeout = 5000
+                      ): Promise<XMLHttpRequest> => {
+
     const {headers = {}, method, body} = options
 
     return new Promise(function(resolve, reject) {
@@ -69,16 +73,16 @@ export class HTTP {
       Object.keys(headers).forEach(key => {
         xhr.setRequestHeader(key, headers[key])
       })
-      xhr.responseType = 'json'
+      xhr.responseType = "json"
 
       xhr.onload = function() {
         resolve(xhr)
       }
 
-      xhr.onabort = () => reject({reason: 'abort'})
-      xhr.onerror = () => reject({reason: 'network error'})
+      xhr.onabort = () => reject({reason: "abort"})
+      xhr.onerror = () => reject({reason: "network error"})
       xhr.timeout = timeout
-      xhr.ontimeout = () => reject({reason: 'timeout'})
+      xhr.ontimeout = () => reject({reason: "timeout"})
 
       if (isGet || !body) {
         xhr.send()

@@ -22,7 +22,7 @@ export class Avatar extends Block<IAvatar> {
 
   render() {
     return this.compile(tpl, {
-      avatar: this.props.data.avatar
+      avatarP: this.props.data.avatar
     })
   }
 

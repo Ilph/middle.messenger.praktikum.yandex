@@ -4,7 +4,6 @@
     "stylelint-scss"
   ],
   "rules": {
-    "color-hex-case": "lower",
     "selector-class-pattern": null,
     "color-function-notation": "legacy",
     "scss/dollar-variable-pattern": "^([a-z][a-z0-9]*)(_[a-z0-9]+)*$"

@@ -221,7 +221,13 @@ const propsProfileData = {
   data: {
     title: ""
   },
-  inputs: [emailProfileData, loginProfileData, firstNameProfileData, secondNameProfileData, displayNameProfileData, phoneProfileData]
+  inputs: [ emailProfileData,
+            loginProfileData,
+            firstNameProfileData,
+            secondNameProfileData,
+            displayNameProfileData,
+            phoneProfileData
+          ]
 }
 
 export const userDataProfileData = new UserData(propsProfileData)

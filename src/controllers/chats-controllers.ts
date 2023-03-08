@@ -51,7 +51,7 @@ class ChatsController {
   }
 
   selectChat(id: number) {
-    store.set('selectedChat', id)
+    store.set("selectedChat", id)
   }
 }
 

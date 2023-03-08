@@ -3,10 +3,10 @@ type PlainObject<T = unknown> = {
 }
 
 function isPlainObject(value: unknown): value is PlainObject {
-  return typeof value === 'object'
+  return typeof value === "object"
     && value !== null
     && value.constructor === Object
-    && Object.prototype.toString.call(value) === '[object Object]'
+    && Object.prototype.toString.call(value) === "[object Object]"
 }
 
 function isArray(value: unknown): value is [] {
@@ -37,7 +37,7 @@ function getParams(data: PlainObject | [], parentKey?: string) {
 
 export function queryString(data: PlainObject) {
   if (!isPlainObject(data)) {
-    throw new Error('input must be an object')
+    throw new Error("input must be an object")
   }
-  return getParams(data).map(arr => arr.join('=')).join('&')
+  return getParams(data).map(arr => arr.join("=")).join("&")
 }

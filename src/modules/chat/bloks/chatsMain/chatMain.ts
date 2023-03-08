@@ -7,10 +7,9 @@ import { Message, IMessage } from "../../component/message/message"
 import {Message as Mes} from "../../../../controllers/messages-controller"
 //icons
 import dot from "../../../../../static/icons/3dot.png"
-import clip from "../../../../../static/icons/clip.png"
+import clipp from "../../../../../static/icons/clipp.png"
 import arrowRigth from "../../../../../static/icons/arrowRigth.png"
 import { createModal } from "../../../userProfile/utils/createModalWindow"
-import { isEqual } from "../../../../utils/isEqual"
 
 
 export interface ChatMainType {
@@ -75,7 +74,7 @@ export class ChatMain extends Block<ChatMainType> {
       avatarChatMain: this.props.data.avatarChatMain,
       login: this.props.data.login,
       dots: dot,
-      clip: clip,
+      clip: clipp,
       arrowRigth: arrowRigth
     })
   }
