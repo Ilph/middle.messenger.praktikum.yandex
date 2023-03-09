@@ -21,7 +21,7 @@ describe("Helpers function", () => {
       expect(result).to.eq(obj)
     })
 
-    it("should throw an error if path is not a string", () => {
+    it("should throw an error if path is not a stringg", () => {
       const obj = {}
       const path = 3 as any
 
