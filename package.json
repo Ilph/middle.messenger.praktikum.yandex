@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/Ilph/middle.messenger.praktikum.yandex#readme",
   "lint-staged": {
-    "*.ts": ["npm run test"]
+    "*.ts": ["npm run test", "npm run check:ts", "npm run check:esl", "npm run check:slt"]
   },
   "husky": {
     "hooks": {
