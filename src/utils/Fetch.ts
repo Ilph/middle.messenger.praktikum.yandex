@@ -29,7 +29,7 @@ export class HTTP {
     const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.GET}, options.timeout)
   }
-  public post: HTTPMethod = (halfurl, options= {}) => {
+  public post: HTTPMethod = (halfurl, options = {}) => {
     const url = this.endpoint + halfurl
     return this._request(url, {...options, method: METHODS.POST}, options.timeout)
   }
