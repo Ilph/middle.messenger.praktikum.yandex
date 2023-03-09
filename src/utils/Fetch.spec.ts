@@ -1,4 +1,4 @@
-import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon'
+import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from "sinon"
 import { HTTP } from "./Fetch"
 import { expect } from "chai"
 
