@@ -33,7 +33,7 @@
   "homepage": "https://github.com/Ilph/middle.messenger.praktikum.yandex#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "precommit"
     }
   },
   "dependencies": {
