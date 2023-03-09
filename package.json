@@ -24,9 +24,6 @@
     "test": "mocha",
     "precommit": "npm run check:ts & npm run check:esl & npm run check:slt & npm run test"
   },
-  // "lint-staged": {
-  //   "*": "precommit"
-  // },
   "keywords": [],
   "author": "Ilphat",
   "license": "ISC",
