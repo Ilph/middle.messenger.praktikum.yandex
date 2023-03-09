@@ -24,9 +24,9 @@
     "test": "mocha",
     "precommit": "npm run check:ts & npm run check:esl & npm run check:slt & npm run test"
   },
-  "lint-staged": {
-    "*": "precommit"
-  },
+  // "lint-staged": {
+  //   "*": "precommit"
+  // },
   "keywords": [],
   "author": "Ilphat",
   "license": "ISC",
@@ -36,7 +36,7 @@
   "homepage": "https://github.com/Ilph/middle.messenger.praktikum.yandex#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "precommit"
     }
   },
   "dependencies": {
