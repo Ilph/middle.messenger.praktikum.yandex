@@ -5,7 +5,11 @@ import store from "../../../../utils/Store/store"
 import ChatsControllers from "../../../../controllers/chats-controllers"
 import { checkMessage } from "../../../../utils/checkUtilsInput/checkInputs"
 import avatar from "../../../../../static/icons/iconAvatar.png"
-import { modalWindowAddUser, modalWindowDeleteUser, modalWindowAddChat, modalWindowAddAvatarChat } from "../../../userProfile/modalWindows/index"
+import { modalWindowAddUser,
+         modalWindowDeleteUser,
+         modalWindowAddChat,
+         modalWindowAddAvatarChat
+} from "../../../userProfile/modalWindows/index"
 import { upLoad } from "../../../userProfile/utils/upLoad"
 
 const wrapper = connect((state: any) => {

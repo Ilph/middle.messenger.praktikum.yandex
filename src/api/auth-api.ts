@@ -32,9 +32,9 @@ export class AuthAPI extends BaseAPI {
 
   async signin(data: SigninData) {
     return this.http.post("/signin", {
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: data
     })
@@ -43,9 +43,9 @@ export class AuthAPI extends BaseAPI {
 
   async signup(data: SignupData) {
     return this.http.post("/signup", {
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: data
     }).then(xhr => xhr.status)
@@ -53,9 +53,9 @@ export class AuthAPI extends BaseAPI {
 
   async read(): Promise<XMLHttpRequest> {
     return this.http.get("/user", {
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       }
     })
     .then(xhr => xhr)
@@ -63,7 +63,7 @@ export class AuthAPI extends BaseAPI {
 
   async logout() {
     return this.http.post("/logout", {
-      credentials: 'include'
+      credentials: "include"
     })
     .then(xhr => xhr.status)
   }

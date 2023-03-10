@@ -20,7 +20,7 @@ export interface IProfileData {
   save: Block<IButton>
 }
 
-const userFields = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone']
+const userFields = ["email", "login", "first_name", "second_name", "display_name", "phone"]
 
 export class ProfileData extends Block<IProfileData> {
   constructor(props: IProfileData) {
@@ -28,9 +28,11 @@ export class ProfileData extends Block<IProfileData> {
     AuthController.fetchUser()
   }
 
-  protected componentDidUpdate(newProps: any): boolean {
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
     const childAvatar = this.children.avatar as unknown
-    (childAvatar as Block<IAvatar>).setProps({data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}})
+    (childAvatar as Block<any>).setProps({
+      data: {avatar: `https://ya-praktikum.tech/api/v2/resources${newProps.data.avatar}`}
+    })
 
     const childUserData = this.children.userData as unknown
     const childInputs = (childUserData as ProfileData).children.inputs as unknown

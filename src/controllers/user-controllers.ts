@@ -1,6 +1,11 @@
 import API, { UserAPI, Profile, ProfilePassword } from "../api/user-api"
 import router from "../utils/Router/Router"
-import { checkLogin, checkPassword,  checkEmail, checkName, checkPhone} from "../utils/checkUtilsInput/checkInputs"
+import { checkLogin,
+         checkPassword,
+         checkEmail,
+         checkName,
+         checkPhone
+} from "../utils/checkUtilsInput/checkInputs"
 import store from "../utils/Store/store"
 
 export class UserController {

@@ -19,7 +19,7 @@ export interface IProfile {
   userChange: Block<IUserChange>
 }
 
-const userFields = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone']
+const userFields = ["email", "login", "first_name", "second_name", "display_name", "phone"]
 
 export class Profile extends Block<IProfile> {
   constructor(props: IProfile) {

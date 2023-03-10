@@ -1,12 +1,11 @@
 # dependencies
 /node_modules
-/server/node_modules
 
 # production
 /dist
-.parcel-cache
 
 # git
 /.github
 
-*.txt
+# husky
+.husky

@@ -15,14 +15,14 @@ export interface ChatInfo {
 
 export class ChatsAPI extends BaseAPI {
   constructor() {
-    super('/chats')
+    super("/chats")
   }
 
   addChat(title: string) {
-    return this.http.post('/', {
-      credentials: 'include',
+    return this.http.post("/", {
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: {"title": title}
     })
@@ -30,10 +30,10 @@ export class ChatsAPI extends BaseAPI {
   }
 
   deleteChat(id: number): Promise<unknown> {
-    return this.http.delete('/', {
-      credentials: 'include',
+    return this.http.delete("/", {
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: { 
         chatId: id
@@ -42,10 +42,10 @@ export class ChatsAPI extends BaseAPI {
   }
 
   request(): Promise<ChatInfo[]> {
-    return this.http.get('/', {
-      credentials: 'include',
+    return this.http.get("/", {
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       }
     })
     .then(xhr => xhr.response)
@@ -56,10 +56,10 @@ export class ChatsAPI extends BaseAPI {
   }
 
   addUsers(id: number, users: number[]): Promise<unknown> {
-    return this.http.put('/users', {
-      credentials: 'include',
+    return this.http.put("/users", {
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: {
         users, 
@@ -69,7 +69,7 @@ export class ChatsAPI extends BaseAPI {
   }
 
   deleteUsers(id: number, users: number[]): Promise<unknown> {
-    return this.http.delete('/users', {
+    return this.http.delete("/users", {
       credentials: "include",
       headers: {
         "content-type": "application/json"
@@ -93,7 +93,7 @@ export class ChatsAPI extends BaseAPI {
 
   async getToken(id: number): Promise<any> {
     return this.http.post(`/token/${id}`, {
-      credentials: 'include'
+      credentials: "include"
     })
     .then(xhr => xhr.response)
   }

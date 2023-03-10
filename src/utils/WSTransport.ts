@@ -1,15 +1,15 @@
-import { EventBus } from './EventBus'
+import { EventBus } from "./EventBus"
 
 export enum WSTransportEvents {
-  Connected = 'connected',
-  Error = 'error',
-  Message = 'message',
-  Close = 'close',
+  Connected = "connected",
+  Error = "error",
+  Message = "message",
+  Close = "close",
 }
 
 export default class WSTransport extends EventBus {
   private socket: WebSocket | null = null
-  private pingInterval: number = 0
+  private pingInterval: any = 0
 
   constructor(private url: string) {
     super();
@@ -17,7 +17,7 @@ export default class WSTransport extends EventBus {
 
   public send(data: unknown) {
     if (!this.socket) {
-      throw new Error('Socket is not connected')
+      throw new Error("Socket is not connected")
     }
 
     this.socket.send(JSON.stringify(data))
@@ -44,7 +44,7 @@ export default class WSTransport extends EventBus {
 
   private setupPing() {
     this.pingInterval = setInterval(() => {
-      this.send({ type: 'ping' })
+      this.send({ type: "ping" })
     }, 50000)
 
     this.on(WSTransportEvents.Close, () => {
@@ -55,23 +55,23 @@ export default class WSTransport extends EventBus {
   }
 
   private subscribe(socket: WebSocket) {
-    socket.addEventListener('open', () => {
+    socket.addEventListener("open", () => {
       this.emit(WSTransportEvents.Connected)
     })
 
-    socket.addEventListener('close', () => {
+    socket.addEventListener("close", () => {
       this.emit(WSTransportEvents.Close)
     })
 
-    socket.addEventListener('error', (event: Event) => {
+    socket.addEventListener("error", (event: Event) => {
       this.emit(WSTransportEvents.Error, {...event})
     })
 
-    socket.addEventListener('message', (message: MessageEvent<any>) => {
+    socket.addEventListener("message", (message: MessageEvent<any>) => {
       try {
         const data = JSON.parse(message.data)
     
-        if (data.type && data.type === 'pong') {
+        if (data.type && data.type === "pong") {
           return
         }
   

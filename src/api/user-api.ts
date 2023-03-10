@@ -23,9 +23,9 @@ export class UserAPI extends BaseAPI {
 
   async update(data: Profile | ProfilePassword, endpoint: string) {
     return this.http.put(endpoint, {
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: data
     })

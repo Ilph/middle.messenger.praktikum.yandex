@@ -1,0 +1,6 @@
+.git
+.github
+package-lock.json
+netlify.toml
+dist
+node_modules
