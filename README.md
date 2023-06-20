@@ -1,8 +1,16 @@
+## Проект 'Messenger'
+
 ## Макет
 https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1&t=SvpMIJJMlWhOuZZi-0
 
 ## Описание
-Проект представляет из себя мессенджер
+Данный учебный проект представляет из себя мессенджер со стандартными функциями:
+- регистрация
+- авторизация
+- список чатов
+- обмен сообщениями
+
+В проекте применялись: HTML, SASS, TS, Webpack, Docker.
 
 ## Команды
 -npm run build:dev - запуск проекта в режиме development
@@ -17,7 +25,7 @@ https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3
 
 -npm run check:tsc - запуск компилятора Typescript для проверки типизации
 
--nom run test - запуск тестов Mocha/Chai
+-npm run test - запуск тестов Mocha/Chai
 
 ## Ссылка на Netlify
 https://graceful-kangaroo-ccd14f.netlify.app
